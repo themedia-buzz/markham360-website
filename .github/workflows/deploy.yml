@@ -20,9 +20,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build with Astro
+      - name: Build Astro site
         uses: withastro/action@v3
-        # installs deps, runs `astro build`, uploads dist/ as a Pages artifact
+        with:
+          node-version: 22
+          package-manager: pnpm@9.15.9
 
   deploy:
     needs: build
