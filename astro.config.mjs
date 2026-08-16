@@ -11,7 +11,7 @@ import mdx from '@astrojs/mdx';
 // See docs/plans/DEPLOY.md (gitignored) for the full decision record.
 
 export default defineConfig({
-  site: 'https://passive-influencer-ai.github.io',
+  site: 'https://themedia-buzz.github.io',
   base: '/markham360-website',
 
   i18n: {
