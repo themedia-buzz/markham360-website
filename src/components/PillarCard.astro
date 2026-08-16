@@ -1,0 +1,52 @@
+---
+interface Props {
+  letter: string;
+  title: string;
+  meaning: string;
+  href?: string;
+}
+const { letter, title, meaning, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+<Tag class="pillar" href={href}>
+  <span class="letter accent">{letter}</span>
+  <div class="copy">
+    <h3>{title}</h3>
+    <p>{meaning}</p>
+  </div>
+</Tag>
+<style>
+  .pillar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4);
+    align-items: start;
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--colour-rule);
+    color: var(--colour-ink);
+    text-decoration: none;
+    background: transparent;
+    border-radius: 0;
+  }
+  a.pillar:hover { text-decoration: none; }
+  a.pillar:hover h3 { color: var(--colour-accent); }
+  .letter {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1;
+    min-width: 1.5rem;
+  }
+  .copy { min-width: 0; }
+  .pillar h3 {
+    margin: 0 0 var(--space-2);
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+  .pillar p {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+</style>

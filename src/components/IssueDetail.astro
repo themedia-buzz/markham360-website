@@ -1,0 +1,33 @@
+---
+interface Section { heading: string; items: string[]; }
+interface Props {
+  episode: number;
+  date: string;
+  title: string;
+  image?: { src: string; alt: string };
+  sections?: Section[];
+}
+const { episode, date, title, image, sections = [] } = Astro.props;
+---
+<article class="issue-detail measure">
+  <p class="stamp label"><span class="accent">EP. {episode}</span> · {date}</p>
+  <h1>{title}</h1>
+  {image && <img class="hero" src={image.src} alt={image.alt} />}
+  <div class="digest">
+    <slot />
+    {sections.map((s) => (
+      <section class="digest-section">
+        <h2>{s.heading}</h2>
+        <ul>{s.items.map((it) => <li>{it}</li>)}</ul>
+      </section>
+    ))}
+  </div>
+</article>
+<style>
+  .stamp { margin: 0 0 var(--space-3); }
+  .hero { border-radius: var(--radius-sm); margin: var(--space-5) 0; }
+  .digest-section { margin-block: var(--space-6); }
+  .digest-section h2 { font-size: 1.4rem; padding-bottom: var(--space-2); border-bottom: 1px solid var(--colour-rule); }
+  .digest-section ul { padding-left: var(--space-5); }
+  .digest-section li { margin-bottom: var(--space-2); }
+</style>

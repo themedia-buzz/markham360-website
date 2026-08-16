@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
+import Nav from '../../components/Nav.astro';
+import StoryCard from '../../components/StoryCard.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'en' as const;
+const base = import.meta.env.BASE_URL;
+const videos = (await getCollection('video', (v) => v.data.locale === 'en' && !v.data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title="Explainers — Markham 360" locale={locale}>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <p class="label">Archive</p>
+    <h1>Explainers</h1>
+    <p class="measure">Short articles where the video is the main content: municipal issues explained for residents.</p>
+    <div class="grid">
+      {videos.map((v) => (
+        <StoryCard
+          kind="video"
+          href={`${base}/video/${v.slug.replace(/^en\//, '')}`}
+          label="Explainer"
+          title={v.data.title}
+          dek={v.data.lead}
+          dateLabel={fmt(v.data.pubDate)}
+          youtubeId={v.data.youtubeId}
+          image={v.data.youtubeId ? { src: `https://i.ytimg.com/vi/${v.data.youtubeId}/hqdefault.jpg`, alt: v.data.title } : undefined}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

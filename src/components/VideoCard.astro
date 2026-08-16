@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  youtubeId?: string;
+}
+const { title, youtubeId } = Astro.props;
+// Privacy-friendly lite embed: link out to youtube-nocookie until clicked.
+const url = youtubeId ? `https://www.youtube-nocookie.com/embed/${youtubeId}` : undefined;
+const thumb = youtubeId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : undefined;
+---
+<article class="video-card">
+  {url ? (
+    <a class="frame" href={url} target="_blank" rel="noopener" aria-label={`Play: ${title}`}>
+      {thumb && <img src={thumb} alt={title} loading="lazy" />}
+      <span class="play accent" aria-hidden="true">▶</span>
+    </a>
+  ) : (
+    <div class="frame placeholder"><span class="label">Video</span></div>
+  )}
+  <h3>{title}</h3>
+</article>
+<style>
+  .video-card { background: var(--colour-white); border: 1px solid var(--colour-rule); border-radius: var(--radius-md); overflow: hidden; }
+  .frame { position: relative; display: block; aspect-ratio: 16/9; background: var(--colour-rule); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; }
+  .play { position: absolute; inset: 0; display: grid; place-items: center; font-size: 2.5rem; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .placeholder { display: grid; place-items: center; }
+  .video-card h3 { margin: var(--space-4) var(--space-5); font-size: 1.05rem; }
+</style>

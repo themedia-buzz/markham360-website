@@ -1,0 +1,114 @@
+---
+import { CAMPAIGN } from '../utils/constants';
+
+const base = import.meta.env.BASE_URL;
+const smartHref = `${base}/record`.replace(/\/+/g, '/').replace(':/', '://');
+---
+{CAMPAIGN.enabled && (
+  <aside class="campaign" id="campaign-banner" role="region" aria-label="Campaign promotion">
+    <div class="campaign-inner container">
+      <div class="copy">
+        <p class="eyebrow label">2026 municipal election</p>
+        <p class="headline">{CAMPAIGN.headline}</p>
+        <p class="subhead">{CAMPAIGN.subhead}</p>
+      </div>
+      <div class="actions">
+        <a class="cta" href={CAMPAIGN.href} rel="noopener">{CAMPAIGN.cta}</a>
+        <a class="secondary" href={smartHref}>S.M.A.R.T. platform</a>
+        <button type="button" class="dismiss" data-dismiss-campaign aria-label="Dismiss campaign banner">Dismiss</button>
+      </div>
+    </div>
+  </aside>
+)}
+
+<script>
+  const key = 'm360-campaign-dismissed';
+  const banner = document.getElementById('campaign-banner');
+  if (banner && sessionStorage.getItem(key) === '1') {
+    banner.hidden = true;
+  }
+  banner?.querySelector('[data-dismiss-campaign]')?.addEventListener('click', () => {
+    sessionStorage.setItem(key, '1');
+    banner.hidden = true;
+  });
+</script>
+
+<style>
+  .campaign {
+    background: var(--colour-accent);
+    color: #fff;
+    border-bottom: 1px solid var(--colour-accent-ink);
+  }
+  .campaign[hidden] { display: none; }
+  .campaign-inner {
+    display: grid;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 800px) {
+    .campaign-inner {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-8);
+    }
+  }
+  .eyebrow { color: rgba(255, 255, 255, 0.75); margin: 0 0 var(--space-2); }
+  .headline {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .subhead {
+    margin: var(--space-2) 0 0;
+    max-width: 36rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+  }
+  .cta {
+    display: inline-block;
+    background: #fff;
+    color: var(--colour-accent-ink);
+    border: 1px solid #fff;
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .cta:hover {
+    background: var(--colour-paper);
+    color: var(--colour-accent-ink);
+    text-decoration: none;
+  }
+  .secondary {
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .secondary:hover { color: #fff; }
+  .dismiss {
+    background: transparent;
+    border: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.4rem 0.2rem;
+  }
+  .dismiss:hover { color: #fff; }
+</style>

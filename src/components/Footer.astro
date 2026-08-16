@@ -1,0 +1,23 @@
+---
+import { COUNCILLOR } from '../utils/constants';
+import { type Locale } from '../utils/i18n';
+interface Props { locale?: Locale; }
+const { locale = 'en' } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <p class="name">Regional Councillor {COUNCILLOR.nameEn} · {COUNCILLOR.nameZh}</p>
+    <p class="muted">{COUNCILLOR.role}</p>
+    <p class="muted">{COUNCILLOR.office}</p>
+    <p class="muted">Email: <a href={`mailto:${COUNCILLOR.email}`}>{COUNCILLOR.email}</a></p>
+    <hr class="rule" />
+    <p class="label">© {year} Regional Councillor {COUNCILLOR.nameEn}, City of Markham.</p>
+  </div>
+</footer>
+<style>
+  .footer { border-top: 1px solid var(--colour-rule); margin-top: var(--section-gap); padding-block: var(--space-8); background: var(--colour-white); }
+  .name { font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 var(--space-2); }
+  .muted { color: var(--colour-muted); margin: 0 0 var(--space-2); }
+  .footer .rule { margin-block: var(--space-6); }
+</style>

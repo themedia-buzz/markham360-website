@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
+import Nav from '../../components/Nav.astro';
+import ContinuityStat from '../../components/ContinuityStat.astro';
+import EditorLead from '../../components/EditorLead.astro';
+import PausedBanner from '../../components/PausedBanner.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'zh-HK' as const;
+---
+<BaseLayout title="萬錦360 — 區域議員何胡景" locale={locale} description="萬錦360：區域議員何胡景每週市政通訊與工作記錄。">
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <ContinuityStat locale={locale} />
+    <EditorLead cite="區域議員何胡景">
+      問責式的領導對我而言並非口號，而是每日的實踐。三年半以來，我每週為您提供市政與區域資訊，從不間斷。（繁體文案為草稿，須經母語人士校訂。）
+    </EditorLead>
+    <PausedBanner locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

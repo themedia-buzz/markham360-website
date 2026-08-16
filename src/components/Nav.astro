@@ -1,0 +1,83 @@
+---
+import { UI, CTA, CONTINUITY } from '../utils/constants';
+import { localizePath, type Locale } from '../utils/i18n';
+import LanguagePicker from './LanguagePicker.astro';
+interface Props { locale?: Locale; }
+const { locale = 'en' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const t = UI[locale];
+const p = (path: string) => `${base}${localizePath(path, locale)}`;
+const items = [
+  { href: p('/markham-360'), label: t.archive },
+  { href: p('/record'), label: t.record },
+  { href: p('/community'), label: t.community },
+  { href: p('/about'), label: t.about },
+];
+---
+<nav class="nav" aria-label="Primary">
+  <div class="nav-inner container">
+    <ul>
+      {items.map((i) => (
+        <li><a href={i.href}>{i.label}</a></li>
+      ))}
+      <li class="folio"><span>{CONTINUITY.editions} weeks</span></li>
+    </ul>
+    <div class="nav-end">
+      <a class="subscribe" href={CTA.subscribeUrl}>{t.subscribe}</a>
+      <LanguagePicker locale={locale} />
+    </div>
+  </div>
+</nav>
+<style>
+  .nav {
+    border-block: 1px solid var(--colour-rule);
+    background: var(--colour-paper);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-block: var(--space-3);
+  }
+  .nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav li {
+    display: flex;
+    align-items: center;
+  }
+  .nav li:not(:last-child)::after {
+    content: '';
+    width: 1px;
+    height: 0.85rem;
+    background: var(--colour-rule);
+    margin-inline: var(--space-4);
+  }
+  .nav a {
+    color: var(--colour-ink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav a:hover { color: var(--colour-accent); text-decoration: none; }
+  .folio span {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--colour-muted);
+  }
+  .nav-end { display: flex; align-items: center; gap: var(--space-4); }
+  .subscribe {
+    color: var(--colour-accent) !important;
+    font-weight: 600;
+  }
+</style>

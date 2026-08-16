@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Self-hosted font faces.
+   Download WOFF2 files into public/fonts/ and confirm the file names below.
+   Fonts are placeholders/candidates until the display serif is confirmed
+   (see DESIGN.md). Keep font-display: swap for performance.
+   ========================================================================== */
+
+/* --- Display serif (candidate: Newsreader) ------------------------------ */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/markham360-website/fonts/newsreader-variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Body sans (Inter) -------------------------------------------------- */
+@font-face {
+  font-family: 'Inter';
+  src: url('/markham360-website/fonts/inter-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Mono labels (JetBrains Mono) --------------------------------------- */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/markham360-website/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+  CJK faces (Noto Serif/Sans TC + SC) are large; subset before self-hosting,
+  or load per-locale to avoid shipping all glyphs. Declare here once the
+  subsetted WOFF2 files are placed in public/fonts/. Example:
+
+  @font-face {
+    font-family: 'Noto Serif TC';
+    src: url('/markham360-website/fonts/noto-serif-tc-subset.woff2') format('woff2');
+    font-weight: 400 700;
+    font-display: swap;
+  }
+*/

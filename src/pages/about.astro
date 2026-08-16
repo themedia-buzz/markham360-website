@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { COUNCILLOR } from '../utils/constants';
+
+const locale = 'en' as const;
+const roles = [
+  'Chair, Culture & Economic Development Committee (City of Markham)',
+  'Chair, Markham Subcommittee (City of Markham)',
+  'Director, Housing York Inc. Board (York Region)',
+  'Member, Audit Committee (York Region)',
+  'Member, Accessibility Advisory Committee (York Region)',
+];
+---
+<BaseLayout title="About — Regional Councillor Alan Ho" locale={locale}>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container measure" style="padding-block: var(--section-gap);">
+    <h1>About Alan Ho</h1>
+    <p>{COUNCILLOR.nameEn} ({COUNCILLOR.nameZh}) is the Regional Councillor for the City of
+      Markham, with 16 years of service to the community. He has published 180 consecutive
+      weekly Markham 360 community updates, keeping residents informed on City and York
+      Region affairs in multiple languages.</p>
+    <h2>Roles on council</h2>
+    <ul>{roles.map((r) => <li>{r}</li>)}</ul>
+    <p class="label">Replace this placeholder with the full biography. No AI-generated likeness; use real photography.</p>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

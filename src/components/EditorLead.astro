@@ -1,0 +1,12 @@
+---
+interface Props { cite?: string; }
+const { cite } = Astro.props;
+---
+<blockquote class="editor-lead measure">
+  <slot />
+  {cite && <cite>{cite}</cite>}
+</blockquote>
+<style>
+  .editor-lead { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.6rem); line-height: 1.45; border-left: 3px solid var(--colour-accent); padding-left: var(--space-5); margin: var(--space-7) 0; color: var(--colour-ink); }
+  .editor-lead cite { display: block; margin-top: var(--space-4); font-family: var(--font-mono); font-size: 0.8rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: var(--colour-muted); }
+</style>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
+import Nav from '../../components/Nav.astro';
+import PillarCard from '../../components/PillarCard.astro';
+import Footer from '../../components/Footer.astro';
+import { PILLARS, UI } from '../../utils/constants';
+
+const locale = 'en' as const;
+const t = UI[locale];
+const base = import.meta.env.BASE_URL;
+
+// Plain-language meaning per pillar (public; see the platform brief).
+const meanings: Record<string, string> = {
+  'safe-community': 'Safer streets: better lighting, active policing partnerships, watchful neighbourhoods.',
+  'moving-people-forward': 'Roads that move and transit that reaches you.',
+  'accountable-leadership': 'You are never left in the dark: weekly updates, without fail.',
+  'resilient-infrastructure': 'Neighbourhoods built to last and ready for tomorrow.',
+  'tax-dollars-that-work': 'Careful with your money, clear about the results.',
+};
+---
+<BaseLayout title="The Record — S.M.A.R.T. — Alan Ho" locale={locale}>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <p class="label">The record</p>
+    <h1>A SMART Markham for the next generation</h1>
+    <p class="measure">Five commitments, each backed by a record of work and a promise for what comes next.</p>
+    <div class="list">
+      {PILLARS.map((p) => (
+        <PillarCard letter={p.letter} title={p.title} meaning={meanings[p.slug]} href={`${base}/record/${p.slug}`} />
+      ))}
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+<style>
+  .list {
+    margin-top: var(--space-6);
+    max-width: 52rem;
+    border-top: 1px solid var(--colour-rule);
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+interface Props {
+  href: string;
+  episode: number;
+  date: string;
+  title: string;
+  lead: string;
+  image?: { src: string; alt: string };
+}
+const { href, episode, date, title, lead, image } = Astro.props;
+---
+<article class="issue-card">
+  {image && <a href={href} class="thumb"><img src={image.src} alt={image.alt} loading="lazy" /></a>}
+  <div class="body">
+    <p class="meta label"><span class="accent">EP. {episode}</span> · {date}</p>
+    <h3><a href={href}>{title}</a></h3>
+    <p class="lead">{lead}</p>
+  </div>
+</article>
+<style>
+  .issue-card { display: grid; gap: var(--space-4); padding-block: var(--space-6); border-bottom: 1px solid var(--colour-rule); }
+  .thumb img { border-radius: var(--radius-sm); }
+  .meta { margin: 0 0 var(--space-2); }
+  .issue-card h3 { margin: 0 0 var(--space-2); }
+  .issue-card h3 a { color: var(--colour-ink); }
+  .issue-card h3 a:hover { color: var(--colour-accent); text-decoration: none; }
+  .lead { color: var(--colour-muted); margin: 0; }
+  @media (min-width: 720px) { .issue-card { grid-template-columns: 240px 1fr; align-items: start; gap: var(--space-6); } }
+</style>

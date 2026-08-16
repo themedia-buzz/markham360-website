@@ -1,0 +1,73 @@
+---
+import '../styles/globals.css';
+import '../styles/fonts.css';
+import { COUNCILLOR, CONTINUITY } from '../utils/constants';
+import { LOCALE_LANG, type Locale } from '../utils/i18n';
+
+interface Props {
+  title: string;
+  description?: string;
+  locale?: Locale;
+  /** One factual sentence surfaced for AEO; defaults to the continuity statement. */
+  factSentence?: string;
+  /** Optional per-page JSON-LD object appended to the default Person graph. */
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description = 'Markham 360: weekly community updates and the record of Regional Councillor Alan Ho, City of Markham.',
+  locale = 'en',
+  factSentence = CONTINUITY.statement,
+  jsonLd,
+} = Astro.props;
+
+const lang = LOCALE_LANG[locale];
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site ? new URL(base, Astro.site).href : base;
+
+// Default Person structured data (public record).
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: COUNCILLOR.nameEn,
+  alternateName: COUNCILLOR.nameZh,
+  jobTitle: COUNCILLOR.role,
+  knowsLanguage: ['en', 'zh-Hant', 'zh-Hans'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: COUNCILLOR.city,
+    addressRegion: COUNCILLOR.region,
+    addressCountry: COUNCILLOR.country,
+  },
+  url: siteUrl,
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+
+    <!-- hreflang alternates (fill hrefs per page as routes stabilise) -->
+    <!-- <link rel="alternate" hreflang="en" href="..." /> -->
+    <!-- <link rel="alternate" hreflang="zh-Hant" href="..." /> -->
+    <!-- <link rel="alternate" hreflang="zh-Hans" href="..." /> -->
+    <!-- <link rel="alternate" hreflang="x-default" href="..." /> -->
+
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <!-- One unambiguous factual sentence near the top (AEO). Visually subtle. -->
+    <p class="sr-fact label" style="position:absolute;left:-9999px;">{factSentence}</p>
+    <slot />
+    <style>
+      .sr-fact { /* available to crawlers; positioned offscreen for layout */ }
+    </style>
+  </body>
+</html>

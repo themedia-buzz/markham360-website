@@ -1,0 +1,44 @@
+---
+import { CONTINUITY } from '../utils/constants';
+import { type Locale } from '../utils/i18n';
+interface Props { locale?: Locale; }
+const { locale = 'en' } = Astro.props;
+const copy: Record<Locale, { n: string; label: string }> = {
+  en: { n: `${CONTINUITY.editions}`, label: 'consecutive weekly editions' },
+  'zh-HK': { n: `${CONTINUITY.editions}`, label: '期，每週從不間斷' },
+  'zh-CN': { n: `${CONTINUITY.editions}`, label: '期，每周从不间断' },
+};
+const c = copy[locale];
+---
+<div class="continuity">
+  <span class="num accent">{c.n}</span>
+  <span class="lbl">{c.label}</span>
+</div>
+<style>
+  .continuity {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    animation: rise 0.7s ease-out both;
+  }
+  .num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .lbl {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+    color: var(--colour-ink);
+    max-width: 12ch;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(0.6rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .continuity { animation: none; }
+  }
+</style>

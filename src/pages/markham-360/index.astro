@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Masthead from '../../components/Masthead.astro';
+import Nav from '../../components/Nav.astro';
+import IssueCard from '../../components/IssueCard.astro';
+import Footer from '../../components/Footer.astro';
+import { UI } from '../../utils/constants';
+
+const locale = 'en' as const;
+const t = UI[locale];
+const base = import.meta.env.BASE_URL;
+
+const all = await getCollection('editions', (e) => e.data.locale === 'en' && !e.data.draft);
+const editions = all.sort((a, b) => b.data.episode - a.data.episode);
+const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title="Markham 360 — All editions" locale={locale}>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <h1>{t.archive}</h1>
+    <p class="measure">Weekly community updates on the City of Markham and York Region. Every edition, since 2022.</p>
+    <div class="list">
+      {editions.map((e) => (
+        <IssueCard
+          href={`${base}/markham-360/${e.slug.replace(/^en\//, '')}`}
+          episode={e.data.episode}
+          date={fmt(e.data.pubDate)}
+          title={e.data.title}
+          lead={e.data.lead}
+          image={e.data.heroImage}
+        />
+      ))}
+      {editions.length === 0 && <p class="label">Editions will appear here once seeded (see content harvest).</p>}
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+<style> .list { margin-top: var(--space-6); } </style>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  label: string;
+}
+const { href, variant = 'primary', label } = Astro.props;
+---
+<a href={href} class={`cta ${variant}`}>{label}</a>
+<style>
+  /* Squared, ruled button — deliberately NOT a pill (avoids campaign feel). */
+  .cta { display: inline-block; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; padding: var(--space-3) var(--space-5); border-radius: var(--radius-sm); text-decoration: none; border: 1px solid var(--colour-accent); }
+  .cta:hover { text-decoration: none; }
+  .primary { background: var(--colour-accent); color: #fff; }
+  .primary:hover { background: var(--colour-accent-ink); color: #fff; }
+  .secondary { background: transparent; color: var(--colour-accent); }
+  .secondary:hover { background: var(--colour-accent); color: #fff; }
+</style>

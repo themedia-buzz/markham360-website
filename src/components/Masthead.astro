@@ -1,0 +1,46 @@
+---
+import { CONTINUITY } from '../utils/constants';
+import { type Locale } from '../utils/i18n';
+interface Props { locale?: Locale; centered?: boolean; }
+const { locale = 'en', centered = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const home = locale === 'en' ? base : `${base}/${locale}`;
+const standing: Record<Locale, string> = {
+  en: 'A weekly civic newspaper from Regional Councillor Alan Ho.',
+  'zh-HK': '區域議員何胡景每週市政通訊。',
+  'zh-CN': '区域议员何胡景每周市政通讯。',
+};
+---
+<a href={home} class:list={['masthead', { centered }]} aria-label="Markham 360 home">
+  <span class="wordmark">Markham <span class="accent">360</span></span>
+  <span class="standing label">{standing[locale]}</span>
+  {centered && (
+    <span class="folio label">{CONTINUITY.editions} consecutive weekly editions since {CONTINUITY.since}</span>
+  )}
+</a>
+<style>
+  .masthead {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--colour-ink);
+  }
+  .masthead.centered {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-block: var(--space-6) var(--space-4);
+  }
+  .masthead:hover { text-decoration: none; }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.25rem, 7vw, 4.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .standing { color: var(--colour-muted); }
+  .folio { margin-top: var(--space-2); color: var(--colour-muted); }
+</style>

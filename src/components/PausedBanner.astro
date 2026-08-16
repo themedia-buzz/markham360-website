@@ -1,0 +1,16 @@
+---
+import { UI } from '../utils/constants';
+import { type Locale } from '../utils/i18n';
+interface Props { locale?: Locale; }
+const { locale = 'en' } = Astro.props;
+const t = UI[locale];
+---
+<aside class="paused" role="note">
+  <span class="label">Notice</span>
+  <p>{t.paused}</p>
+</aside>
+<style>
+  /* Dignified, not apologetic. Left rule in the accent; calm surface. */
+  .paused { border-left: 3px solid var(--colour-accent); background: var(--colour-white); padding: var(--space-5); border-radius: var(--radius-sm); }
+  .paused p { margin: var(--space-2) 0 0; color: var(--colour-ink); }
+</style>
