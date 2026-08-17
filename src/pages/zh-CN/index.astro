@@ -1,23 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Masthead from '../../components/Masthead.astro';
-import Nav from '../../components/Nav.astro';
-import ContinuityStat from '../../components/ContinuityStat.astro';
-import EditorLead from '../../components/EditorLead.astro';
-import PausedBanner from '../../components/PausedBanner.astro';
-import Footer from '../../components/Footer.astro';
-
-const locale = 'zh-CN' as const;
+import HomePage from '../../views/HomePage.astro';
 ---
-<BaseLayout title="万锦360 — 区域议员何胡景" locale={locale} description="万锦360：区域议员何胡景每周市政通讯与工作记录。">
-  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
-  <Nav locale={locale} />
-  <main class="container" style="padding-block: var(--section-gap);">
-    <ContinuityStat locale={locale} />
-    <EditorLead cite="区域议员何胡景">
-      问责式的领导对我而言并非口号，而是每日的实践。三年半以来，我每周为您提供市政与区域资讯，从不间断。（简体文案为草稿，须经母语人士校订。）
-    </EditorLead>
-    <PausedBanner locale={locale} />
-  </main>
-  <Footer locale={locale} />
-</BaseLayout>
+<HomePage locale="zh-CN" />

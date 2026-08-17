@@ -1,0 +1,109 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { UI } from '../utils/constants';
+import { contentSlug, formatDate, href, LOCALE_LANG, type Locale } from '../utils/i18n';
+
+interface Props {
+  locale: Locale;
+  entry: CollectionEntry<'video'>;
+}
+const { locale, entry } = Astro.props;
+const { Content } = await entry.render();
+const t = UI[locale];
+const base = import.meta.env.BASE_URL;
+const path = `/video/${contentSlug(entry.slug)}`;
+const embed = entry.data.youtubeId
+  ? `https://www.youtube-nocookie.com/embed/${entry.data.youtubeId}`
+  : undefined;
+
+const videoLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: entry.data.title,
+  description: entry.data.lead,
+  inLanguage: LOCALE_LANG[locale],
+  uploadDate: entry.data.pubDate.toISOString(),
+  ...(entry.data.youtubeId
+    ? {
+        embedUrl: embed,
+        thumbnailUrl: `https://i.ytimg.com/vi/${entry.data.youtubeId}/hqdefault.jpg`,
+      }
+    : {}),
+};
+---
+<BaseLayout
+  title={`${entry.data.title} - Markham 360`}
+  description={entry.data.lead}
+  locale={locale}
+  path={path}
+  jsonLd={videoLd}
+>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <article class="video-article measure">
+      <p class="label"><span class="accent">{t.explainer}</span> · {formatDate(entry.data.pubDate, locale)}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="lede">{entry.data.lead}</p>
+
+      {embed ? (
+        <div class="embed">
+          <iframe
+            src={embed}
+            title={entry.data.title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      ) : (
+        <p class="label">-</p>
+      )}
+
+      <div class="body">
+        <Content />
+      </div>
+
+      <p class="back"><a href={href(base, locale, '/video')}>← {t.backExplainers}</a></p>
+    </article>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+
+<style>
+  .video-article { display: grid; gap: var(--space-5); }
+  .lede {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    line-height: 1.45;
+    margin: 0;
+  }
+  .embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--colour-rule);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .body :global(p) { margin: 0 0 var(--space-4); }
+  .back {
+    border-top: 1px solid var(--colour-rule);
+    padding-top: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>

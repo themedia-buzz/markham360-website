@@ -1,12 +1,18 @@
 ---
 import { UI, CTA, CONTINUITY } from '../utils/constants';
-import { localizePath, type Locale } from '../utils/i18n';
+import { href, type Locale } from '../utils/i18n';
 import LanguagePicker from './LanguagePicker.astro';
 interface Props { locale?: Locale; }
 const { locale = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const t = UI[locale];
-const p = (path: string) => `${base}${localizePath(path, locale)}`;
+const navLabel: Record<Locale, string> = {
+  en: 'Primary',
+  fr: 'Navigation principale',
+  'zh-HK': '主要導覽',
+  'zh-CN': '主要导航',
+};
+const p = (path: string) => href(base, locale, path);
 const items = [
   { href: p('/markham-360'), label: t.archive },
   { href: p('/record'), label: t.record },
@@ -14,13 +20,13 @@ const items = [
   { href: p('/about'), label: t.about },
 ];
 ---
-<nav class="nav" aria-label="Primary">
+<nav class="nav" aria-label={navLabel[locale]}>
   <div class="nav-inner container">
     <ul>
       {items.map((i) => (
         <li><a href={i.href}>{i.label}</a></li>
       ))}
-      <li class="folio"><span>{CONTINUITY.editions} weeks</span></li>
+      <li class="folio"><span>{CONTINUITY.editions} {t.weeks}</span></li>
     </ul>
     <div class="nav-end">
       <a class="subscribe" href={CTA.subscribeUrl}>{t.subscribe}</a>

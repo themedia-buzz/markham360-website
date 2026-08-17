@@ -1,41 +1,22 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Masthead from '../../components/Masthead.astro';
-import Nav from '../../components/Nav.astro';
-import IssueDetail from '../../components/IssueDetail.astro';
-import Footer from '../../components/Footer.astro';
+import EditionDetail from '../../views/EditionDetail.astro';
+import { contentSlug, includeDraftContent } from '../../utils/i18n';
 
 export async function getStaticPaths() {
-  const editions = await getCollection('editions', (e) => e.data.locale === 'en');
+  const locale = 'en' as const;
+  const allowDraft = includeDraftContent(locale);
+  const editions = await getCollection(
+    'editions',
+    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+  );
   return editions.map((entry) => ({
-    params: { slug: entry.slug.replace(/^en\//, '') },
+    params: { slug: contentSlug(entry.slug) },
     props: { entry },
   }));
 }
 
 interface Props { entry: CollectionEntry<'editions'>; }
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-const locale = 'en' as const;
-const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-
-const articleLd = {
-  '@context': 'https://schema.org',
-  '@type': 'NewsArticle',
-  headline: entry.data.title,
-  datePublished: entry.data.pubDate.toISOString(),
-  author: { '@type': 'Person', name: 'Alan Ho' },
-  articleSection: 'Markham 360',
-};
 ---
-<BaseLayout title={`${entry.data.title} — Markham 360`} description={entry.data.lead} locale={locale} jsonLd={articleLd}>
-  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
-  <Nav locale={locale} />
-  <main class="container" style="padding-block: var(--section-gap);">
-    <IssueDetail episode={entry.data.episode} date={fmt(entry.data.pubDate)} title={entry.data.title} image={entry.data.heroImage} sections={entry.data.sections}>
-      <Content />
-    </IssueDetail>
-  </main>
-  <Footer locale={locale} />
-</BaseLayout>
+<EditionDetail locale="en" entry={entry} />

@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import EventCard from '../components/EventCard.astro';
+import Footer from '../components/Footer.astro';
+import { UI, PAGE_COPY } from '../utils/constants';
+import { contentSlug, href, includeDraftContent, type Locale } from '../utils/i18n';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = UI[locale];
+const copy = PAGE_COPY[locale];
+const base = import.meta.env.BASE_URL;
+const allowDraft = includeDraftContent(locale);
+const all = await getCollection(
+  'events',
+  (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+);
+---
+<BaseLayout title={copy.communityTitle} locale={locale} path="/community">
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <h1>{t.community}</h1>
+    <p class="measure">{copy.communityLede}</p>
+    <div class="grid">
+      {all
+        .slice()
+        .sort((a, b) => b.data.date.localeCompare(a.data.date))
+        .map((e) => (
+        <EventCard
+          href={href(base, locale, `/community/${contentSlug(e.slug)}`)}
+          title={e.data.title}
+          date={e.data.date}
+          summary={e.data.summary}
+          image={e.data.gallery?.[0]}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+<style>
+  .grid { display: grid; gap: var(--space-5); margin-top: var(--space-6); }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

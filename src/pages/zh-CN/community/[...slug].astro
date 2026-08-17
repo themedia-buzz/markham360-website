@@ -1,0 +1,22 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import CommunityDetail from '../../../views/CommunityDetail.astro';
+import { contentSlug, includeDraftContent } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const locale = 'zh-CN' as const;
+  const allowDraft = includeDraftContent(locale);
+  const events = await getCollection(
+    'events',
+    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+  );
+  return events.map((entry) => ({
+    params: { slug: contentSlug(entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: CollectionEntry<'events'>; }
+const { entry } = Astro.props;
+---
+<CommunityDetail locale="zh-CN" entry={entry} />

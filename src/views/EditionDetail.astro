@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import IssueDetail from '../components/IssueDetail.astro';
+import Footer from '../components/Footer.astro';
+import { contentSlug, formatDate, LOCALE_LANG, type Locale } from '../utils/i18n';
+
+interface Props {
+  locale: Locale;
+  entry: CollectionEntry<'editions'>;
+}
+const { locale, entry } = Astro.props;
+const { Content } = await entry.render();
+const path = `/markham-360/${contentSlug(entry.slug)}`;
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: entry.data.title,
+  datePublished: entry.data.pubDate.toISOString(),
+  author: { '@type': 'Person', name: 'Alan Ho' },
+  articleSection: 'Markham 360',
+  inLanguage: LOCALE_LANG[locale],
+};
+---
+<BaseLayout
+  title={`${entry.data.title} - Markham 360`}
+  description={entry.data.lead}
+  locale={locale}
+  path={path}
+  jsonLd={articleLd}
+>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <IssueDetail
+      episode={entry.data.episode}
+      date={formatDate(entry.data.pubDate, locale)}
+      title={entry.data.title}
+      image={entry.data.heroImage}
+      sections={entry.data.sections}
+    >
+      <Content />
+    </IssueDetail>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

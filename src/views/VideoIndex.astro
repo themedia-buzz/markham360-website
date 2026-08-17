@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import StoryCard from '../components/StoryCard.astro';
+import Footer from '../components/Footer.astro';
+import { UI, PAGE_COPY } from '../utils/constants';
+import {
+  contentSlug,
+  formatDate,
+  href,
+  includeDraftContent,
+  type Locale,
+} from '../utils/i18n';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = UI[locale];
+const copy = PAGE_COPY[locale];
+const base = import.meta.env.BASE_URL;
+const allowDraft = includeDraftContent(locale);
+const videos = (
+  await getCollection(
+    'video',
+    (v) => v.data.locale === locale && (allowDraft || !v.data.draft)
+  )
+).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title={copy.videoTitle} locale={locale} path="/video">
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <p class="label">{t.archive}</p>
+    <h1>{copy.videoH1}</h1>
+    <p class="measure">{copy.videoLede}</p>
+    <div class="grid">
+      {videos.map((v) => (
+        <StoryCard
+          kind="video"
+          href={href(base, locale, `/video/${contentSlug(v.slug)}`)}
+          label={t.explainer}
+          title={v.data.title}
+          dek={v.data.lead}
+          dateLabel={formatDate(v.data.pubDate, locale)}
+          youtubeId={v.data.youtubeId}
+          image={v.data.youtubeId ? { src: `https://i.ytimg.com/vi/${v.data.youtubeId}/hqdefault.jpg`, alt: v.data.title } : undefined}
+        />
+      ))}
+    </div>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

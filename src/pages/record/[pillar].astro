@@ -1,79 +1,15 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Masthead from '../../components/Masthead.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
+import RecordPillar from '../../views/RecordPillar.astro';
 import { PILLARS } from '../../utils/constants';
-import { PILLAR_CONTENT } from '../../utils/pillars';
 
 export async function getStaticPaths() {
-  return PILLARS.map((p) => ({ params: { pillar: p.slug }, props: { pillar: p } }));
+  return PILLARS.map((p) => ({
+    params: { pillar: p.slug },
+    props: { slug: p.slug, letter: p.letter },
+  }));
 }
-interface Props { pillar: (typeof PILLARS)[number]; }
-const { pillar } = Astro.props;
-const locale = 'en' as const;
-const content = PILLAR_CONTENT[pillar.slug];
-const base = import.meta.env.BASE_URL;
+
+interface Props { slug: string; letter: string; }
+const { slug, letter } = Astro.props;
 ---
-<BaseLayout title={`${pillar.title} — Alan Ho's record`} locale={locale}>
-  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
-  <Nav locale={locale} />
-  <main class="container" style="padding-block: var(--section-gap);">
-    <article class="measure pillar-article">
-      <p class="label"><span class="accent">{pillar.letter}</span> · S.M.A.R.T.</p>
-      <h1>{pillar.title}</h1>
-      <p class="lede">{content.meaning}</p>
-
-      {content.body.map((para) => <p>{para}</p>)}
-
-      <section class="proof">
-        <h2>The record</h2>
-        <ul>
-          {content.record.map((item) => <li>{item}</li>)}
-        </ul>
-      </section>
-
-      <section class="promise">
-        <h2>What comes next</h2>
-        <p>{content.promise}</p>
-      </section>
-
-      <p class="back"><a href={`${base}/record`}>← All S.M.A.R.T. pillars</a></p>
-    </article>
-  </main>
-  <Footer locale={locale} />
-</BaseLayout>
-
-<style>
-  .pillar-article { display: grid; gap: var(--space-5); }
-  .lede {
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
-    line-height: 1.45;
-    color: var(--colour-ink);
-    margin: 0;
-  }
-  .pillar-article p { margin: 0; }
-  .proof, .promise {
-    border-top: 1px solid var(--colour-rule);
-    padding-top: var(--space-6);
-    margin-top: var(--space-2);
-  }
-  .proof h2, .promise h2 { font-size: 1.35rem; }
-  .proof ul {
-    margin: 0;
-    padding-left: 1.2rem;
-    display: grid;
-    gap: var(--space-3);
-    color: var(--colour-ink);
-  }
-  .back {
-    border-top: 1px solid var(--colour-rule);
-    padding-top: var(--space-5);
-    margin-top: var(--space-4);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-</style>
+<RecordPillar locale="en" slug={slug} letter={letter} />

@@ -1,4 +1,12 @@
 import { getCollection } from 'astro:content';
+import {
+  contentSlug,
+  href,
+  includeDraftContent,
+  formatDate,
+  type Locale,
+} from './i18n';
+import { UI } from './constants';
 
 export type FeedKind = 'edition' | 'event' | 'video';
 
@@ -16,9 +24,6 @@ export type FeedItem = {
   episode?: number;
 };
 
-const fmtDate = (d: Date) =>
-  d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-
 /** Best-effort parse of free-text event dates into sortable Date values. */
 function parseEventDate(raw: string): Date {
   const direct = Date.parse(raw);
@@ -26,21 +31,43 @@ function parseEventDate(raw: string): Date {
 
   const yearMatch = raw.match(/(20\d{2})/);
   const monthNames = [
-    'january', 'february', 'march', 'april', 'may', 'june',
-    'july', 'august', 'september', 'october', 'november', 'december',
+    ['january', 'janvier'],
+    ['february', 'février'],
+    ['march', 'mars'],
+    ['april', 'avril'],
+    ['may', 'mai'],
+    ['june', 'juin'],
+    ['july', 'juillet'],
+    ['august', 'août'],
+    ['september', 'septembre'],
+    ['october', 'octobre'],
+    ['november', 'novembre'],
+    ['december', 'décembre'],
   ];
   const lower = raw.toLowerCase();
-  const month = monthNames.findIndex((m) => lower.includes(m));
+  const month = monthNames.findIndex((names) => names.some((name) => lower.includes(name)));
   const year = yearMatch ? Number(yearMatch[1]) : 2024;
   if (month >= 0) return new Date(year, month, 15);
   return new Date(year, 0, 1);
 }
 
-export async function buildFeed(base: string, locale: 'en' | 'zh-HK' | 'zh-CN' = 'en'): Promise<FeedItem[]> {
+export async function buildFeed(base: string, locale: Locale = 'en'): Promise<FeedItem[]> {
+  const allowDraft = includeDraftContent(locale);
+  const t = UI[locale];
+
   const [editions, events, videos] = await Promise.all([
-    getCollection('editions', (e) => e.data.locale === locale && !e.data.draft),
-    getCollection('events', (e) => e.data.locale === locale && !e.data.draft),
-    getCollection('video', (e) => e.data.locale === locale && !e.data.draft),
+    getCollection(
+      'editions',
+      (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+    ),
+    getCollection(
+      'events',
+      (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+    ),
+    getCollection(
+      'video',
+      (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+    ),
   ]);
 
   const editionItems: FeedItem[] = editions.map((e) => ({
@@ -48,9 +75,9 @@ export async function buildFeed(base: string, locale: 'en' | 'zh-HK' | 'zh-CN' =
     id: e.id,
     title: e.data.title,
     date: e.data.pubDate,
-    dateLabel: fmtDate(e.data.pubDate),
+    dateLabel: formatDate(e.data.pubDate, locale),
     dek: e.data.lead,
-    href: `${base}/markham-360/${e.slug.replace(/^en\//, '')}`,
+    href: href(base, locale, `/markham-360/${contentSlug(e.slug)}`),
     label: `EP. ${e.data.episode}`,
     image: e.data.heroImage,
     episode: e.data.episode,
@@ -63,8 +90,8 @@ export async function buildFeed(base: string, locale: 'en' | 'zh-HK' | 'zh-CN' =
     date: parseEventDate(e.data.date),
     dateLabel: e.data.date,
     dek: e.data.summary,
-    href: `${base}/community/${e.slug.replace(/^en\//, '')}`,
-    label: 'Community',
+    href: href(base, locale, `/community/${contentSlug(e.slug)}`),
+    label: t.communityLabel,
     image: e.data.gallery?.[0],
   }));
 
@@ -73,10 +100,10 @@ export async function buildFeed(base: string, locale: 'en' | 'zh-HK' | 'zh-CN' =
     id: v.id,
     title: v.data.title,
     date: v.data.pubDate,
-    dateLabel: fmtDate(v.data.pubDate),
+    dateLabel: formatDate(v.data.pubDate, locale),
     dek: v.data.lead,
-    href: `${base}/video/${v.slug.replace(/^en\//, '')}`,
-    label: 'Explainer',
+    href: href(base, locale, `/video/${contentSlug(v.slug)}`),
+    label: t.explainer,
     youtubeId: v.data.youtubeId,
     image: v.data.youtubeId
       ? {

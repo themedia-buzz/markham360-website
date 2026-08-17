@@ -1,18 +1,24 @@
 ---
-import { COUNCILLOR } from '../utils/constants';
+import { COUNCILLOR, PAGE_COPY, councillorRole, councillorOffice } from '../utils/constants';
 import { type Locale } from '../utils/i18n';
 interface Props { locale?: Locale; }
 const { locale = 'en' } = Astro.props;
 const year = new Date().getFullYear();
+const copy = PAGE_COPY[locale];
+const emailLabel = locale === 'fr' ? 'Courriel' : 'Email';
 ---
 <footer class="footer">
   <div class="container">
-    <p class="name">Regional Councillor {COUNCILLOR.nameEn} · {COUNCILLOR.nameZh}</p>
-    <p class="muted">{COUNCILLOR.role}</p>
-    <p class="muted">{COUNCILLOR.office}</p>
-    <p class="muted">Email: <a href={`mailto:${COUNCILLOR.email}`}>{COUNCILLOR.email}</a></p>
+    <p class="name">
+      {locale === 'zh-HK' || locale === 'zh-CN'
+        ? `${councillorRole(locale)}${COUNCILLOR.nameZh} · ${COUNCILLOR.nameEn}`
+        : `${councillorRole(locale)} ${COUNCILLOR.nameEn} · ${COUNCILLOR.nameZh}`}
+    </p>
+    <p class="muted">{councillorRole(locale)}</p>
+    <p class="muted">{councillorOffice(locale)}</p>
+    <p class="muted">{emailLabel}: <a href={`mailto:${COUNCILLOR.email}`}>{COUNCILLOR.email}</a></p>
     <hr class="rule" />
-    <p class="label">© {year} Regional Councillor {COUNCILLOR.nameEn}, City of Markham.</p>
+    <p class="label">© {year} {copy.footerCopyright}</p>
   </div>
 </footer>
 <style>

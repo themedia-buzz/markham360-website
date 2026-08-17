@@ -1,0 +1,124 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { UI } from '../utils/constants';
+import { contentSlug, href, LOCALE_LANG, type Locale } from '../utils/i18n';
+
+interface Props {
+  locale: Locale;
+  entry: CollectionEntry<'events'>;
+}
+const { locale, entry } = Astro.props;
+const { Content } = await entry.render();
+const t = UI[locale];
+const galleryLabel: Record<Locale, string> = {
+  en: 'Event photos',
+  fr: 'Photos de l’événement',
+  'zh-HK': '活動照片',
+  'zh-CN': '活动照片',
+};
+const base = import.meta.env.BASE_URL;
+const gallery = entry.data.gallery ?? [];
+const path = `/community/${contentSlug(entry.slug)}`;
+
+const eventLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: entry.data.title,
+  description: entry.data.summary,
+  inLanguage: LOCALE_LANG[locale],
+  startDate: entry.data.date,
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  organizer: {
+    '@type': 'Person',
+    name: 'Alan Ho',
+    jobTitle: 'Regional Councillor, City of Markham',
+  },
+  image: gallery.map((g) => g.src),
+};
+---
+<BaseLayout
+  title={`${entry.data.title} - ${t.community}`}
+  description={entry.data.summary}
+  locale={locale}
+  path={path}
+  jsonLd={eventLd}
+>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <article class="event-detail">
+      <p class="label">{entry.data.date}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="summary measure">{entry.data.summary}</p>
+
+      {gallery.length > 0 && (
+        <figure class="hero">
+          <img src={gallery[0].src} alt={gallery[0].alt} />
+        </figure>
+      )}
+
+      <div class="body measure">
+        <Content />
+      </div>
+
+      {gallery.length > 1 && (
+        <section class="gallery" aria-label={galleryLabel[locale]}>
+          {gallery.slice(1).map((img) => (
+            <figure>
+              <img src={img.src} alt={img.alt} loading="lazy" />
+            </figure>
+          ))}
+        </section>
+      )}
+
+      <p class="back"><a href={href(base, locale, '/community')}>← {t.backCommunity}</a></p>
+    </article>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+
+<style>
+  .event-detail { display: grid; gap: var(--space-5); max-width: var(--width-content); }
+  .summary {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    line-height: 1.45;
+    margin: 0;
+  }
+  .hero img {
+    width: 100%;
+    max-height: 32rem;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .body :global(p) { margin: 0 0 var(--space-4); }
+  .gallery {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  @media (min-width: 720px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+  .gallery img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .gallery figure { margin: 0; }
+  .back {
+    border-top: 1px solid var(--colour-rule);
+    padding-top: var(--space-5);
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>

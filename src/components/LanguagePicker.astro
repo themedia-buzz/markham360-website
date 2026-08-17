@@ -1,13 +1,18 @@
 ---
-import { LOCALES, LOCALE_LABELS, type Locale } from '../utils/i18n';
+import { LOCALES, LOCALE_LABELS, localizePath, pathWithoutLocale, withBase, type Locale } from '../utils/i18n';
 interface Props { locale?: Locale; }
 const { locale = 'en' } = Astro.props;
 const base = import.meta.env.BASE_URL;
-// Simple locale switch to each locale's home. Per-page equivalents can be
-// wired later once routes stabilise.
-const hrefFor = (l: Locale) => (l === 'en' ? `${base}/` : `${base}/${l}/`);
+const path = pathWithoutLocale(Astro.url.pathname, base);
+const hrefFor = (l: Locale) => withBase(base, localizePath(path, l));
+const languageLabel: Record<Locale, string> = {
+  en: 'Language',
+  fr: 'Langue',
+  'zh-HK': '語言',
+  'zh-CN': '语言',
+};
 ---
-<div class="lang" role="navigation" aria-label="Language">
+<div class="lang" role="navigation" aria-label={languageLabel[locale]}>
   {LOCALES.map((l) => (
     <a href={hrefFor(l)} aria-current={l === locale ? 'true' : undefined} class={l === locale ? 'current' : ''}>{LOCALE_LABELS[l]}</a>
   ))}

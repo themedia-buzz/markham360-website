@@ -5,6 +5,7 @@ interface Props { locale?: Locale; }
 const { locale = 'en' } = Astro.props;
 const copy: Record<Locale, { n: string; label: string }> = {
   en: { n: `${CONTINUITY.editions}`, label: 'consecutive weekly editions' },
+  fr: { n: `${CONTINUITY.editions}`, label: 'éditions hebdomadaires consécutives' },
   'zh-HK': { n: `${CONTINUITY.editions}`, label: '期，每週從不間斷' },
   'zh-CN': { n: `${CONTINUITY.editions}`, label: '期，每周从不间断' },
 };

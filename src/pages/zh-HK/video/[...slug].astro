@@ -1,0 +1,22 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import VideoDetail from '../../../views/VideoDetail.astro';
+import { contentSlug, includeDraftContent } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const locale = 'zh-HK' as const;
+  const allowDraft = includeDraftContent(locale);
+  const videos = await getCollection(
+    'video',
+    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+  );
+  return videos.map((entry) => ({
+    params: { slug: contentSlug(entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: CollectionEntry<'video'>; }
+const { entry } = Astro.props;
+---
+<VideoDetail locale="zh-HK" entry={entry} />

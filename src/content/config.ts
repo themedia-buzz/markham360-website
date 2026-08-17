@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-const locale = z.enum(['en', 'zh-HK', 'zh-CN']);
+const locale = z.enum(['en', 'fr', 'zh-HK', 'zh-CN']);
 
 /**
  * Markham 360 weekly editions. Rendered as editorial digests, not raw

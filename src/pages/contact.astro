@@ -1,27 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Masthead from '../components/Masthead.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CTAButton from '../components/CTAButton.astro';
-import { COUNCILLOR, UI, CTA } from '../utils/constants';
-
-const locale = 'en' as const;
-const t = UI[locale];
+import ContactPage from '../views/ContactPage.astro';
 ---
-<BaseLayout title="Contact — Regional Councillor Alan Ho" locale={locale}>
-  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
-  <Nav locale={locale} />
-  <main class="container measure" style="padding-block: var(--section-gap);">
-    <h1>Contact my office</h1>
-    <p>{COUNCILLOR.office}</p>
-    <p>Email: <a href={`mailto:${COUNCILLOR.email}`}>{COUNCILLOR.email}</a></p>
-    <div id="subscribe" style="margin-top: var(--space-7);">
-      <h2>Subscribe to Markham 360</h2>
-      <p class="measure">Get weekly community updates when regular editions resume.
-        (Connect the subscribe form endpoint here.)</p>
-      <CTAButton href={CTA.contactEmail ? `mailto:${CTA.contactEmail}` : '#'} label={t.subscribe} variant="primary" />
-    </div>
-  </main>
-  <Footer locale={locale} />
-</BaseLayout>
+<ContactPage locale="en" />

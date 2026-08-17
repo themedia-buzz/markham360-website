@@ -1,0 +1,15 @@
+---
+import RecordPillar from '../../../views/RecordPillar.astro';
+import { PILLARS } from '../../../utils/constants';
+
+export async function getStaticPaths() {
+  return PILLARS.map((p) => ({
+    params: { pillar: p.slug },
+    props: { slug: p.slug, letter: p.letter },
+  }));
+}
+
+interface Props { slug: string; letter: string; }
+const { slug, letter } = Astro.props;
+---
+<RecordPillar locale="zh-HK" slug={slug} letter={letter} />

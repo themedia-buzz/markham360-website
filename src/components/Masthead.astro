@@ -1,21 +1,28 @@
 ---
 import { CONTINUITY } from '../utils/constants';
-import { type Locale } from '../utils/i18n';
+import { href, type Locale } from '../utils/i18n';
 interface Props { locale?: Locale; centered?: boolean; }
 const { locale = 'en', centered = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const home = locale === 'en' ? base : `${base}/${locale}`;
+const home = href(base, locale, '/');
 const standing: Record<Locale, string> = {
   en: 'A weekly civic newspaper from Regional Councillor Alan Ho.',
+  fr: 'Un journal civique hebdomadaire du conseiller régional Alan Ho.',
   'zh-HK': '區域議員何胡景每週市政通訊。',
   'zh-CN': '区域议员何胡景每周市政通讯。',
+};
+const folio: Record<Locale, string> = {
+  en: `${CONTINUITY.editions} consecutive weekly editions since ${CONTINUITY.since}`,
+  fr: `${CONTINUITY.editions} éditions hebdomadaires consécutives depuis ${CONTINUITY.since}`,
+  'zh-HK': `自 ${CONTINUITY.since} 年起連續 ${CONTINUITY.editions} 期`,
+  'zh-CN': `自 ${CONTINUITY.since} 年起连续 ${CONTINUITY.editions} 期`,
 };
 ---
 <a href={home} class:list={['masthead', { centered }]} aria-label="Markham 360 home">
   <span class="wordmark">Markham <span class="accent">360</span></span>
   <span class="standing label">{standing[locale]}</span>
   {centered && (
-    <span class="folio label">{CONTINUITY.editions} consecutive weekly editions since {CONTINUITY.since}</span>
+    <span class="folio label">{folio[locale]}</span>
   )}
 </a>
 <style>

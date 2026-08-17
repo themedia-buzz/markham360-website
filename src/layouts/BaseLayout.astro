@@ -1,13 +1,22 @@
 ---
 import '../styles/globals.css';
 import '../styles/fonts.css';
-import { COUNCILLOR, CONTINUITY } from '../utils/constants';
-import { LOCALE_LANG, type Locale } from '../utils/i18n';
+import { COUNCILLOR, continuityStatement } from '../utils/constants';
+import {
+  LOCALES,
+  LOCALE_HREFLANG,
+  LOCALE_LANG,
+  localizePath,
+  withBase,
+  type Locale,
+} from '../utils/i18n';
 
 interface Props {
   title: string;
   description?: string;
   locale?: Locale;
+  /** Path without locale prefix for hreflang alternates (e.g. `/about`). */
+  path?: string;
   /** One factual sentence surfaced for AEO; defaults to the continuity statement. */
   factSentence?: string;
   /** Optional per-page JSON-LD object appended to the default Person graph. */
@@ -16,24 +25,34 @@ interface Props {
 
 const {
   title,
-  description = 'Markham 360: weekly community updates and the record of Regional Councillor Alan Ho, City of Markham.',
+  description,
   locale = 'en',
-  factSentence = CONTINUITY.statement,
+  path = '/',
+  factSentence,
   jsonLd,
 } = Astro.props;
 
+const fact = factSentence ?? continuityStatement(locale);
+const defaultDescriptions: Record<Locale, string> = {
+  en: 'Markham 360: weekly community updates and the record of Regional Councillor Alan Ho, City of Markham.',
+  fr: 'Markham 360 : les nouvelles communautaires hebdomadaires et le bilan du conseiller régional Alan Ho, Ville de Markham.',
+  'zh-HK': '萬錦360：區域議員何胡景的每週社區通訊與工作記錄。',
+  'zh-CN': '万锦360：区域议员何胡景的每周社区通讯与工作记录。',
+};
+const pageDescription = description ?? defaultDescriptions[locale];
 const lang = LOCALE_LANG[locale];
 const base = import.meta.env.BASE_URL;
 const siteUrl = Astro.site ? new URL(base, Astro.site).href : base;
+const absolute = (p: string) =>
+  Astro.site ? new URL(withBase(base, p).replace(/^\//, ''), Astro.site).href : withBase(base, p);
 
-// Default Person structured data (public record).
 const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: COUNCILLOR.nameEn,
   alternateName: COUNCILLOR.nameZh,
   jobTitle: COUNCILLOR.role,
-  knowsLanguage: ['en', 'zh-Hant', 'zh-Hans'],
+  knowsLanguage: ['en', 'fr-CA', 'zh-Hant', 'zh-Hans'],
   address: {
     '@type': 'PostalAddress',
     addressLocality: COUNCILLOR.city,
@@ -42,6 +61,8 @@ const personLd = {
   },
   url: siteUrl,
 };
+
+const canonical = absolute(localizePath(path, locale));
 ---
 
 <!doctype html>
@@ -50,21 +71,20 @@ const personLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <meta name="description" content={pageDescription} />
+    <link rel="icon" type="image/svg+xml" href={withBase(base, '/favicon.svg')} />
+    <link rel="canonical" href={canonical} />
 
-    <!-- hreflang alternates (fill hrefs per page as routes stabilise) -->
-    <!-- <link rel="alternate" hreflang="en" href="..." /> -->
-    <!-- <link rel="alternate" hreflang="zh-Hant" href="..." /> -->
-    <!-- <link rel="alternate" hreflang="zh-Hans" href="..." /> -->
-    <!-- <link rel="alternate" hreflang="x-default" href="..." /> -->
+    {LOCALES.map((l) => (
+      <link rel="alternate" hreflang={LOCALE_HREFLANG[l]} href={absolute(localizePath(path, l))} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absolute(localizePath(path, 'en'))} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
-    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
-    <!-- One unambiguous factual sentence near the top (AEO). Visually subtle. -->
-    <p class="sr-fact label" style="position:absolute;left:-9999px;">{factSentence}</p>
+    <p class="sr-fact label" style="position:absolute;left:-9999px;">{fact}</p>
     <slot />
     <style>
       .sr-fact { /* available to crawlers; positioned offscreen for layout */ }

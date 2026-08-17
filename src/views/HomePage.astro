@@ -1,0 +1,267 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CampaignBanner from '../components/CampaignBanner.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import StoryCard from '../components/StoryCard.astro';
+import PausedBanner from '../components/PausedBanner.astro';
+import PillarCard from '../components/PillarCard.astro';
+import Footer from '../components/Footer.astro';
+import { UI, PILLARS, HOME_MEANINGS, PAGE_COPY } from '../utils/constants';
+import { buildFeed } from '../utils/feed';
+import { href, type Locale } from '../utils/i18n';
+import { pillarTitle } from '../utils/pillars';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = UI[locale];
+const copy = PAGE_COPY[locale];
+const meanings = HOME_MEANINGS[locale];
+const base = import.meta.env.BASE_URL;
+
+const feed = await buildFeed(base, locale);
+const editions = feed.filter((i) => i.kind === 'edition');
+const events = feed.filter((i) => i.kind === 'event');
+const videos = feed.filter((i) => i.kind === 'video');
+
+const lead = editions[0] ?? feed[0];
+const rail = feed
+  .filter((i) => i.id !== lead?.id)
+  .filter((i) => i.image || i.youtubeId || i.kind === 'edition')
+  .slice(0, 4);
+const moreEditions = editions.slice(0, 6);
+const community = events.slice(0, 6);
+const explainers = videos.slice(0, 6);
+---
+<BaseLayout title={copy.homeTitle} description={copy.homeDescription} locale={locale} path="/">
+  <CampaignBanner locale={locale} recordHref="/record" />
+
+  <header class="paper-header">
+    <div class="container">
+      <Masthead locale={locale} centered />
+    </div>
+  </header>
+
+  <Nav locale={locale} />
+
+  <main>
+
+    <section class="container lead-band">
+      <div class="lead-grid">
+        <div class="lead-main">
+          {lead && (
+            <StoryCard
+              size="lead"
+              kind={lead.kind}
+              href={lead.href}
+              label={lead.label}
+              title={lead.title}
+              dek={lead.dek}
+              dateLabel={lead.dateLabel}
+              image={lead.image}
+              youtubeId={lead.youtubeId}
+              folio={lead.episode ? String(lead.episode) : undefined}
+            />
+          )}
+        </div>
+        <aside class="lead-rail" aria-label={t.alsoFiling}>
+          <p class="label rail-head">{t.alsoFiling}</p>
+          {rail.map((item) => (
+            <StoryCard
+              size="rail"
+              kind={item.kind}
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              dek={item.dek}
+              dateLabel={item.dateLabel}
+              image={item.image}
+              youtubeId={item.youtubeId}
+              folio={item.episode ? String(item.episode) : undefined}
+            />
+          ))}
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <PausedBanner locale={locale} />
+    </div>
+
+    <section class="band">
+      <div class="container">
+        <div class="band-head">
+          <h2>{t.latestEditions}</h2>
+          <a class="band-link" href={href(base, locale, '/markham-360')}>{t.archive} →</a>
+        </div>
+        <p class="band-lede measure">{t.editionsLede}</p>
+        <div class="edition-strip">
+          {moreEditions.map((item) => (
+            <StoryCard
+              kind="edition"
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              dek={item.dek}
+              dateLabel={item.dateLabel}
+              image={item.image}
+              folio={item.episode ? String(item.episode) : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band surface-white">
+      <div class="container">
+        <div class="band-head">
+          <h2>{t.community}</h2>
+          <a class="band-link" href={href(base, locale, '/community')}>{t.allEvents} →</a>
+        </div>
+        <div class="photo-row">
+          {community.map((item) => (
+            <StoryCard
+              kind="event"
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              dek={item.dek}
+              dateLabel={item.dateLabel}
+              image={item.image}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="container">
+        <div class="band-head">
+          <h2>{t.explainers}</h2>
+          <a class="band-link" href={href(base, locale, '/video')}>{t.allExplainers} →</a>
+        </div>
+        <p class="band-lede measure">{t.explainersLede}</p>
+        <div class="photo-row">
+          {explainers.map((item) => (
+            <StoryCard
+              kind="video"
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              dek={item.dek}
+              dateLabel={item.dateLabel}
+              image={item.image}
+              youtubeId={item.youtubeId}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="band surface-white">
+      <div class="container">
+        <div class="band-head">
+          <h2>{t.smartPlatform}</h2>
+          <a class="band-link" href={href(base, locale, '/record')}>{t.record} →</a>
+        </div>
+        <p class="band-lede measure">{t.smartLede}</p>
+        <div class="pillar-list">
+          {PILLARS.map((p) => (
+            <PillarCard
+              letter={p.letter}
+              title={locale === 'en' ? p.title : `${pillarTitle(p.slug, locale)} (${p.title})`}
+              meaning={meanings[p.slug]}
+              href={href(base, locale, `/record/${p.slug}`)}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer locale={locale} />
+</BaseLayout>
+
+<style>
+  .paper-header {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, transparent 70%),
+      var(--colour-paper);
+  }
+
+  .lead-band { padding-block: var(--space-7) var(--space-5); }
+  .lead-grid {
+    display: grid;
+    gap: var(--space-6);
+    align-items: start;
+  }
+  @media (min-width: 960px) {
+    .lead-grid {
+      grid-template-columns: minmax(0, 1.55fr) minmax(17rem, 0.85fr);
+      gap: var(--space-7);
+    }
+  }
+  .lead-main { min-width: 0; }
+  .lead-rail {
+    border-top: 1px solid var(--colour-rule);
+    padding-top: var(--space-3);
+  }
+  @media (min-width: 960px) {
+    .lead-rail {
+      border-top: 0;
+      border-left: 1px solid var(--colour-rule);
+      padding-top: 0;
+      padding-left: var(--space-5);
+    }
+  }
+  .rail-head { margin: 0 0 var(--space-1); }
+
+  .band {
+    padding-block: var(--section-gap);
+    border-top: 1px solid var(--colour-rule);
+  }
+  .surface-white { background: var(--colour-white); }
+  .band-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+  .band-head h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  }
+  .band-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .band-lede {
+    margin: 0 0 var(--space-6);
+    color: var(--colour-muted);
+  }
+
+  .edition-strip,
+  .photo-row {
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .edition-strip,
+    .photo-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 960px) {
+    .edition-strip { grid-template-columns: repeat(3, 1fr); }
+    .photo-row { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .pillar-list {
+    display: grid;
+    gap: 0;
+    max-width: 52rem;
+    border-top: 1px solid var(--colour-rule);
+  }
+</style>
