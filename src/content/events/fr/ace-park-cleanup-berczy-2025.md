@@ -6,11 +6,13 @@ author: "ace-ontario"
 summary: "ACE Ontario a poursuivi sa série de nettoyages à Markham au parc Berczy Nord, un dimanche matin."
 gallery:
   - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/cover.jpg"
-    alt: "Bénévoles d’ACE Ontario avec une bannière et des sacs de déchets dans un parc de Markham"
+    alt: "Bénévoles d’ACE Ontario avec bannière et sacs sous le pavillon du parc Berczy Nord"
   - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-1.jpg"
-    alt: "Deux bénévoles avec pinces à déchets et un sac de collecte sur un terrain de parc"
+    alt: "Bénévoles et enfants d’ACE avec pinces sous le pavillon du parc Berczy Nord"
   - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-2.jpg"
-    alt: "Famille de bénévoles tenant sacs et pinces après un nettoyage de parc"
+    alt: "Familles ramassant sacs et pinces au début du nettoyage du parc Berczy"
+  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-3.jpg"
+    alt: "Deux bénévoles ramassant une bouteille avec une pince près de conifères"
 ---
 
 Le dimanche 7 septembre 2025, de 9 h à 11 h, Active Community Engagement (ACE) Ontario / 政經民社 a tenu un nettoyage au parc Berczy Nord (447, The Bridle Walk, Markham). Les bénévoles se sont rassemblés à 8 h 45.

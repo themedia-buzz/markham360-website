@@ -8,9 +8,11 @@ gallery:
   - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/cover.png"
     alt: "Affiche d’ACE Ontario pour le nettoyage du 21 septembre au parc John Button"
   - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-1.jpg"
-    alt: "Bénévoles d’ACE Ontario avec une bannière et des sacs de déchets"
+    alt: "Bénévoles nettoyant une aire pavée lors du nettoyage du parc John Button"
   - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-2.jpg"
-    alt: "Deux bénévoles avec pinces à déchets pendant un nettoyage de parc"
+    alt: "Bénévoles d’ACE Ontario avec sacs pendant le nettoyage du parc John Button"
+  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-3.jpg"
+    alt: "Photo de groupe du nettoyage ACE Ontario au parc John Button"
 ---
 
 Le dimanche 21 septembre 2025, Active Community Engagement (ACE) Ontario / 政經民社 a organisé un nettoyage au parc John Button (125, boulevard John Button, Markham). Les bénévoles se sont réunis à 9 h; l’activité s’est poursuivie jusqu’à 11 h.

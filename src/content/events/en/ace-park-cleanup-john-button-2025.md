@@ -8,9 +8,11 @@ gallery:
   - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/cover.png"
     alt: "ACE Ontario flyer for the September 21 park cleanup at John Button Park"
   - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-1.jpg"
-    alt: "ACE Ontario volunteers with a cleanup banner and filled litter bags"
+    alt: "Volunteers cleaning a paved play area during the John Button Park cleanup"
   - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-2.jpg"
-    alt: "Two volunteers with litter grabbers and a collection bag during a park cleanup"
+    alt: "ACE Ontario volunteers with litter bags during the John Button Park cleanup"
+  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-3.jpg"
+    alt: "Group photo from the ACE Ontario John Button Park cleanup"
 ---
 
 On Sunday, September 21, 2025, Active Community Engagement (ACE) Ontario / 政經民社 hosted a park cleanup at John Button Park (125 John Button Boulevard, Markham). Volunteers met at 9:00 a.m., with the cleanup running through 11:00 a.m.
