@@ -1,0 +1,16 @@
+{
+  "name": "Active Community Engagement (ACE) Ontario",
+  "nameZh": "政經民社",
+  "type": "organization",
+  "bio": "Active Community Engagement (ACE) Ontario (安省義工及社區促進會 / 政經民社) is a Markham-based non-profit focused on civic education, community service, and practical engagement for residents and young people. Markham 360 cross-posts selected ACE events so local service work stays visible alongside the weekly newspaper.",
+  "bioFr": "Active Community Engagement (ACE) Ontario (政經民社) est un organisme sans but lucratif basé à Markham qui favorise l’éducation civique, le service communautaire et la participation pratique des résidents et des jeunes. Markham 360 republie certains événements d’ACE pour garder ce travail local visible.",
+  "bioZhHK": "政經民社（Active Community Engagement / ACE Ontario；全稱安省義工及社區促進會）是以萬錦為基地的非牟利組織，致力公民教育、社區服務，以及協助居民與青年參與公共事務。《萬錦360》會選載 ACE 活動，讓本地服務工作與每週通訊並存。",
+  "bioZhCN": "政经民社（Active Community Engagement / ACE Ontario；全称安省义工及社区促进会）是以万锦为基地的非牟利组织，致力公民教育、社区服务，以及协助居民与青年参与公共事务。《万锦360》会选载 ACE 活动，让本地服务工作与每周通讯并存。",
+  "website": "https://aceontario.org/",
+  "social": [
+    {
+      "label": "Events",
+      "href": "https://aceontario.org/events"
+    }
+  ]
+}

@@ -1,15 +1,12 @@
 ---
 import { CAMPAIGN, CAMPAIGN_COPY } from '../utils/constants';
-import { href, type Locale } from '../utils/i18n';
+import type { Locale } from '../utils/i18n';
 
 interface Props {
   locale?: Locale;
-  recordHref?: string;
 }
-const { locale = 'en', recordHref = '/record' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const { locale = 'en' } = Astro.props;
 const copy = CAMPAIGN_COPY[locale];
-const smartHref = href(base, locale, recordHref);
 ---
 {CAMPAIGN.enabled && (
   <aside class="campaign" id="campaign-banner" role="region" aria-label={copy.eyebrow}>
@@ -17,11 +14,10 @@ const smartHref = href(base, locale, recordHref);
       <div class="copy">
         <p class="eyebrow label">{copy.eyebrow}</p>
         <p class="headline">{copy.headline}</p>
-        <p class="subhead">{copy.subhead}</p>
+        {copy.subhead && <p class="subhead">{copy.subhead}</p>}
       </div>
       <div class="actions">
         <a class="cta" href={CAMPAIGN.href} rel="noopener">{copy.cta}</a>
-        <a class="secondary" href={smartHref}>{copy.smart}</a>
         <button type="button" class="dismiss" data-dismiss-campaign aria-label={copy.dismiss}>{copy.dismiss}</button>
       </div>
     </div>
@@ -98,14 +94,6 @@ const smartHref = href(base, locale, recordHref);
     color: var(--colour-accent-ink);
     text-decoration: none;
   }
-  .secondary {
-    color: #fff;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .secondary:hover { color: #fff; }
   .dismiss {
     background: transparent;
     border: 0;

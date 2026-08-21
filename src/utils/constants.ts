@@ -41,15 +41,6 @@ export function continuityStatement(locale: Locale): string {
   return CONTINUITY.statement;
 }
 
-/** The five S.M.A.R.T. pillars (slugs used for /record/[pillar]). */
-export const PILLARS = [
-  { slug: 'safe-community', letter: 'S', title: 'Safe Community' },
-  { slug: 'moving-people-forward', letter: 'M', title: 'Moving People Forward' },
-  { slug: 'accountable-leadership', letter: 'A', title: 'Accountable Leadership' },
-  { slug: 'resilient-infrastructure', letter: 'R', title: 'Resilient Infrastructure' },
-  { slug: 'tax-dollars-that-work', letter: 'T', title: 'Tax Dollars That Work' },
-] as const;
-
 /** Primary publication CTAs. */
 export const CTA = {
   subscribeUrl: '#subscribe',
@@ -68,38 +59,34 @@ export const CAMPAIGN = {
 /** Campaign banner copy per locale (DRAFT for zh). */
 export const CAMPAIGN_COPY: Record<
   Locale,
-  { eyebrow: string; headline: string; subhead: string; cta: string; smart: string; dismiss: string }
+  { eyebrow: string; headline: string; subhead: string; cta: string; dismiss: string }
 > = {
   en: {
     eyebrow: '2026 municipal election',
     headline: 'Re-elect Alan Ho for Markham Regional Councillor',
-    subhead: 'A SMART Markham for the next generation.',
+    subhead: 'Learn more on the campaign site.',
     cta: 'Visit the campaign',
-    smart: 'S.M.A.R.T. platform',
     dismiss: 'Dismiss',
   },
   fr: {
     eyebrow: 'Élections municipales de 2026',
     headline: 'Réélire Alan Ho comme conseiller régional de Markham',
-    subhead: 'Un Markham SMART pour la prochaine génération.',
+    subhead: 'En savoir plus sur le site de campagne.',
     cta: 'Visiter le site de campagne',
-    smart: 'Plateforme S.M.A.R.T.',
     dismiss: 'Fermer',
   },
   'zh-HK': {
     eyebrow: '2026 年市政選舉',
     headline: '再選何胡景出任萬錦市區域議員',
-    subhead: '為下一代建設智慧（SMART）萬錦。',
+    subhead: '詳情請見競選網站。',
     cta: '前往競選網站',
-    smart: 'S.M.A.R.T. 政綱',
     dismiss: '關閉',
   },
   'zh-CN': {
     eyebrow: '2026 年市政选举',
     headline: '再选何胡景出任万锦市区域议员',
-    subhead: '为下一代建设智慧（SMART）万锦。',
+    subhead: '详情请见竞选网站。',
     cta: '前往竞选网站',
-    smart: 'S.M.A.R.T. 政纲',
     dismiss: '关闭',
   },
 };
@@ -111,7 +98,6 @@ export const UI: Record<Locale, Record<string, string>> = {
     contact: 'Contact my office',
     latest: 'Latest edition',
     archive: 'All editions',
-    record: 'The record',
     community: 'In the community',
     video: 'Video',
     about: 'About',
@@ -122,16 +108,15 @@ export const UI: Record<Locale, Record<string, string>> = {
     allEvents: 'All events',
     explainers: 'Explainers',
     allExplainers: 'All explainers',
-    smartPlatform: 'S.M.A.R.T. platform',
-    smartLede: 'Five commitments, each backed by a public record.',
-    editionsLede: `${CONTINUITY.editions} consecutive weekly Markham 360 editions since ${CONTINUITY.since}. The 2026 run is indexed here as the newspaper of record.`,
+    editionsLede: `${CONTINUITY.editions} consecutive weekly Markham 360 editions since ${CONTINUITY.since}. The 2026 run is indexed here as the local newspaper archive.`,
     explainersLede:
       'Articles where the video is the main content: short municipal explainers for residents.',
     weeks: 'weeks',
     backCommunity: 'In the community',
     backExplainers: 'All explainers',
-    backPillars: 'All S.M.A.R.T. pillars',
-    theRecord: 'The record',
+    backAuthors: 'All contributors',
+    authors: 'Contributors',
+    byline: 'By',
     whatNext: 'What comes next',
     explainer: 'Explainer',
     communityLabel: 'Community',
@@ -141,7 +126,6 @@ export const UI: Record<Locale, Record<string, string>> = {
     contact: 'Communiquer avec mon bureau',
     latest: 'Dernière édition',
     archive: 'Toutes les éditions',
-    record: 'Le bilan',
     community: 'Dans la communauté',
     video: 'Vidéo',
     about: 'À propos',
@@ -152,16 +136,15 @@ export const UI: Record<Locale, Record<string, string>> = {
     allEvents: 'Tous les événements',
     explainers: 'Vidéos explicatives',
     allExplainers: 'Toutes les explications',
-    smartPlatform: 'Plateforme S.M.A.R.T.',
-    smartLede: 'Cinq engagements, chacun appuyé par un bilan public.',
-    editionsLede: `${CONTINUITY.editions} éditions hebdomadaires consécutives de Markham 360 depuis ${CONTINUITY.since}. La série de 2026 est conservée ici comme journal de référence.`,
+    editionsLede: `${CONTINUITY.editions} éditions hebdomadaires consécutives de Markham 360 depuis ${CONTINUITY.since}. La série de 2026 est conservée ici comme archive du journal local.`,
     explainersLede:
       'Des articles où la vidéo est le contenu principal : de courtes explications municipales pour les résidents.',
     weeks: 'semaines',
     backCommunity: 'Dans la communauté',
     backExplainers: 'Toutes les explications',
-    backPillars: 'Tous les piliers S.M.A.R.T.',
-    theRecord: 'Le bilan',
+    backAuthors: 'Tous les contributeurs',
+    authors: 'Contributeurs',
+    byline: 'Par',
     whatNext: 'La prochaine étape',
     explainer: 'Explication',
     communityLabel: 'Communauté',
@@ -171,7 +154,6 @@ export const UI: Record<Locale, Record<string, string>> = {
     contact: '聯絡我的辦公室',
     latest: '最新一期',
     archive: '所有期數',
-    record: '工作記錄',
     community: '社區活動',
     video: '影片',
     about: '關於',
@@ -181,15 +163,14 @@ export const UI: Record<Locale, Record<string, string>> = {
     allEvents: '所有活動',
     explainers: '解說短片',
     allExplainers: '所有解說',
-    smartPlatform: 'S.M.A.R.T. 政綱',
-    smartLede: '五項承諾，各有公開工作記錄佐證。',
-    editionsLede: `自 ${CONTINUITY.since} 年起連續 ${CONTINUITY.editions} 期《萬錦360》。2026 年各期在此作為公開紀錄存檔。`,
+    editionsLede: `自 ${CONTINUITY.since} 年起連續 ${CONTINUITY.editions} 期《萬錦360》。2026 年各期在此作為本地報紙存檔。`,
     explainersLede: '以短片為主的市政解說文章，方便居民快速了解議題。',
     weeks: '週',
     backCommunity: '社區活動',
     backExplainers: '所有解說',
-    backPillars: '全部 S.M.A.R.T. 政綱',
-    theRecord: '工作記錄',
+    backAuthors: '所有作者與社區',
+    authors: '作者與社區',
+    byline: '作者',
     whatNext: '下一步',
     explainer: '解說',
     communityLabel: '社區',
@@ -199,7 +180,6 @@ export const UI: Record<Locale, Record<string, string>> = {
     contact: '联系我的办公室',
     latest: '最新一期',
     archive: '所有期数',
-    record: '工作记录',
     community: '社区活动',
     video: '视频',
     about: '关于',
@@ -209,49 +189,17 @@ export const UI: Record<Locale, Record<string, string>> = {
     allEvents: '所有活动',
     explainers: '解说短片',
     allExplainers: '所有解说',
-    smartPlatform: 'S.M.A.R.T. 政纲',
-    smartLede: '五项承诺，各有公开工作记录佐证。',
-    editionsLede: `自 ${CONTINUITY.since} 年起连续 ${CONTINUITY.editions} 期《万锦360》。2026 年各期在此作为公开记录存档。`,
+    editionsLede: `自 ${CONTINUITY.since} 年起连续 ${CONTINUITY.editions} 期《万锦360》。2026 年各期在此作为本地报纸存档。`,
     explainersLede: '以短片为主的市政解说文章，方便居民快速了解议题。',
     weeks: '周',
     backCommunity: '社区活动',
     backExplainers: '所有解说',
-    backPillars: '全部 S.M.A.R.T. 政纲',
-    theRecord: '工作记录',
+    backAuthors: '所有作者与社区',
+    authors: '作者与社区',
+    byline: '作者',
     whatNext: '下一步',
     explainer: '解说',
     communityLabel: '社区',
-  },
-};
-
-export const HOME_MEANINGS: Record<Locale, Record<string, string>> = {
-  en: {
-    'safe-community': 'Safer streets and watchful neighbourhoods.',
-    'moving-people-forward': 'Roads that move and transit that reaches you.',
-    'accountable-leadership': 'Weekly updates, without fail.',
-    'resilient-infrastructure': 'Neighbourhoods built to last.',
-    'tax-dollars-that-work': 'Careful with money, clear about results.',
-  },
-  fr: {
-    'safe-community': 'Des rues plus sûres et des quartiers vigilants.',
-    'moving-people-forward': 'Des routes fluides et un transport collectif accessible.',
-    'accountable-leadership': 'Des nouvelles chaque semaine, sans interruption.',
-    'resilient-infrastructure': 'Des quartiers construits pour durer.',
-    'tax-dollars-that-work': 'Une gestion prudente et des résultats clairs.',
-  },
-  'zh-HK': {
-    'safe-community': '更安全的街道與守望相助的鄰里。',
-    'moving-people-forward': '暢通道路與覆蓋到位的公共交通。',
-    'accountable-leadership': '每週更新，從不間斷。',
-    'resilient-infrastructure': '經得起時間考驗的社區建設。',
-    'tax-dollars-that-work': '善用公帑，成果公開。',
-  },
-  'zh-CN': {
-    'safe-community': '更安全的街道与守望相助的邻里。',
-    'moving-people-forward': '畅通道路与覆盖到位的公共交通。',
-    'accountable-leadership': '每周更新，从不间断。',
-    'resilient-infrastructure': '经得起时间考验的社区建设。',
-    'tax-dollars-that-work': '善用公帑，成果公开。',
   },
 };
 
@@ -274,10 +222,8 @@ export const PAGE_COPY: Record<
     archiveLede: string;
     communityTitle: string;
     communityLede: string;
-    recordTitle: string;
-    recordEyebrow: string;
-    recordH1: string;
-    recordLede: string;
+    authorsTitle: string;
+    authorsLede: string;
     videoTitle: string;
     videoH1: string;
     videoLede: string;
@@ -285,9 +231,9 @@ export const PAGE_COPY: Record<
   }
 > = {
   en: {
-    homeTitle: 'Markham 360 - Regional Councillor Alan Ho',
+    homeTitle: 'Markham 360 - Local news for Markham',
     homeDescription:
-      'Markham 360: weekly community updates and the record of Regional Councillor Alan Ho, City of Markham.',
+      'Markham 360 is a local community newspaper covering Markham: weekly editions, community events, and contributors who serve the region.',
     aboutTitle: 'About - Regional Councillor Alan Ho',
     aboutH1: 'About Alan Ho',
     aboutIntro: `${COUNCILLOR.nameEn} (${COUNCILLOR.nameZh}) is the Regional Councillor for the City of Markham, with 16 years of service to the community. He has published ${CONTINUITY.editions} consecutive weekly Markham 360 community updates, keeping residents informed on City and York Region affairs in multiple languages.`,
@@ -309,14 +255,12 @@ export const PAGE_COPY: Record<
     archiveTitle: 'Markham 360 - All editions',
     archiveLede:
       'Weekly community updates on the City of Markham and York Region. Every edition, since 2022.',
-    communityTitle: 'In the Community - Alan Ho',
+    communityTitle: 'In the Community - Markham 360',
     communityLede:
-      'Food drives, charity concerts, community picnics, safety forums, and more.',
-    recordTitle: 'The Record - S.M.A.R.T. - Alan Ho',
-    recordEyebrow: 'The record',
-    recordH1: 'A SMART Markham for the next generation',
-    recordLede:
-      'Five commitments, each backed by a record of work and a promise for what comes next.',
+      'Food drives, charity concerts, community picnics, safety forums, and partner events across Markham.',
+    authorsTitle: 'Contributors - Markham 360',
+    authorsLede:
+      'People and community organisations whose work appears in Markham 360.',
     videoTitle: 'Explainers - Markham 360',
     videoH1: 'Explainers',
     videoLede:
@@ -324,9 +268,9 @@ export const PAGE_COPY: Record<
     footerCopyright: `Regional Councillor ${COUNCILLOR.nameEn}, City of Markham.`,
   },
   fr: {
-    homeTitle: 'Markham 360 - Conseiller régional Alan Ho',
+    homeTitle: 'Markham 360 - Nouvelles locales de Markham',
     homeDescription:
-      'Markham 360 : les nouvelles communautaires hebdomadaires et le bilan du conseiller régional Alan Ho, Ville de Markham.',
+      'Markham 360 est un journal communautaire local sur Markham : éditions hebdomadaires, événements et contributeurs au service de la région.',
     aboutTitle: 'À propos - Conseiller régional Alan Ho',
     aboutH1: 'À propos d’Alan Ho',
     aboutIntro: `${COUNCILLOR.nameEn} (${COUNCILLOR.nameZh}) est conseiller régional de la Ville de Markham et compte 16 années de service communautaire. Il a publié ${CONTINUITY.editions} éditions hebdomadaires consécutives de Markham 360 pour informer les résidents des affaires de la Ville et de la région de York dans plusieurs langues.`,
@@ -348,14 +292,12 @@ export const PAGE_COPY: Record<
     archiveTitle: 'Markham 360 - Toutes les éditions',
     archiveLede:
       'Nouvelles communautaires hebdomadaires sur la Ville de Markham et la région de York. Toutes les éditions depuis 2022.',
-    communityTitle: 'Dans la communauté - Alan Ho',
+    communityTitle: 'Dans la communauté - Markham 360',
     communityLede:
-      'Collectes de denrées, concerts-bénéfice, pique-niques communautaires, forums sur la sécurité et plus encore.',
-    recordTitle: 'Le bilan - S.M.A.R.T. - Alan Ho',
-    recordEyebrow: 'Le bilan',
-    recordH1: 'Un Markham SMART pour la prochaine génération',
-    recordLede:
-      'Cinq engagements, chacun appuyé par un bilan de travail et une promesse pour la suite.',
+      'Collectes de denrées, concerts-bénéfice, pique-niques communautaires, forums sur la sécurité et événements partenaires à Markham.',
+    authorsTitle: 'Contributeurs - Markham 360',
+    authorsLede:
+      'Personnes et organisations communautaires dont le travail paraît dans Markham 360.',
     videoTitle: 'Vidéos explicatives - Markham 360',
     videoH1: 'Vidéos explicatives',
     videoLede:
@@ -363,8 +305,8 @@ export const PAGE_COPY: Record<
     footerCopyright: `Conseiller régional ${COUNCILLOR.nameEn}, Ville de Markham.`,
   },
   'zh-HK': {
-    homeTitle: '萬錦360 - 區域議員何胡景',
-    homeDescription: '萬錦360：區域議員何胡景的每週社區通訊與工作記錄。',
+    homeTitle: '萬錦360 - 萬錦本地新聞',
+    homeDescription: '萬錦360是報道萬錦事務的本地社區報紙：每週通訊、社區活動，以及服務本區的作者與社區組織。',
     aboutTitle: '關於 - 區域議員何胡景',
     aboutH1: '關於何胡景',
     aboutIntro: `${COUNCILLOR.nameZh}（${COUNCILLOR.nameEn}）是萬錦市區域議員，服務社區逾十六年。他已連續發表 ${CONTINUITY.editions} 期《萬錦360》每週通訊，以多語向居民通報市府與約克區事務。`,
@@ -383,20 +325,18 @@ export const PAGE_COPY: Record<
     contactSubscribeP: '通訊恢復後即可收取每週社區更新。（請在此接上訂閱表單端點。）',
     archiveTitle: '萬錦360 - 所有期數',
     archiveLede: '關於萬錦市與約克區的每週社區通訊。自 2022 年起每期可查。',
-    communityTitle: '社區活動 - 何胡景',
-    communityLede: '食物募捐、慈善音樂會、社區野餐、安全論壇等。',
-    recordTitle: '工作記錄 - S.M.A.R.T. - 何胡景',
-    recordEyebrow: '工作記錄',
-    recordH1: '為下一代建設智慧（SMART）萬錦',
-    recordLede: '五項承諾，各有工作記錄與前瞻承諾。',
+    communityTitle: '社區活動 - 萬錦360',
+    communityLede: '食物募捐、慈善音樂會、社區野餐、安全論壇及合作夥伴活動。',
+    authorsTitle: '作者與社區 - 萬錦360',
+    authorsLede: '在萬錦360發表內容的個人與社區組織。',
     videoTitle: '解說短片 - 萬錦360',
     videoH1: '解說短片',
     videoLede: '以短片為主的市政解說，協助居民掌握議題。',
     footerCopyright: `萬錦市區域議員${COUNCILLOR.nameZh}。`,
   },
   'zh-CN': {
-    homeTitle: '万锦360 - 区域议员何胡景',
-    homeDescription: '万锦360：区域议员何胡景的每周社区通讯与工作记录。',
+    homeTitle: '万锦360 - 万锦本地新闻',
+    homeDescription: '万锦360是报道万锦事务的本地社区报纸：每周通讯、社区活动，以及服务本区的作者与社区组织。',
     aboutTitle: '关于 - 区域议员何胡景',
     aboutH1: '关于何胡景',
     aboutIntro: `${COUNCILLOR.nameZh}（${COUNCILLOR.nameEn}）是万锦市区域议员，服务社区逾十六年。他已连续发表 ${CONTINUITY.editions} 期《万锦360》每周通讯，以多语向居民通报市府与约克区事务。`,
@@ -415,12 +355,10 @@ export const PAGE_COPY: Record<
     contactSubscribeP: '通讯恢复后即可收取每周社区更新。（请在此接上订阅表单端点。）',
     archiveTitle: '万锦360 - 所有期数',
     archiveLede: '关于万锦市与约克区的每周社区通讯。自 2022 年起每期可查。',
-    communityTitle: '社区活动 - 何胡景',
-    communityLede: '食物募捐、慈善音乐会、社区野餐、安全论坛等。',
-    recordTitle: '工作记录 - S.M.A.R.T. - 何胡景',
-    recordEyebrow: '工作记录',
-    recordH1: '为下一代建设智慧（SMART）万锦',
-    recordLede: '五项承诺，各有工作记录与前瞻承诺。',
+    communityTitle: '社区活动 - 万锦360',
+    communityLede: '食物募捐、慈善音乐会、社区野餐、安全论坛及合作伙伴活动。',
+    authorsTitle: '作者与社区 - 万锦360',
+    authorsLede: '在万锦360发表内容的个人与社区组织。',
     videoTitle: '解说短片 - 万锦360',
     videoH1: '解说短片',
     videoLede: '以短片为主的市政解说，协助居民掌握议题。',

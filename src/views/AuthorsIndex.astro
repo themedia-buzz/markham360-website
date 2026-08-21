@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { PAGE_COPY, UI } from '../utils/constants';
+import { authorBio, authorDisplayName, getAllAuthors } from '../utils/authors';
+import { href, type Locale } from '../utils/i18n';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const copy = PAGE_COPY[locale];
+const t = UI[locale];
+const base = import.meta.env.BASE_URL;
+const authors = await getAllAuthors();
+---
+<BaseLayout title={copy.authorsTitle} description={copy.authorsLede} locale={locale} path="/authors">
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <header class="page-head">
+      <h1>{t.authors}</h1>
+      <p class="lede measure">{copy.authorsLede}</p>
+    </header>
+    <ul class="author-list">
+      {authors.map((author) => (
+        <li>
+          <a class="author-card" href={href(base, locale, `/authors/${author.id}`)}>
+            {author.data.avatar && (
+              <img src={author.data.avatar.src} alt={author.data.avatar.alt} width="72" height="72" />
+            )}
+            <div>
+              <h2>{authorDisplayName(author, locale)}</h2>
+              <p>{authorBio(author, locale)}</p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+
+<style>
+  .page-head { margin-bottom: var(--space-7); }
+  .page-head h1 { margin: 0 0 var(--space-3); }
+  .lede { margin: 0; color: var(--colour-muted); }
+  .author-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-5);
+    max-width: 40rem;
+  }
+  .author-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4);
+    align-items: start;
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--colour-rule);
+    color: inherit;
+    text-decoration: none;
+  }
+  .author-card:hover { text-decoration: none; }
+  .author-card:hover h2 { color: var(--colour-accent); }
+  .author-card img {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .author-card h2 {
+    margin: 0 0 var(--space-2);
+    font-size: 1.35rem;
+  }
+  .author-card p {
+    margin: 0;
+    color: var(--colour-muted);
+    font-size: 0.95rem;
+  }
+</style>

@@ -10,4 +10,4 @@ gallery:
 
 On December 20, 2023, from 7 to 9 p.m. in the Canada Room at Markham Civic Centre (101 Town Centre Blvd.), Regional Councillor Alan Ho and Ward 2 Councillor Ritch Lau hosted a Crime Prevention Forum and Seminar with support from York Regional Police Brian Hinds.
 
-The in-person session covered crime prevention tips, how to report concerns, an update on the police camera pilot program, and a question-and-answer period with councillors, officers, and residents. It is a core proof point for the Safe Community pillar: practical safety information delivered face to face.
+The in-person session covered crime prevention tips, how to report concerns, an update on the police camera pilot program, and a question-and-answer period with councillors, officers, and residents: practical safety information delivered face to face.

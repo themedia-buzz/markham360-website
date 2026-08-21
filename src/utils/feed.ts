@@ -25,7 +25,7 @@ export type FeedItem = {
 };
 
 /** Best-effort parse of free-text event dates into sortable Date values. */
-function parseEventDate(raw: string): Date {
+export function parseEventDate(raw: string): Date | null {
   const direct = Date.parse(raw);
   if (!Number.isNaN(direct)) return new Date(direct);
 
@@ -48,7 +48,8 @@ function parseEventDate(raw: string): Date {
   const month = monthNames.findIndex((names) => names.some((name) => lower.includes(name)));
   const year = yearMatch ? Number(yearMatch[1]) : 2024;
   if (month >= 0) return new Date(year, month, 15);
-  return new Date(year, 0, 1);
+  if (yearMatch) return new Date(year, 0, 1);
+  return null;
 }
 
 export async function buildFeed(base: string, locale: Locale = 'en'): Promise<FeedItem[]> {
@@ -87,7 +88,7 @@ export async function buildFeed(base: string, locale: Locale = 'en'): Promise<Fe
     kind: 'event',
     id: e.id,
     title: e.data.title,
-    date: parseEventDate(e.data.date),
+    date: parseEventDate(e.data.date) ?? new Date(0),
     dateLabel: e.data.date,
     dek: e.data.summary,
     href: href(base, locale, `/community/${contentSlug(e.slug)}`),

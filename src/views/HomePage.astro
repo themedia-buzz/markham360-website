@@ -5,18 +5,15 @@ import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
 import StoryCard from '../components/StoryCard.astro';
 import PausedBanner from '../components/PausedBanner.astro';
-import PillarCard from '../components/PillarCard.astro';
 import Footer from '../components/Footer.astro';
-import { UI, PILLARS, HOME_MEANINGS, PAGE_COPY } from '../utils/constants';
+import { UI, PAGE_COPY } from '../utils/constants';
 import { buildFeed } from '../utils/feed';
 import { href, type Locale } from '../utils/i18n';
-import { pillarTitle } from '../utils/pillars';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = UI[locale];
 const copy = PAGE_COPY[locale];
-const meanings = HOME_MEANINGS[locale];
 const base = import.meta.env.BASE_URL;
 
 const feed = await buildFeed(base, locale);
@@ -34,7 +31,7 @@ const community = events.slice(0, 6);
 const explainers = videos.slice(0, 6);
 ---
 <BaseLayout title={copy.homeTitle} description={copy.homeDescription} locale={locale} path="/">
-  <CampaignBanner locale={locale} recordHref="/record" />
+  <CampaignBanner locale={locale} />
 
   <header class="paper-header">
     <div class="container">
@@ -157,26 +154,6 @@ const explainers = videos.slice(0, 6);
         </div>
       </div>
     </section>
-
-    <section class="band surface-white">
-      <div class="container">
-        <div class="band-head">
-          <h2>{t.smartPlatform}</h2>
-          <a class="band-link" href={href(base, locale, '/record')}>{t.record} →</a>
-        </div>
-        <p class="band-lede measure">{t.smartLede}</p>
-        <div class="pillar-list">
-          {PILLARS.map((p) => (
-            <PillarCard
-              letter={p.letter}
-              title={locale === 'en' ? p.title : `${pillarTitle(p.slug, locale)} (${p.title})`}
-              meaning={meanings[p.slug]}
-              href={href(base, locale, `/record/${p.slug}`)}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
   </main>
 
   <Footer locale={locale} />
@@ -256,12 +233,5 @@ const explainers = videos.slice(0, 6);
   @media (min-width: 960px) {
     .edition-strip { grid-template-columns: repeat(3, 1fr); }
     .photo-row { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  .pillar-list {
-    display: grid;
-    gap: 0;
-    max-width: 52rem;
-    border-top: 1px solid var(--colour-rule);
   }
 </style>

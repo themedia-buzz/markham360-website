@@ -12,6 +12,7 @@ const { episode, date, title, image, sections = [] } = Astro.props;
 <article class="issue-detail measure">
   <p class="stamp label"><span class="accent">EP. {episode}</span> · {date}</p>
   <h1>{title}</h1>
+  <slot name="byline" />
   {image && <img class="hero" src={image.src} alt={image.alt} />}
   <div class="digest">
     <slot />

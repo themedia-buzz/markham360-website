@@ -4,7 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
 import IssueDetail from '../components/IssueDetail.astro';
+import Byline from '../components/Byline.astro';
 import Footer from '../components/Footer.astro';
+import { authorJsonLd, getAuthor } from '../utils/authors';
 import { contentSlug, formatDate, LOCALE_LANG, type Locale } from '../utils/i18n';
 
 interface Props {
@@ -14,13 +16,14 @@ interface Props {
 const { locale, entry } = Astro.props;
 const { Content } = await entry.render();
 const path = `/markham-360/${contentSlug(entry.slug)}`;
+const author = await getAuthor(entry.data.author);
 
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
   headline: entry.data.title,
   datePublished: entry.data.pubDate.toISOString(),
-  author: { '@type': 'Person', name: 'Alan Ho' },
+  author: author ? authorJsonLd(author) : { '@type': 'Person', name: 'Alan Ho' },
   articleSection: 'Markham 360',
   inLanguage: LOCALE_LANG[locale],
 };
@@ -42,6 +45,7 @@ const articleLd = {
       image={entry.data.heroImage}
       sections={entry.data.sections}
     >
+      {author && <Byline slot="byline" locale={locale} author={author} />}
       <Content />
     </IssueDetail>
   </main>

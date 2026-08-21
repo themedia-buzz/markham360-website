@@ -4,7 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Byline from '../components/Byline.astro';
 import { UI } from '../utils/constants';
+import { getAuthor } from '../utils/authors';
 import { contentSlug, formatDate, href, LOCALE_LANG, type Locale } from '../utils/i18n';
 
 interface Props {
@@ -16,6 +18,7 @@ const { Content } = await entry.render();
 const t = UI[locale];
 const base = import.meta.env.BASE_URL;
 const path = `/video/${contentSlug(entry.slug)}`;
+const author = await getAuthor(entry.data.author);
 const embed = entry.data.youtubeId
   ? `https://www.youtube-nocookie.com/embed/${entry.data.youtubeId}`
   : undefined;
@@ -48,6 +51,7 @@ const videoLd = {
     <article class="video-article measure">
       <p class="label"><span class="accent">{t.explainer}</span> · {formatDate(entry.data.pubDate, locale)}</p>
       <h1>{entry.data.title}</h1>
+      {author && <Byline locale={locale} author={author} />}
       <p class="lede">{entry.data.lead}</p>
 
       {embed ? (

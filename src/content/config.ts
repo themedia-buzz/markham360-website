@@ -2,6 +2,16 @@ import { defineCollection, z } from 'astro:content';
 
 const locale = z.enum(['en', 'fr', 'zh-HK', 'zh-CN']);
 
+const socialLink = z.object({
+  label: z.string(),
+  href: z.string().url(),
+});
+
+const avatar = z.object({
+  src: z.string(),
+  alt: z.string(),
+});
+
 /**
  * Markham 360 weekly editions. Rendered as editorial digests, not raw
  * newsletter dumps. `episode` preserves the canonical run so the
@@ -31,6 +41,8 @@ const editions = defineCollection({
       .optional(),
     /** Optional editorial series tag (e.g. election specials). */
     series: z.string().optional(),
+    /** Author slug from the authors collection; defaults to alan-ho in templates. */
+    author: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -51,6 +63,8 @@ const events = defineCollection({
         })
       )
       .default([]),
+    /** Author slug from the authors collection; defaults to alan-ho in templates. */
+    author: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -68,6 +82,29 @@ const video = defineCollection({
     lead: z.string(),
     youtubeId: z.string().optional(),
     order: z.number().default(0),
+    /** Author slug from the authors collection; defaults to alan-ho in templates. */
+    author: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+/**
+ * People and community organisations who contribute to Markham 360.
+ * One JSON file per author; slug is the filename.
+ */
+const authors = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    nameZh: z.string().optional(),
+    type: z.enum(['person', 'organization']),
+    bio: z.string(),
+    bioFr: z.string().optional(),
+    bioZhHK: z.string().optional(),
+    bioZhCN: z.string().optional(),
+    website: z.string().url().optional(),
+    social: z.array(socialLink).default([]),
+    avatar: avatar.optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -81,4 +118,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { editions, events, video, pages };
+export const collections = { editions, events, video, authors, pages };

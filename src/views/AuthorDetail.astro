@@ -1,0 +1,186 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import StoryCard from '../components/StoryCard.astro';
+import { UI } from '../utils/constants';
+import {
+  authorBio,
+  authorDisplayName,
+  authorJsonLd,
+  DEFAULT_AUTHOR_SLUG,
+} from '../utils/authors';
+import { contentSlug, formatDate, href, includeDraftContent, type Locale } from '../utils/i18n';
+import { parseEventDate } from '../utils/feed';
+
+interface Props {
+  locale: Locale;
+  author: CollectionEntry<'authors'>;
+}
+const { locale, author } = Astro.props;
+const t = UI[locale];
+const base = import.meta.env.BASE_URL;
+const path = `/authors/${author.id}`;
+const allowDraft = includeDraftContent(locale);
+const name = authorDisplayName(author, locale);
+const bio = authorBio(author, locale);
+
+const matchesAuthor = (slug: string | undefined) =>
+  (slug?.trim() || DEFAULT_AUTHOR_SLUG) === author.id;
+
+const [editions, events, videos] = await Promise.all([
+  getCollection('editions', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
+  getCollection('events', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
+  getCollection('video', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
+]);
+
+const posts = [
+  ...editions.map((e) => ({
+    kind: 'edition' as const,
+    id: e.id,
+    href: href(base, locale, `/markham-360/${contentSlug(e.slug)}`),
+    title: e.data.title,
+    dek: e.data.lead,
+    dateLabel: formatDate(e.data.pubDate, locale),
+    sort: e.data.pubDate.getTime(),
+    image: e.data.heroImage,
+    folio: String(e.data.episode),
+    label: t.latest,
+  })),
+  ...events.map((e) => ({
+    kind: 'event' as const,
+    id: e.id,
+    href: href(base, locale, `/community/${contentSlug(e.slug)}`),
+    title: e.data.title,
+    dek: e.data.summary,
+    dateLabel: e.data.date,
+    sort: parseEventDate(e.data.date)?.getTime() ?? 0,
+    image: e.data.gallery?.[0],
+    folio: undefined as string | undefined,
+    label: t.communityLabel,
+  })),
+  ...videos.map((e) => ({
+    kind: 'video' as const,
+    id: e.id,
+    href: href(base, locale, `/video/${contentSlug(e.slug)}`),
+    title: e.data.title,
+    dek: e.data.lead,
+    dateLabel: formatDate(e.data.pubDate, locale),
+    sort: e.data.pubDate.getTime(),
+    image: undefined as { src: string; alt: string } | undefined,
+    folio: undefined as string | undefined,
+    label: t.explainer,
+    youtubeId: e.data.youtubeId,
+  })),
+].sort((a, b) => b.sort - a.sort);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  ...authorJsonLd(author),
+};
+---
+<BaseLayout title={`${name} - Markham 360`} description={bio} locale={locale} path={path} jsonLd={jsonLd}>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <article class="author-profile">
+      <header class="profile-head">
+        {author.data.avatar && (
+          <img class="avatar" src={author.data.avatar.src} alt={author.data.avatar.alt} width="120" height="120" />
+        )}
+        <div>
+          <p class="label">{author.data.type === 'organization' ? t.communityLabel : t.authors}</p>
+          <h1>{name}</h1>
+          <p class="bio measure">{bio}</p>
+          <ul class="links">
+            {author.data.website && (
+              <li><a href={author.data.website} rel="noopener">{author.data.website.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></li>
+            )}
+            {author.data.social.map((s) => (
+              <li><a href={s.href} rel="noopener">{s.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </header>
+
+      {posts.length > 0 && (
+        <section class="posts" aria-labelledby="author-posts">
+          <h2 id="author-posts">{t.alsoFiling}</h2>
+          <div class="post-grid">
+            {posts.map((item) => (
+              <StoryCard
+                kind={item.kind}
+                href={item.href}
+                label={item.label}
+                title={item.title}
+                dek={item.dek}
+                dateLabel={item.dateLabel}
+                image={item.image}
+                youtubeId={'youtubeId' in item ? item.youtubeId : undefined}
+                folio={item.folio}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <p class="back"><a href={href(base, locale, '/authors')}>← {t.backAuthors}</a></p>
+    </article>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+
+<style>
+  .profile-head {
+    display: grid;
+    gap: var(--space-5);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--colour-rule);
+  }
+  @media (min-width: 640px) {
+    .profile-head {
+      grid-template-columns: auto 1fr;
+      align-items: start;
+    }
+  }
+  .avatar {
+    width: 7.5rem;
+    height: 7.5rem;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .profile-head h1 { margin: var(--space-2) 0 var(--space-3); }
+  .bio { margin: 0 0 var(--space-4); color: var(--colour-muted); }
+  .links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .posts h2 {
+    margin: 0 0 var(--space-5);
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  }
+  .post-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .post-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 960px) {
+    .post-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .back { margin-top: var(--space-8); }
+</style>

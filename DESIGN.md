@@ -55,7 +55,7 @@ Self-host all fonts under `public/fonts/` (privacy + performance + discoverabili
 | `LanguagePicker` | en / zh-HK / zh-CN switch |
 | `IssueCard` | Edition preview (EP number in red, date in mono, lead excerpt, image) |
 | `IssueDetail` | Full edition (headline, EP stamp, hero, sectioned digest, prev/next) |
-| `PillarCard` | One S.M.A.R.T. pillar |
+| `Byline` | Author or community credit linking to `/authors/[slug]` |
 | `EventCard` | Community event (photo-led) |
 | `VideoCard` | Explainer video (youtube-nocookie lite embed) |
 | `ContinuityStat` | "180 consecutive weekly editions" — the signature proof |
@@ -66,10 +66,11 @@ Self-host all fonts under `public/fonts/` (privacy + performance + discoverabili
 
 ## Layout Notes
 
-- **Home:** masthead-first, magazine-cover style; the continuity stat is the hero, not a slogan graphic.
+- **Home:** masthead-first, magazine-cover style; lead story and filing rail, then editions, community, and explainers.
 - **Archive:** editions as an editorial index grouped by year; the unbroken run visible.
-- **Article:** serif headline, red EP stamp, hero image, sectioned digest, tight captions.
-- **Community:** photo-led grid.
+- **Article:** serif headline, red EP stamp, hero image, sectioned digest, tight captions; byline when author is set.
+- **Community:** photo-led grid; events may credit a person or organisation author.
+- **Authors:** profile pages for people and community organisations (bio, website, social links, their posts).
 - Alternate section surfaces (paper → white) with hairline rules.
 
 ## What To Avoid

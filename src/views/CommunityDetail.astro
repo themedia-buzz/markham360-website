@@ -4,7 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Byline from '../components/Byline.astro';
 import { UI } from '../utils/constants';
+import { authorJsonLd, getAuthor } from '../utils/authors';
 import { contentSlug, href, LOCALE_LANG, type Locale } from '../utils/i18n';
 
 interface Props {
@@ -23,6 +25,7 @@ const galleryLabel: Record<Locale, string> = {
 const base = import.meta.env.BASE_URL;
 const gallery = entry.data.gallery ?? [];
 const path = `/community/${contentSlug(entry.slug)}`;
+const author = await getAuthor(entry.data.author);
 
 const eventLd = {
   '@context': 'https://schema.org',
@@ -33,11 +36,7 @@ const eventLd = {
   startDate: entry.data.date,
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
-  organizer: {
-    '@type': 'Person',
-    name: 'Alan Ho',
-    jobTitle: 'Regional Councillor, City of Markham',
-  },
+  organizer: author ? authorJsonLd(author) : { '@type': 'Person', name: 'Alan Ho' },
   image: gallery.map((g) => g.src),
 };
 ---
@@ -54,6 +53,7 @@ const eventLd = {
     <article class="event-detail">
       <p class="label">{entry.data.date}</p>
       <h1>{entry.data.title}</h1>
+      {author && <Byline locale={locale} author={author} />}
       <p class="summary measure">{entry.data.summary}</p>
 
       {gallery.length > 0 && (
@@ -83,42 +83,24 @@ const eventLd = {
 </BaseLayout>
 
 <style>
-  .event-detail { display: grid; gap: var(--space-5); max-width: var(--width-content); }
+  .event-detail h1 { margin: var(--space-2) 0 var(--space-3); }
   .summary {
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
-    line-height: 1.45;
-    margin: 0;
+    margin: 0 0 var(--space-6);
+    color: var(--colour-muted);
+    font-size: 1.1rem;
   }
-  .hero img {
-    width: 100%;
-    max-height: 32rem;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-  }
-  .body :global(p) { margin: 0 0 var(--space-4); }
+  .hero { margin: 0 0 var(--space-6); }
+  .hero img { border-radius: var(--radius-sm); width: 100%; }
+  .body { margin-bottom: var(--space-7); }
   .gallery {
     display: grid;
     gap: var(--space-4);
-    margin-top: var(--space-4);
+    margin-bottom: var(--space-7);
   }
-  @media (min-width: 720px) {
+  @media (min-width: 640px) {
     .gallery { grid-template-columns: repeat(2, 1fr); }
   }
-  .gallery img {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-  }
   .gallery figure { margin: 0; }
-  .back {
-    border-top: 1px solid var(--colour-rule);
-    padding-top: var(--space-5);
-    margin-top: var(--space-4);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
+  .gallery img { border-radius: var(--radius-sm); width: 100%; }
+  .back { margin-top: var(--space-4); }
 </style>
