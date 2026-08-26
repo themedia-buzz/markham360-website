@@ -4,7 +4,7 @@ date: "2024"
 locale: "zh-CN"
 summary: "与社区伙伴合办的慈善音乐会，为万锦食物银行筹得 25,000 元。"
 gallery:
-  - src: "/markham360-website/images/events/dragons-singing-with-love-charity-concert/cover.jpg"
+  - src: "/images/events/dragons-singing-with-love-charity-concert/cover.jpg"
     alt: "龙唱爱心慈善音乐会"
 draft: true
 ---

@@ -8,7 +8,7 @@
 /* --- Display serif (candidate: Newsreader) ------------------------------ */
 @font-face {
   font-family: 'Newsreader';
-  src: url('/markham360-website/fonts/newsreader-variable.woff2') format('woff2');
+  src: url('/fonts/newsreader-variable.woff2') format('woff2');
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 /* --- Body sans (Inter) -------------------------------------------------- */
 @font-face {
   font-family: 'Inter';
-  src: url('/markham360-website/fonts/inter-variable.woff2') format('woff2');
+  src: url('/fonts/inter-variable.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -26,7 +26,7 @@
 /* --- Mono labels (JetBrains Mono) --------------------------------------- */
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('/markham360-website/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  src: url('/fonts/jetbrains-mono-variable.woff2') format('woff2');
   font-weight: 100 800;
   font-style: normal;
   font-display: swap;
@@ -39,7 +39,7 @@
 
   @font-face {
     font-family: 'Noto Serif TC';
-    src: url('/markham360-website/fonts/noto-serif-tc-subset.woff2') format('woff2');
+    src: url('/fonts/noto-serif-tc-subset.woff2') format('woff2');
     font-weight: 400 700;
     font-display: swap;
   }

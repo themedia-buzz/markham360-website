@@ -4,7 +4,7 @@ date: "February 19, 2023"
 locale: "en"
 summary: "Charity roadshow supporting DD Community Connector and the Chinese Autism Awareness Centre, with sponsors, performers, and volunteers across Markham."
 gallery:
-  - src: "/markham360-website/images/events/we-are-family-charity-roadshow-2023/cover.jpg"
+  - src: "/images/events/we-are-family-charity-roadshow-2023/cover.jpg"
     alt: "We Are Family Charity Roadshow 2023"
 ---
 

@@ -5,13 +5,13 @@ locale: "fr"
 author: "ace-ontario"
 summary: "Les bénévoles d’ACE Ontario ont nettoyé le parc Milliken Mills à Markham, première étape d’une série de nettoyages de fin d’été."
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/cover.png"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/cover.png"
     alt: "Affiche d’ACE Ontario pour le nettoyage du 24 août au parc Milliken Mills"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-1.jpg"
     alt: "Bénévoles d’ACE Ontario avec bannière et sacs sous le kiosque du parc Milliken Mills"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-2.jpg"
     alt: "Bénévoles d’ACE avec pinces à déchets devant le kiosque du parc Milliken Mills"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-3.jpg"
     alt: "Jeunes bénévoles d’ACE avec sacs et pinces sur un sentier de parc"
 ---
 

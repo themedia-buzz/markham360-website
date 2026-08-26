@@ -4,7 +4,7 @@ date: "19 février 2023"
 locale: "fr"
 summary: "Tournée au profit de DD Community Connector et du Chinese Autism Awareness Centre avec des commanditaires, artistes et bénévoles."
 gallery:
-  - src: "/markham360-website/images/events/we-are-family-charity-roadshow-2023/cover.jpg"
+  - src: "/images/events/we-are-family-charity-roadshow-2023/cover.jpg"
     alt: "Tournée-bénéfice We Are Family 2023"
 draft: false
 ---

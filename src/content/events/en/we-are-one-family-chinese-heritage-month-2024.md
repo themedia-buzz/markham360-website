@@ -4,7 +4,7 @@ date: "February 19, 2024"
 locale: "en"
 summary: "Family Day Traditional Chinese Costume Heritage Show at Markham Civic Centre for Chinese Heritage Month."
 gallery:
-  - src: "/markham360-website/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
+  - src: "/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
     alt: "We Are One Family Chinese Heritage Month celebration 2024"
 ---
 

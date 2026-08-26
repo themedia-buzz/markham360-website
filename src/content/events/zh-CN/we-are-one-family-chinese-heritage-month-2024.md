@@ -4,7 +4,7 @@ date: "February 19, 2024"
 locale: "zh-CN"
 summary: "于万锦市政中心举行的家庭日传统中式服饰文化展，庆祝华裔文化传统月。"
 gallery:
-  - src: "/markham360-website/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
+  - src: "/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
     alt: "2024年我们是一家人华裔文化传统月庆典"
 draft: true
 ---

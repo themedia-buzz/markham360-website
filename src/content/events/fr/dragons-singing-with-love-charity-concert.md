@@ -4,7 +4,7 @@ date: "2024"
 locale: "fr"
 summary: "Concert-bénéfice organisé avec des partenaires communautaires qui a recueilli 25 000 $ pour la banque alimentaire de Markham."
 gallery:
-  - src: "/markham360-website/images/events/dragons-singing-with-love-charity-concert/cover.jpg"
+  - src: "/images/events/dragons-singing-with-love-charity-concert/cover.jpg"
     alt: "Concert-bénéfice Dragons Singing with Love"
 draft: false
 ---

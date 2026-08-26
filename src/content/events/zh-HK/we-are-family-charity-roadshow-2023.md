@@ -4,7 +4,7 @@ date: "February 19, 2023"
 locale: "zh-HK"
 summary: "支持 DD Community Connector 與華人自閉症關註中心的慈善巡演，汇集萬錦各地赞助商、表演者與義工。"
 gallery:
-  - src: "/markham360-website/images/events/we-are-family-charity-roadshow-2023/cover.jpg"
+  - src: "/images/events/we-are-family-charity-roadshow-2023/cover.jpg"
     alt: "我們是一家人慈善巡演 2023"
 draft: true
 ---

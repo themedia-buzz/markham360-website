@@ -5,13 +5,13 @@ locale: "zh-HK"
 author: "ace-ontario"
 summary: "政經民社邀請萬錦居民於星期日早上到 John Button 公園清潔，延續夏末公園義工系列。"
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/cover.png"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/cover.png"
     alt: "政經民社9月21日 John Button 公園清潔活動海報"
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/gallery-1.jpg"
     alt: "義工於 John Button 公園鋪面場地進行清潔"
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/gallery-2.jpg"
     alt: "政經民社義工於 John Button 公園清潔期間手持垃圾袋"
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/gallery-3.jpg"
     alt: "政經民社 John Button 公園清潔活動團體合照"
 draft: true
 ---

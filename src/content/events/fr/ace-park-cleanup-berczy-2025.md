@@ -5,13 +5,13 @@ locale: "fr"
 author: "ace-ontario"
 summary: "ACE Ontario a poursuivi sa série de nettoyages à Markham au parc Berczy Nord, un dimanche matin."
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/cover.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/cover.jpg"
     alt: "Bénévoles d’ACE Ontario avec bannière et sacs sous le pavillon du parc Berczy Nord"
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/gallery-1.jpg"
     alt: "Bénévoles et enfants d’ACE avec pinces sous le pavillon du parc Berczy Nord"
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/gallery-2.jpg"
     alt: "Familles ramassant sacs et pinces au début du nettoyage du parc Berczy"
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/gallery-3.jpg"
     alt: "Deux bénévoles ramassant une bouteille avec une pince près de conifères"
 ---
 

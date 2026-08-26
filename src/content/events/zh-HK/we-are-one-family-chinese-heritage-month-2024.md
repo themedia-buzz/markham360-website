@@ -4,7 +4,7 @@ date: "February 19, 2024"
 locale: "zh-HK"
 summary: "于萬錦市政中心舉行的家庭日傳統中式服饰文化展，慶祝華裔文化傳統月。"
 gallery:
-  - src: "/markham360-website/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
+  - src: "/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
     alt: "2024年我們是一家人華裔文化傳統月慶典"
 draft: true
 ---

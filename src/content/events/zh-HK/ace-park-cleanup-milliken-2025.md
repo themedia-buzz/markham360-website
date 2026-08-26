@@ -5,13 +5,13 @@ locale: "zh-HK"
 author: "ace-ontario"
 summary: "政經民社（ACE Ontario）義工於萬錦 Milliken Mills 公園進行清潔，揭開夏末公園清潔系列的序幕。"
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/cover.png"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/cover.png"
     alt: "政經民社8月24日 Milliken Mills 公園清潔活動海報"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-1.jpg"
     alt: "政經民社義工於 Milliken Mills 公園涼亭下手持橫額與垃圾袋"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-2.jpg"
     alt: "政經民社義工手持撿拾夾於 Milliken Mills 公園涼亭前合照"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-3.jpg"
     alt: "年輕義工於公園小徑手持垃圾袋與撿拾夾"
 draft: true
 ---

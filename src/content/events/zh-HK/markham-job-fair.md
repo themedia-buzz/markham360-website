@@ -4,7 +4,7 @@ date: "April 19, 2026"
 locale: "zh-HK"
 summary: "于 Aaniin Community Centre 舉行的招聘會，連接居民與約克區、緊急服務及本地僱主。"
 gallery:
-  - src: "/markham360-website/images/events/markham-job-fair/cover.jpg"
+  - src: "/images/events/markham-job-fair/cover.jpg"
     alt: "Aaniin Community Centre 萬錦招聘會"
 draft: true
 ---

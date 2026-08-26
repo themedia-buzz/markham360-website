@@ -5,13 +5,13 @@ locale: "en"
 author: "ace-ontario"
 summary: "Active Community Engagement (ACE) Ontario volunteers cleaned Milliken Mills Park in Markham, the first stop in a late-summer park cleanup series."
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/cover.png"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/cover.png"
     alt: "ACE Ontario flyer for the August 24 park cleanup at Milliken Mills Park"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-1.jpg"
     alt: "ACE Ontario volunteers with banner and litter bags under a park gazebo at Milliken Mills Park"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-2.jpg"
     alt: "ACE volunteers with litter grabbers posing in front of the Milliken Mills Park gazebo"
-  - src: "/markham360-website/images/events/ace-park-cleanup-milliken-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-milliken-2025/gallery-3.jpg"
     alt: "Young ACE volunteers with litter bags and grabbers on a park path"
 ---
 

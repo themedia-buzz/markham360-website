@@ -4,7 +4,7 @@ date: "April 28, 2024"
 locale: "en"
 summary: "World Autism Awareness fundraiser at King Square Shopping Centre supporting local organisations that serve people with intellectual disabilities."
 gallery:
-  - src: "/markham360-website/images/events/alan-ho-charity-roadshow-2024/cover.jpg"
+  - src: "/images/events/alan-ho-charity-roadshow-2024/cover.jpg"
     alt: "Alan Ho Charity Roadshow 2024"
 ---
 

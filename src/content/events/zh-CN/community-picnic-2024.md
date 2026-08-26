@@ -4,7 +4,7 @@ date: "July 7, 2024"
 locale: "zh-CN"
 summary: "于 Aaniin Park 举行的社区野餐，提供免费食物、表演、游戏与抽奖。"
 gallery:
-  - src: "/markham360-website/images/events/community-picnic-2024/cover.jpg"
+  - src: "/images/events/community-picnic-2024/cover.jpg"
     alt: "2024年 Aaniin Park 社区野餐"
 draft: true
 ---

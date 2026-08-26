@@ -4,7 +4,7 @@ date: "December 20, 2023"
 locale: "zh-CN"
 summary: "与第二选区议员 Ritch Lau 及约克区警察合办的论坛，涵盖防罪提示、举报方式与摄像头试点计划。"
 gallery:
-  - src: "/markham360-website/images/events/crime-prevention-forum-2023/cover.jpg"
+  - src: "/images/events/crime-prevention-forum-2023/cover.jpg"
     alt: "2023年万锦市政中心防罪论坛"
 draft: true
 ---

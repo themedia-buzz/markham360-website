@@ -5,13 +5,13 @@ locale: "fr"
 author: "ace-ontario"
 summary: "ACE Ontario a invité les résidents de Markham à un nettoyage dominical au parc John Button, poursuivant sa série de bénévolat estival."
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/cover.png"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/cover.png"
     alt: "Affiche d’ACE Ontario pour le nettoyage du 21 septembre au parc John Button"
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/gallery-1.jpg"
     alt: "Bénévoles nettoyant une aire pavée lors du nettoyage du parc John Button"
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/gallery-2.jpg"
     alt: "Bénévoles d’ACE Ontario avec sacs pendant le nettoyage du parc John Button"
-  - src: "/markham360-website/images/events/ace-park-cleanup-john-button-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-john-button-2025/gallery-3.jpg"
     alt: "Photo de groupe du nettoyage ACE Ontario au parc John Button"
 ---
 

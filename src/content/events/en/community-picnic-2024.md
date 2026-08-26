@@ -4,7 +4,7 @@ date: "July 7, 2024"
 locale: "en"
 summary: "Community picnic at Aaniin Park with free food, shows, games, and a lucky draw."
 gallery:
-  - src: "/markham360-website/images/events/community-picnic-2024/cover.jpg"
+  - src: "/images/events/community-picnic-2024/cover.jpg"
     alt: "Community Picnic 2024 at Aaniin Park"
 ---
 

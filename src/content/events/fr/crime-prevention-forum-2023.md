@@ -4,7 +4,7 @@ date: "20 décembre 2023"
 locale: "fr"
 summary: "Forum avec le conseiller du quartier 2 Ritch Lau et la Police régionale de York sur la prévention, le signalement et le projet pilote de caméras."
 gallery:
-  - src: "/markham360-website/images/events/crime-prevention-forum-2023/cover.jpg"
+  - src: "/images/events/crime-prevention-forum-2023/cover.jpg"
     alt: "Forum sur la prévention du crime 2023 au Centre civique de Markham"
 draft: false
 ---

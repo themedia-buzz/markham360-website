@@ -5,13 +5,13 @@ locale: "en"
 author: "ace-ontario"
 summary: "ACE Ontario continued its Markham park cleanup series at Berczy Park North, with volunteers gathering litter on a Sunday morning."
 gallery:
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/cover.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/cover.jpg"
     alt: "ACE Ontario volunteers with banner and litter bags under the pavilion at Berczy Park North"
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-1.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/gallery-1.jpg"
     alt: "ACE volunteers and children with litter grabbers under the Berczy Park North pavilion"
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-2.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/gallery-2.jpg"
     alt: "Families collecting litter bags and grabbers at the start of the Berczy Park cleanup"
-  - src: "/markham360-website/images/events/ace-park-cleanup-berczy-2025/gallery-3.jpg"
+  - src: "/images/events/ace-park-cleanup-berczy-2025/gallery-3.jpg"
     alt: "Two volunteers picking up a bottle with a litter grabber beside evergreen trees"
 ---
 

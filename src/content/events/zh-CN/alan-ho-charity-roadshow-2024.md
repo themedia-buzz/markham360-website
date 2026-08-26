@@ -4,7 +4,7 @@ date: "April 28, 2024"
 locale: "zh-CN"
 summary: "于 King Square Shopping Centre 举办的世界自闭症关注筹款活动，支持服务智障人士的本地组织。"
 gallery:
-  - src: "/markham360-website/images/events/alan-ho-charity-roadshow-2024/cover.jpg"
+  - src: "/images/events/alan-ho-charity-roadshow-2024/cover.jpg"
     alt: "何胡景慈善巡演 2024"
 draft: true
 ---

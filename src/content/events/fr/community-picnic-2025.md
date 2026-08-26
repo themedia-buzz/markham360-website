@@ -4,7 +4,7 @@ date: "19 juillet 2025"
 locale: "fr"
 summary: "Pique-nique estival au parc Upper Cornell avec nourriture gratuite, spectacles, jeux et tirage pour les résidents de Markham."
 gallery:
-  - src: "/markham360-website/images/events/community-picnic-2025/cover.jpg"
+  - src: "/images/events/community-picnic-2025/cover.jpg"
     alt: "Pique-nique communautaire 2025 au parc Upper Cornell"
 draft: false
 ---

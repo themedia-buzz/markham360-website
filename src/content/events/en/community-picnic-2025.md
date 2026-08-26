@@ -4,7 +4,7 @@ date: "July 19, 2025"
 locale: "en"
 summary: "Summer picnic at Upper Cornell Park with free food, shows, games, and a lucky draw for Markham residents."
 gallery:
-  - src: "/markham360-website/images/events/community-picnic-2025/cover.jpg"
+  - src: "/images/events/community-picnic-2025/cover.jpg"
     alt: "Community Picnic 2025 at Upper Cornell Park"
 ---
 

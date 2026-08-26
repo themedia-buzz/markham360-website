@@ -6,10 +6,10 @@ const { locale = 'en', centered = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const home = href(base, locale, '/');
 const standing: Record<Locale, string> = {
-  en: 'A local community newspaper for Markham, with contributors who serve the region.',
-  fr: 'Un journal communautaire local pour Markham, avec des contributeurs au service de la région.',
-  'zh-HK': '報道萬錦事務的本地社區報紙，匯集服務本區的作者與社區。',
-  'zh-CN': '报道万锦事务的本地社区报纸，汇集服务本区的作者与社区。',
+  en: 'A weekly e-newsletter from York Regional Councillor Alan Ho.',
+  fr: 'Un bulletin électronique hebdomadaire du conseiller régional de York Alan Ho.',
+  'zh-HK': '約克區區域議員何胡景的每週電子通訊。',
+  'zh-CN': '约克区区域议员何胡景的每周电子通讯。',
 };
 const folio: Record<Locale, string> = {
   en: `${CONTINUITY.editions} consecutive weekly editions since ${CONTINUITY.since}`,

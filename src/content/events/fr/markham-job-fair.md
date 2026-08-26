@@ -4,7 +4,7 @@ date: "19 avril 2026"
 locale: "fr"
 summary: "Salon au Centre communautaire Aaniin reliant les résidents à la région de York, aux services d’urgence et aux employeurs locaux."
 gallery:
-  - src: "/markham360-website/images/events/markham-job-fair/cover.jpg"
+  - src: "/images/events/markham-job-fair/cover.jpg"
     alt: "Salon de l’emploi de Markham au Centre communautaire Aaniin"
 draft: false
 ---

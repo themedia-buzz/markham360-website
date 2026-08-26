@@ -4,7 +4,7 @@ date: "December 20, 2023"
 locale: "en"
 summary: "Forum with Ward 2 Councillor Ritch Lau and York Regional Police on prevention tips, reporting, and the camera pilot program."
 gallery:
-  - src: "/markham360-website/images/events/crime-prevention-forum-2023/cover.jpg"
+  - src: "/images/events/crime-prevention-forum-2023/cover.jpg"
     alt: "Crime Prevention Forum 2023 at Markham Civic Centre"
 ---
 

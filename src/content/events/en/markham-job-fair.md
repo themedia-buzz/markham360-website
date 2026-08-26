@@ -4,7 +4,7 @@ date: "April 19, 2026"
 locale: "en"
 summary: "Job fair at Aaniin Community Centre connecting residents with York Region, emergency services, and local employers."
 gallery:
-  - src: "/markham360-website/images/events/markham-job-fair/cover.jpg"
+  - src: "/images/events/markham-job-fair/cover.jpg"
     alt: "Markham Job Fair at Aaniin Community Centre"
 ---
 

@@ -4,7 +4,7 @@ date: "19 février 2024"
 locale: "fr"
 summary: "Défilé de costumes chinois traditionnels au Centre civique de Markham pour la fête de la Famille et le Mois du patrimoine chinois."
 gallery:
-  - src: "/markham360-website/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
+  - src: "/images/events/we-are-one-family-chinese-heritage-month-2024/cover.jpg"
     alt: "Célébration We Are One Family du Mois du patrimoine chinois 2024"
 draft: false
 ---

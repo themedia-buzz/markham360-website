@@ -4,7 +4,7 @@ date: "December 2025 to January 2026"
 locale: "zh-CN"
 summary: "与万锦消防及紧急服务和社区伙伴合办的年度食物银行募捐，于全市投放点收集不易腐坏的捐赠。"
 gallery:
-  - src: "/markham360-website/images/events/markham-helping-hands-2025/cover.jpg"
+  - src: "/images/events/markham-helping-hands-2025/cover.jpg"
     alt: "2025年万锦伸出援手食物募捐"
 draft: true
 ---

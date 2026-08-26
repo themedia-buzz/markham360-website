@@ -4,7 +4,7 @@ date: "2024"
 locale: "en"
 summary: "Charity concert co-hosted with community partners that raised $25,000 for the Markham Food Bank."
 gallery:
-  - src: "/markham360-website/images/events/dragons-singing-with-love-charity-concert/cover.jpg"
+  - src: "/images/events/dragons-singing-with-love-charity-concert/cover.jpg"
     alt: "Dragons Singing with Love Charity Concert"
 ---
 

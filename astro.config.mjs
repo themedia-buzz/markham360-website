@@ -4,15 +4,11 @@ import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
 import mdx from '@astrojs/mdx';
 
-// DEMO deploy target. Default: GitHub Pages project URL.
-// Option (a) Pages project URL: set `site` below and `base: '/markham360-website'`.
-// Option (b) custom demo domain (e.g. markham360.ca): set `site` to the apex,
-//            add public/CNAME, and REMOVE `base`.
-// See docs/plans/DEPLOY.md (gitignored) for the full decision record.
+// Production deploy target: markham360.ca (apex, base `/`).
+// GitHub Pages: add public/CNAME and set Custom domain in repo settings.
 
 export default defineConfig({
-  site: 'https://themedia-buzz.github.io',
-  base: '/markham360-website',
+  site: 'https://markham360.ca',
 
   i18n: {
     defaultLocale: 'en',

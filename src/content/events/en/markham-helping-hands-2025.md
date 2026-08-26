@@ -4,7 +4,7 @@ date: "December 2025 to January 2026"
 locale: "en"
 summary: "Annual food bank drive with Markham Fire & Emergency Service and community partners, collecting non-perishable donations across Markham drop-off sites."
 gallery:
-  - src: "/markham360-website/images/events/markham-helping-hands-2025/cover.jpg"
+  - src: "/images/events/markham-helping-hands-2025/cover.jpg"
     alt: "Markham Helping Hands 2025 food drive"
 ---
 

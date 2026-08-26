@@ -4,7 +4,7 @@ date: "July 19, 2025"
 locale: "zh-HK"
 summary: "于 Upper Cornell Park 舉行的夏季野餐，為萬錦居民提供免費食物、表演、遊戲與抽獎。"
 gallery:
-  - src: "/markham360-website/images/events/community-picnic-2025/cover.jpg"
+  - src: "/images/events/community-picnic-2025/cover.jpg"
     alt: "2025年 Upper Cornell Park 社區野餐"
 draft: true
 ---
