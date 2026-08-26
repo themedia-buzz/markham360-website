@@ -30,7 +30,13 @@ const moreEditions = editions.slice(0, 6);
 const community = events.slice(0, 6);
 const explainers = videos.slice(0, 6);
 ---
-<BaseLayout title={copy.homeTitle} description={copy.homeDescription} locale={locale} path="/">
+<BaseLayout
+  title={copy.homeTitle}
+  description={copy.homeDescription}
+  shareDescription={copy.homeShareDescription}
+  locale={locale}
+  path="/"
+>
   <CampaignBanner locale={locale} />
 
   <header class="paper-header">

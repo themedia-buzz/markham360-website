@@ -13,7 +13,10 @@ import {
 
 interface Props {
   title: string;
+  /** Search / AEO meta description. Kept separate from share cards when needed. */
   description?: string;
+  /** Open Graph / Twitter description. Defaults to `description` when omitted. */
+  shareDescription?: string;
   locale?: Locale;
   /** Path without locale prefix for hreflang alternates (e.g. `/about`). */
   path?: string;
@@ -26,6 +29,7 @@ interface Props {
 const {
   title,
   description,
+  shareDescription,
   locale = 'en',
   path = '/',
   factSentence,
@@ -40,6 +44,7 @@ const defaultDescriptions: Record<Locale, string> = {
   'zh-CN': '万锦360：区域议员何胡景的每周社区通讯与工作记录。',
 };
 const pageDescription = description ?? defaultDescriptions[locale];
+const ogDescription = shareDescription ?? pageDescription;
 const lang = LOCALE_LANG[locale];
 const base = import.meta.env.BASE_URL;
 const siteUrl = Astro.site ? new URL(base, Astro.site).href : base;
@@ -72,6 +77,15 @@ const canonical = absolute(localizePath(path, locale));
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Markham 360" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={ogDescription} />
     <link rel="icon" type="image/svg+xml" href={withBase(base, '/favicon.svg')} />
     <link rel="canonical" href={canonical} />
 

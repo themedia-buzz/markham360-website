@@ -206,7 +206,11 @@ export const UI: Record<Locale, Record<string, string>> = {
 export const PAGE_COPY: Record<
   Locale,
   {
+    /** Browser tab + link-share card title (newsletter angle). */
     homeTitle: string;
+    /** Open Graph / Twitter share description (newsletter angle). */
+    homeShareDescription: string;
+    /** Meta description for search / AEO (local-news identity). */
     homeDescription: string;
     aboutTitle: string;
     aboutH1: string;
@@ -231,7 +235,9 @@ export const PAGE_COPY: Record<
   }
 > = {
   en: {
-    homeTitle: 'Markham 360 - Local news for Markham',
+    homeTitle: 'Markham 360 - Weekly e-newsletter from Councillor Alan Ho',
+    homeShareDescription:
+      'A weekly e-newsletter from York Regional Councillor Alan Ho. City and York Region updates for Markham residents.',
     homeDescription:
       'Markham 360 is a local community newspaper covering Markham: weekly editions, community events, and contributors who serve the region.',
     aboutTitle: 'About - Regional Councillor Alan Ho',
@@ -268,7 +274,9 @@ export const PAGE_COPY: Record<
     footerCopyright: `Regional Councillor ${COUNCILLOR.nameEn}, City of Markham.`,
   },
   fr: {
-    homeTitle: 'Markham 360 - Nouvelles locales de Markham',
+    homeTitle: 'Markham 360 - Bulletin électronique hebdomadaire du conseiller Alan Ho',
+    homeShareDescription:
+      'Un bulletin électronique hebdomadaire du conseiller régional de York Alan Ho. Nouvelles de la Ville et de la région de York pour les résidents de Markham.',
     homeDescription:
       'Markham 360 est un journal communautaire local sur Markham : éditions hebdomadaires, événements et contributeurs au service de la région.',
     aboutTitle: 'À propos - Conseiller régional Alan Ho',
@@ -305,7 +313,9 @@ export const PAGE_COPY: Record<
     footerCopyright: `Conseiller régional ${COUNCILLOR.nameEn}, Ville de Markham.`,
   },
   'zh-HK': {
-    homeTitle: '萬錦360 - 萬錦本地新聞',
+    homeTitle: '萬錦360 - 區域議員何胡景的每週電子通訊',
+    homeShareDescription:
+      '約克區區域議員何胡景的每週電子通訊。為萬錦居民報道市府與約克區事務。',
     homeDescription: '萬錦360是報道萬錦事務的本地社區報紙：每週通訊、社區活動，以及服務本區的作者與社區組織。',
     aboutTitle: '關於 - 區域議員何胡景',
     aboutH1: '關於何胡景',
@@ -335,7 +345,9 @@ export const PAGE_COPY: Record<
     footerCopyright: `萬錦市區域議員${COUNCILLOR.nameZh}。`,
   },
   'zh-CN': {
-    homeTitle: '万锦360 - 万锦本地新闻',
+    homeTitle: '万锦360 - 区域议员何胡景的每周电子通讯',
+    homeShareDescription:
+      '约克区区域议员何胡景的每周电子通讯。为万锦居民报道市府与约克区事务。',
     homeDescription: '万锦360是报道万锦事务的本地社区报纸：每周通讯、社区活动，以及服务本区的作者与社区组织。',
     aboutTitle: '关于 - 区域议员何胡景',
     aboutH1: '关于何胡景',
