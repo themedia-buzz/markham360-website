@@ -1,0 +1,108 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Byline from '../components/Byline.astro';
+import { UI } from '../utils/constants';
+import { authorJsonLd, getAuthor } from '../utils/authors';
+import { contentSlug, formatDate, href, LOCALE_LANG, type Locale } from '../utils/i18n';
+
+interface Props {
+  locale: Locale;
+  entry: CollectionEntry<'articles'>;
+}
+const { locale, entry } = Astro.props;
+const { Content } = await entry.render();
+const t = UI[locale];
+const galleryLabel: Record<Locale, string> = {
+  en: 'Article photos',
+  fr: 'Photos de l’article',
+  'zh-HK': '文章照片',
+  'zh-CN': '文章照片',
+};
+const base = import.meta.env.BASE_URL;
+const path = `/news/${contentSlug(entry.slug)}`;
+const author = await getAuthor(entry.data.author);
+const hero = entry.data.heroImage;
+const gallery = entry.data.gallery ?? [];
+const images = [...(hero ? [hero] : []), ...gallery];
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: entry.data.title,
+  description: entry.data.lead,
+  datePublished: entry.data.pubDate.toISOString(),
+  author: author ? authorJsonLd(author) : { '@type': 'Person', name: 'Alan Ho' },
+  articleSection: 'Community News',
+  inLanguage: LOCALE_LANG[locale],
+  ...(images.length ? { image: images.map((g) => g.src) } : {}),
+};
+---
+<BaseLayout
+  title={`${entry.data.title} - Markham 360`}
+  description={entry.data.lead}
+  locale={locale}
+  path={path}
+  jsonLd={articleLd}
+>
+  <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
+  <Nav locale={locale} />
+  <main class="container" style="padding-block: var(--section-gap);">
+    <article class="article-detail">
+      <p class="label">{formatDate(entry.data.pubDate, locale)}</p>
+      <h1>{entry.data.title}</h1>
+      {author && <Byline locale={locale} author={author} />}
+      <p class="lead measure">{entry.data.lead}</p>
+
+      {images.length > 0 && (
+        <section class:list={['gallery', { pair: images.length > 1 }]} aria-label={galleryLabel[locale]}>
+          {images.map((img) => (
+            <figure>
+              <img src={img.src} alt={img.alt} loading={img === images[0] ? 'eager' : 'lazy'} />
+            </figure>
+          ))}
+        </section>
+      )}
+
+      <div class="body measure">
+        <Content />
+      </div>
+
+      {entry.data.sourceUrl && (
+        <p class="source measure">
+          <a href={entry.data.sourceUrl} rel="noopener">
+            {entry.data.sourceLabel ?? entry.data.sourceUrl}
+          </a>
+        </p>
+      )}
+
+      <p class="back"><a href={href(base, locale, '/news')}>← {t.news}</a></p>
+    </article>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
+
+<style>
+  .article-detail h1 { margin: var(--space-2) 0 var(--space-3); }
+  .lead {
+    margin: 0 0 var(--space-6);
+    color: var(--colour-muted);
+    font-size: 1.1rem;
+  }
+  .gallery {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0 0 var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .gallery.pair { grid-template-columns: repeat(2, 1fr); }
+  }
+  .gallery figure { margin: 0; }
+  .gallery img { border-radius: var(--radius-sm); width: 100%; }
+  .body { margin-bottom: var(--space-6); }
+  .source { margin: 0 0 var(--space-6); font-size: 0.95rem; }
+  .back { margin-top: var(--space-4); }
+</style>

@@ -3,10 +3,11 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
-import EventCard from '../components/EventCard.astro';
+import StoryCard from '../components/StoryCard.astro';
 import Footer from '../components/Footer.astro';
 import { UI, PAGE_COPY } from '../utils/constants';
-import { contentSlug, href, includeDraftContent, type Locale } from '../utils/i18n';
+import { contentSlug, formatDate, href, includeDraftContent, type Locale } from '../utils/i18n';
+import { parseEventDate } from '../utils/feed';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -14,36 +15,73 @@ const t = UI[locale];
 const copy = PAGE_COPY[locale];
 const base = import.meta.env.BASE_URL;
 const allowDraft = includeDraftContent(locale);
-const all = await getCollection(
-  'events',
-  (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
-);
+
+const [articles, events] = await Promise.all([
+  getCollection(
+    'articles',
+    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+  ),
+  getCollection(
+    'events',
+    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+  ),
+]);
+
+const community = [
+  ...articles.map((a) => ({
+    kind: 'article' as const,
+    id: a.id,
+    href: href(base, locale, `/news/${contentSlug(a.slug)}`),
+    title: a.data.title,
+    dek: a.data.lead,
+    dateLabel: formatDate(a.data.pubDate, locale),
+    sort: a.data.pubDate.getTime(),
+    image: a.data.heroImage,
+    label: t.news,
+  })),
+  ...events.map((e) => ({
+    kind: 'event' as const,
+    id: e.id,
+    href: href(base, locale, `/community/${contentSlug(e.slug)}`),
+    title: e.data.title,
+    dek: e.data.summary,
+    dateLabel: e.data.date,
+    sort: parseEventDate(e.data.date)?.getTime() ?? 0,
+    image: e.data.gallery?.[0],
+    label: t.communityLabel,
+  })),
+].sort((a, b) => b.sort - a.sort);
 ---
 <BaseLayout title={copy.communityTitle} locale={locale} path="/community">
   <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
   <Nav locale={locale} />
   <main class="container" style="padding-block: var(--section-gap);">
     <h1>{t.community}</h1>
-    <p class="measure">{copy.communityLede}</p>
+    <p class="measure lede">{copy.communityLede}</p>
     <div class="grid">
-      {all
-        .slice()
-        .sort((a, b) => b.data.date.localeCompare(a.data.date))
-        .map((e) => (
-        <EventCard
-          href={href(base, locale, `/community/${contentSlug(e.slug)}`)}
-          title={e.data.title}
-          date={e.data.date}
-          summary={e.data.summary}
-          image={e.data.gallery?.[0]}
+      {community.map((item) => (
+        <StoryCard
+          kind={item.kind}
+          href={item.href}
+          label={item.label}
+          title={item.title}
+          dek={item.dek}
+          dateLabel={item.dateLabel}
+          image={item.image}
         />
       ))}
+      {community.length === 0 && <p class="label">-</p>}
     </div>
   </main>
   <Footer locale={locale} />
 </BaseLayout>
 <style>
-  .grid { display: grid; gap: var(--space-5); margin-top: var(--space-6); }
+  .lede { margin-top: var(--space-3); color: var(--colour-muted); }
+  .grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

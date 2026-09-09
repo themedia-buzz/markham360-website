@@ -30,8 +30,9 @@ const bio = authorBio(author, locale);
 const matchesAuthor = (slug: string | undefined) =>
   (slug?.trim() || DEFAULT_AUTHOR_SLUG) === author.id;
 
-const [editions, events, videos] = await Promise.all([
+const [editions, articles, events, videos] = await Promise.all([
   getCollection('editions', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
+  getCollection('articles', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
   getCollection('events', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
   getCollection('video', (e) => e.data.locale === locale && (allowDraft || !e.data.draft) && matchesAuthor(e.data.author)),
 ]);
@@ -48,6 +49,18 @@ const posts = [
     image: e.data.heroImage,
     folio: String(e.data.episode),
     label: t.latest,
+  })),
+  ...articles.map((e) => ({
+    kind: 'article' as const,
+    id: e.id,
+    href: href(base, locale, `/news/${contentSlug(e.slug)}`),
+    title: e.data.title,
+    dek: e.data.lead,
+    dateLabel: formatDate(e.data.pubDate, locale),
+    sort: e.data.pubDate.getTime(),
+    image: e.data.heroImage,
+    folio: undefined as string | undefined,
+    label: t.news,
   })),
   ...events.map((e) => ({
     kind: 'event' as const,

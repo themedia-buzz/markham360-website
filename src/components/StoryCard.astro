@@ -10,7 +10,7 @@ interface Props {
   size?: 'lead' | 'rail' | 'grid';
   folio?: string;
   /** Drives the default thumbnail when no image is present. */
-  kind?: 'edition' | 'event' | 'video';
+  kind?: 'edition' | 'article' | 'event' | 'video';
 }
 const {
   href,
@@ -28,6 +28,7 @@ const {
 const hasPhoto = Boolean(image);
 const defaults: Record<string, { mark: string; cap: string }> = {
   edition: { mark: folio ?? '360', cap: 'Markham 360' },
+  article: { mark: 'News', cap: 'Community' },
   event: { mark: 'In', cap: 'Community' },
   video: { mark: '▶', cap: 'Explainer' },
 };
@@ -90,6 +91,7 @@ const fallback = defaults[kind] ?? defaults.edition;
     background:
       linear-gradient(145deg, var(--colour-white) 0%, var(--colour-paper) 50%, #efe9e0 100%);
   }
+  .kind-article .media.folio,
   .kind-event .media.folio {
     background:
       linear-gradient(160deg, #fff 0%, #f7f3ec 45%, #e8efe8 100%);

@@ -1,0 +1,22 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleDetail from '../../../views/ArticleDetail.astro';
+import { contentSlug, includeDraftContent } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const locale = 'fr' as const;
+  const allowDraft = includeDraftContent(locale);
+  const articles = await getCollection(
+    'articles',
+    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+  );
+  return articles.map((entry) => ({
+    params: { slug: contentSlug(entry.slug) },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: CollectionEntry<'articles'>; }
+const { entry } = Astro.props;
+---
+<ArticleDetail locale="fr" entry={entry} />

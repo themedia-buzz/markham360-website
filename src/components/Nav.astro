@@ -1,5 +1,5 @@
 ---
-import { UI, CTA, CONTINUITY } from '../utils/constants';
+import { UI, CONTINUITY } from '../utils/constants';
 import { href, type Locale } from '../utils/i18n';
 import LanguagePicker from './LanguagePicker.astro';
 interface Props { locale?: Locale; }
@@ -28,7 +28,6 @@ const items = [
       <li class="folio"><span>{CONTINUITY.editions} {t.weeks}</span></li>
     </ul>
     <div class="nav-end">
-      <a class="subscribe" href={CTA.subscribeUrl}>{t.subscribe}</a>
       <LanguagePicker locale={locale} />
     </div>
   </div>
@@ -81,8 +80,4 @@ const items = [
     color: var(--colour-muted);
   }
   .nav-end { display: flex; align-items: center; gap: var(--space-4); }
-  .subscribe {
-    color: var(--colour-accent) !important;
-    font-weight: 600;
-  }
 </style>

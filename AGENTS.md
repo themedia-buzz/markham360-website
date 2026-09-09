@@ -11,7 +11,9 @@
 
 - **Local newspaper, not a campaign platform.** Informational tone. Primary CTAs are subscribe and contact. Do not revive S.M.A.R.T. (or any Municipal City–sponsored political platform branding) on this domain.
 - **Optional campaign banner.** A feature flag (`CAMPAIGN` in `src/utils/constants.ts`) may show a top banner that links to the external re-election site. The banner must not carry SMART copy or on-site platform links. Flip `CAMPAIGN.enabled` off for Mode A (newspaper-only) operation; see `docs/plans/MODE-A-REFERENCE.md` (gitignored) if present.
-- **Multi-author.** Editions, events, and explainers may credit an `author` slug. Each author or community org with published work gets a profile under `/authors/` with website and social links.
+- **Multi-author.** Editions, articles, events, and explainers may credit an `author` slug. Each author or community org with published work gets a profile under `/authors/` with website and social links.
+- **Two public pillars.** The homepage hero includes all content kinds; the newest item by date is always the lead. Nav and homepage bands present two pillars: **Community** (`articles` news + `events` under `/news` and `/community`) above **Markham 360 series** (`editions` + `video` explainers under `/markham-360` and `/video`). Detail URL families stay separate; collections stay separate.
+- **Two kinds of writing.** The numbered **Markham 360 newsletter** run lives in the `editions` collection (`/markham-360/`, episode-numbered, preserves the 180-week continuity). A **standalone community-news article** that is NOT part of the newsletter lives in the `articles` collection (`/news/`, dated, no episode number). Do not file a standalone article as an edition, and do not give it an episode number. Explainers (`video`) belong to the Markham 360 series; events belong with community news.
 - **No private-interest content.** Do not add anything about land, development deals, financing, or private ventures.
 
 ## Tech Stack (Locked)
@@ -41,10 +43,27 @@ Astro (static) · Tailwind CSS (tokens via CSS variables) · Astro i18n (`en`, `
 - JSON-LD structured data (Person, Organization for community authors, Article per edition, Event per community event) via `BaseLayout`.
 - `hreflang` alternates for all three locales; canonical URL per page.
 
+## Ghostwriting an article by an author
+
+Markham 360 is a multi-author newspaper. To **ghostwrite an article by \<name\>** (e.g. "ghostwrite an article by Alan Ho", "ghostwrite an article by Scott Xie", "ghostwrite an article by Mark Lin"):
+
+1. **Load the author's persona.** Read `docs/persona/<slug>.md` for their voice, tone, register, vocabulary, sample lines, and Chinese-rendering rules. Available personas:
+   - Alan Ho (何胡景) — `docs/persona/alan-ho.md`
+   - Scott Xie (谢绍国) — `docs/persona/scott-xie.md`
+   - Mark Lin (林) — `docs/persona/mark-lin.md`
+2. **Draft in that author's voice**, crediting their byline (`author` slug). The article must read as though the named author wrote it.
+3. **Apply the newspaper rules** in this file: Canadian English, no em-dashes, one clear factual sentence near the top, real dated facts only, semantic headings, descriptive `alt` text, JSON-LD.
+4. **Stay in newspaper posture.** Informational tone. No campaign-platform branding (including S.M.A.R.T.), no "vote for me", no solicitation, no attacks on named individuals. If the request implies campaign messaging, keep it off this domain (that belongs on an author's own external campaign site, not here).
+5. **Chinese output is DRAFT** (`draft: true`) until native Mandarin AND Cantonese review.
+6. The author (or their office) approves before publish.
+
+Persona files are publication-safe author voice guides. They contain no campaign strategy. Full index: `docs/persona/README.md`.
+
 ## Repository Layout
 
 - `src/` — site source (see README).
 - `public/` — static assets (fonts, images, favicon).
+- `docs/persona/` — **public** author voice guides for ghostwriting under a named byline (`README.md` + one file per author).
 - `docs/plans/` — **gitignored** internal notes (build brief, deploy decisions, content harvest plan). Not part of the public site.
 - `.github/workflows/deploy.yml` — GitHub Pages build + deploy on push to `main`.
 
@@ -53,6 +72,7 @@ Astro (static) · Tailwind CSS (tokens via CSS variables) · Astro i18n (`en`, `
 1. This file (`AGENTS.md`) — working agreements and posture.
 2. `DESIGN.md` — the visual system, tokens, and component conventions.
 3. `README.md` — setup and structure.
-4. `src/styles/globals.css` — design tokens.
-5. `src/content/config.ts` — content collection schemas.
-6. `docs/plans/BUILD-BRIEF.md` (local only, gitignored) — the full internal build brief, if present.
+4. `docs/persona/README.md` — author voice guides for ghostwriting under a named byline.
+5. `src/styles/globals.css` — design tokens.
+6. `src/content/config.ts` — content collection schemas.
+7. `docs/plans/BUILD-BRIEF.md` (local only, gitignored) — the full internal build brief, if present.

@@ -17,18 +17,16 @@ const copy = PAGE_COPY[locale];
 const base = import.meta.env.BASE_URL;
 
 const feed = await buildFeed(base, locale);
-const editions = feed.filter((i) => i.kind === 'edition');
-const events = feed.filter((i) => i.kind === 'event');
-const videos = feed.filter((i) => i.kind === 'video');
+const series = feed.filter((i) => i.kind === 'edition' || i.kind === 'video');
+const community = feed.filter((i) => i.kind === 'article' || i.kind === 'event');
 
-const lead = editions[0] ?? feed[0];
+const lead = feed[0];
 const rail = feed
   .filter((i) => i.id !== lead?.id)
   .filter((i) => i.image || i.youtubeId || i.kind === 'edition')
   .slice(0, 4);
-const moreEditions = editions.slice(0, 6);
-const community = events.slice(0, 6);
-const explainers = videos.slice(0, 6);
+const moreSeries = series.slice(0, 6);
+const moreCommunity = community.slice(0, 6);
 ---
 <BaseLayout
   title={copy.homeTitle}
@@ -87,9 +85,28 @@ const explainers = videos.slice(0, 6);
       </div>
     </section>
 
-    <div class="container">
-      <PausedBanner locale={locale} />
-    </div>
+    <section class="band surface-white">
+      <div class="container">
+        <div class="band-head">
+          <h2>{t.community}</h2>
+          <a class="band-link" href={href(base, locale, '/community')}>{t.allCommunity} →</a>
+        </div>
+        <p class="band-lede measure">{t.communityLede}</p>
+        <div class="photo-row">
+          {moreCommunity.map((item) => (
+            <StoryCard
+              kind={item.kind}
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              dek={item.dek}
+              dateLabel={item.dateLabel}
+              image={item.image}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
 
     <section class="band">
       <div class="container">
@@ -97,57 +114,12 @@ const explainers = videos.slice(0, 6);
           <h2>{t.latestEditions}</h2>
           <a class="band-link" href={href(base, locale, '/markham-360')}>{t.archive} →</a>
         </div>
+        <PausedBanner locale={locale} />
         <p class="band-lede measure">{t.editionsLede}</p>
         <div class="edition-strip">
-          {moreEditions.map((item) => (
+          {moreSeries.map((item) => (
             <StoryCard
-              kind="edition"
-              href={item.href}
-              label={item.label}
-              title={item.title}
-              dek={item.dek}
-              dateLabel={item.dateLabel}
-              image={item.image}
-              folio={item.episode ? String(item.episode) : undefined}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="band surface-white">
-      <div class="container">
-        <div class="band-head">
-          <h2>{t.community}</h2>
-          <a class="band-link" href={href(base, locale, '/community')}>{t.allEvents} →</a>
-        </div>
-        <div class="photo-row">
-          {community.map((item) => (
-            <StoryCard
-              kind="event"
-              href={item.href}
-              label={item.label}
-              title={item.title}
-              dek={item.dek}
-              dateLabel={item.dateLabel}
-              image={item.image}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="container">
-        <div class="band-head">
-          <h2>{t.explainers}</h2>
-          <a class="band-link" href={href(base, locale, '/video')}>{t.allExplainers} →</a>
-        </div>
-        <p class="band-lede measure">{t.explainersLede}</p>
-        <div class="photo-row">
-          {explainers.map((item) => (
-            <StoryCard
-              kind="video"
+              kind={item.kind}
               href={item.href}
               label={item.label}
               title={item.title}
@@ -155,6 +127,7 @@ const explainers = videos.slice(0, 6);
               dateLabel={item.dateLabel}
               image={item.image}
               youtubeId={item.youtubeId}
+              folio={item.episode ? String(item.episode) : undefined}
             />
           ))}
         </div>
@@ -223,7 +196,7 @@ const explainers = videos.slice(0, 6);
     white-space: nowrap;
   }
   .band-lede {
-    margin: 0 0 var(--space-6);
+    margin: var(--space-4) 0 var(--space-6);
     color: var(--colour-muted);
   }
 

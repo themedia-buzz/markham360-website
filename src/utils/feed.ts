@@ -8,7 +8,7 @@ import {
 } from './i18n';
 import { UI } from './constants';
 
-export type FeedKind = 'edition' | 'event' | 'video';
+export type FeedKind = 'edition' | 'article' | 'event' | 'video';
 
 export type FeedItem = {
   kind: FeedKind;
@@ -56,9 +56,13 @@ export async function buildFeed(base: string, locale: Locale = 'en'): Promise<Fe
   const allowDraft = includeDraftContent(locale);
   const t = UI[locale];
 
-  const [editions, events, videos] = await Promise.all([
+  const [editions, articles, events, videos] = await Promise.all([
     getCollection(
       'editions',
+      (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+    ),
+    getCollection(
+      'articles',
       (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
     ),
     getCollection(
@@ -82,6 +86,18 @@ export async function buildFeed(base: string, locale: Locale = 'en'): Promise<Fe
     label: `EP. ${e.data.episode}`,
     image: e.data.heroImage,
     episode: e.data.episode,
+  }));
+
+  const articleItems: FeedItem[] = articles.map((a) => ({
+    kind: 'article',
+    id: a.id,
+    title: a.data.title,
+    date: a.data.pubDate,
+    dateLabel: formatDate(a.data.pubDate, locale),
+    dek: a.data.lead,
+    href: href(base, locale, `/news/${contentSlug(a.slug)}`),
+    label: t.news,
+    image: a.data.heroImage,
   }));
 
   const eventItems: FeedItem[] = events.map((e) => ({
@@ -114,7 +130,7 @@ export async function buildFeed(base: string, locale: Locale = 'en'): Promise<Fe
       : undefined,
   }));
 
-  return [...editionItems, ...eventItems, ...videoItems].sort(
+  return [...editionItems, ...articleItems, ...eventItems, ...videoItems].sort(
     (a, b) => b.date.getTime() - a.date.getTime()
   );
 }

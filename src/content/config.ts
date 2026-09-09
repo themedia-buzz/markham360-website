@@ -47,6 +47,43 @@ const editions = defineCollection({
   }),
 });
 
+/**
+ * Standalone community-news articles. Independent of the numbered
+ * Markham 360 newsletter run (`editions`); a single dated news piece
+ * with a hero image and prose body, credited to an author byline.
+ */
+const articles = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.date(),
+    locale,
+    lead: z.string(), // one clear factual sentence / standfirst
+    heroImage: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+      })
+      .optional(),
+    /** Additional images shown in the article body after the hero. */
+    gallery: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+        })
+      )
+      .default([]),
+    /** Optional source link (e.g. an official news release). */
+    sourceUrl: z.string().url().optional(),
+    sourceLabel: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    /** Author slug from the authors collection; defaults to alan-ho in templates. */
+    author: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 /** Community events (photo-led). */
 const events = defineCollection({
   type: 'content',
@@ -118,4 +155,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { editions, events, video, authors, pages };
+export const collections = { editions, articles, events, video, authors, pages };
