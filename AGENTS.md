@@ -33,7 +33,7 @@ Astro (static) · Tailwind CSS (tokens via CSS variables) · Astro i18n (`en`, `
 - Editions are **editorial digests**: a short lead, then the handful of items that matter. Do not paste raw third-party notices wholesale. Cross-posts from partner orgs should attribute the author and link to their site.
 - Use **own published words** and real, dated facts. No fabricated claims or statistics.
 - **Chinese content is DRAFT** until reviewed by native Mandarin AND Cantonese speakers. Mark drafts clearly in frontmatter (`draft: true`) until reviewed.
-- **No AI-fabricated likeness.** Use real photographs or neutral placeholders for portrait/office imagery.
+- **Portraits and real events:** prefer real photographs for identifiable people and documentary scenes. When generating or stylising post art, use the **Markham 360 editorial art style** below (not photorealistic fakes of real people or events).
 - Place names: "Markham" as a place/council renders in Chinese as 萬錦 / 万锦 (never a phonetic transliteration). The councillor's name in Chinese is 何胡景.
 
 ### Accessibility & SEO/AEO
@@ -45,34 +45,72 @@ Astro (static) · Tailwind CSS (tokens via CSS variables) · Astro i18n (`en`, `
 
 ## Ghostwriting an article by an author
 
-Markham 360 is a multi-author newspaper. To **ghostwrite an article by \<name\>** (e.g. "ghostwrite an article by Alan Ho", "ghostwrite an article by Scott Xie", "ghostwrite an article by Mark Lin"):
+Markham 360 is a multi-author newspaper. When asked to **ghostwrite an article by \<name\>** (e.g. "ghostwrite an article by Alan Ho"), **report this from \<name\>'s perspective**, or turn a release/draft into a newspaper piece under a byline:
 
-1. **Load the author's persona.** Read `docs/persona/<slug>.md` for their voice, tone, register, vocabulary, sample lines, and Chinese-rendering rules. Available personas:
+**Run the full workflow in `docs/persona/WORKFLOW.md`** (local; may be present on the contributor machine). Companions: `docs/persona/<slug>.md` (voice) and `docs/persona/WRITING-STYLE.md` (style + frontmatter contract). Summary:
+
+1. **Research the facts.** Prefer a primary source (City of Markham / York Region release, official page). Capture names, dates, figures, locations, and the source URL. Never fabricate.
+2. **Load the author's persona.** Read `docs/persona/<slug>.md` for voice, tone, register, vocabulary, sample lines, Chinese-rendering rules, and guardrails:
    - Alan Ho (何胡景) — `docs/persona/alan-ho.md`
    - Scott Xie (谢绍国) — `docs/persona/scott-xie.md`
    - Mark Lin (林) — `docs/persona/mark-lin.md`
-2. **Draft in that author's voice**, crediting their byline (`author` slug). The article must read as though the named author wrote it.
-3. **Apply the newspaper rules** in this file: Canadian English, no em-dashes, one clear factual sentence near the top, real dated facts only, semantic headings, descriptive `alt` text, JSON-LD.
-4. **Stay in newspaper posture.** Informational tone. No campaign-platform branding (including S.M.A.R.T.), no "vote for me", no solicitation, no attacks on named individuals. If the request implies campaign messaging, keep it off this domain (that belongs on an author's own external campaign site, not here).
-5. **Chinese output is DRAFT** (`draft: true`) until native Mandarin AND Cantonese review.
-6. The author (or their office) approves before publish.
+3. **Write in that author's voice**, following newspaper rules in this file and `WRITING-STYLE.md` when present: Canadian English, no em-dashes, lead with the fact, scannable structure, no emoji/hashtags, no campaign solicitation.
+4. **Produce four locales** (`en`, `fr`, `zh-HK`, `zh-CN`). EN/FR final; Chinese `draft: true` pending native Mandarin AND Cantonese review.
+5. **Generate or restyle images** into `public/images/posts/<YYYYMMDD>-<slug>/` using the **Markham 360 editorial art style** below. Reference them via `heroImage` and optional `gallery`. Descriptive `alt` on every image; optimise large files.
+6. **Place and verify.** Files go in `src/content/articles/<locale>/<slug>.md`; run `npm run build` (exit 0) and `npm run check`. The article then appears in the community section and homepage feed.
 
-Persona files are publication-safe author voice guides. They contain no campaign strategy. Full index: `docs/persona/README.md`.
+**Standalone article vs newsletter:** a standalone community-news article lives in the `articles` collection (`/news/`, dated, no episode number). The numbered Markham 360 newsletter lives in `editions` (`/markham-360/`). Do not file a standalone article as an edition.
+
+Persona files are publication-safe author voice guides. They contain no campaign strategy. Full index: `docs/persona/README.md`. Worked examples: `src/content/articles/*/hwy-404-road-crossing.md` and related posts under `public/images/posts/`.
+
+## Markham 360 editorial art style (post images)
+
+**Canonical references:** every generated or restyled post image must match the look of the files already in [`public/images/posts/`](public/images/posts/) (e.g. `20260905-404-crossing/`, `20260905-drjerry/`). Open those PNGs before generating; treat them as the house style, not optional inspiration.
+
+When ghostwriting produces art, or when a source photo is **repurposed** for the site, render it in this style so Markham 360 has one visual voice across community news.
+
+### Look
+- **Medium:** editorial **watercolor and ink wash** on textured paper. Soft pigment blooms, visible paper grain, light charcoal or ink linework. Feels hand-made and magazine-ready, not stock photo and not hard vector flat design.
+- **Edges:** often a **soft vignette or deckled / bleeding edge** that fades into off-white paper, not a hard full-bleed photo crop.
+- **Line:** organic, slightly sketchy outlines; architecture and maps stay legible; figures stay proportional but clearly illustrated.
+- **Light:** soft, even, overcast daylight. No harsh flash, no cinematic neon, no heavy drop shadows.
+- **Maps / diagrams:** same watercolor-paper treatment (see the Hwy 404 map sketch): muted land washes, hand-drawn roads, charcoal labels, legend on the page; brand red/orange only for the “new” or focal elements.
+
+### Palette (align with site tokens)
+Ground the image in the site’s paper-and-ink system from `src/styles/globals.css` / `DESIGN.md`:
+- **Paper / neutrals:** warm off-white, cream, soft grey (`--colour-paper`, `--colour-rule`).
+- **Ink:** charcoal / near-black for line and type (`--colour-ink`), muted grey for secondary detail (`--colour-muted`).
+- **Accent:** Alan Ho’s red (`--colour-accent`, placeholder `#c8102e`) used sparingly for ribbons, “new” map lines, or a single focal prop. Do not flood the frame with red.
+- **Support colours:** desaturated navy, sage/olive greens, soft sky blue, warm wood/ochre. Low overall saturation; calm civic editorial mood.
+
+### Do / don’t
+- **Do** illustrate places, openings, infrastructure, maps, and community scenes in this watercolor editorial style.
+- **Do** restyle a source photograph into this look when the piece needs art and a real photo cannot be published as-is.
+- **Do not** output photorealistic AI fakes of real people, real ribbon-cuttings, or real buildings presented as documentary photos.
+- **Do not** use purple-gradient AI defaults, glossy 3D, meme stickers, or campaign-poster bombast.
+- **Do not** invent a recognisable likeness of a real person; if a portrait is required, use a cleared real photograph (or omit the face and keep the scene illustrative).
+
+### Placement
+- Folder: `public/images/posts/<YYYYMMDD>-<slug>/`
+- Prefer descriptive filenames ending in `_editorial_sketch` (or similar) so the asset is obviously illustration.
+- Wire via article frontmatter `heroImage` + `gallery`; every image needs descriptive `alt` text.
 
 ## Repository Layout
 
 - `src/` — site source (see README).
-- `public/` — static assets (fonts, images, favicon).
-- `docs/persona/` — **public** author voice guides for ghostwriting under a named byline (`README.md` + one file per author).
+- `public/` — static assets (fonts, images, favicon). Post editorial art lives under `public/images/posts/`.
+- `docs/persona/` — author voice guides and ghostwriting workflow (`README.md`, `WORKFLOW.md`, `WRITING-STYLE.md`, one file per author). May be local-only depending on repo ignore rules; still the source of truth when present.
 - `docs/plans/` — **gitignored** internal notes (build brief, deploy decisions, content harvest plan). Not part of the public site.
 - `.github/workflows/deploy.yml` — GitHub Pages build + deploy on push to `main`.
 
 ## Reading Order For New Contributors
 
-1. This file (`AGENTS.md`) — working agreements and posture.
+1. This file (`AGENTS.md`) — working agreements, posture, ghostwriting, and editorial art style.
 2. `DESIGN.md` — the visual system, tokens, and component conventions.
 3. `README.md` — setup and structure.
 4. `docs/persona/README.md` — author voice guides for ghostwriting under a named byline.
-5. `src/styles/globals.css` — design tokens.
-6. `src/content/config.ts` — content collection schemas.
-7. `docs/plans/BUILD-BRIEF.md` (local only, gitignored) — the full internal build brief, if present.
+5. `docs/persona/WORKFLOW.md` — research-and-report workflow; `docs/persona/WRITING-STYLE.md` — style rules and the article file contract.
+6. `public/images/posts/` — visual reference for generated post art.
+7. `src/styles/globals.css` — design tokens.
+8. `src/content/config.ts` — content collection schemas.
+9. `docs/plans/BUILD-BRIEF.md` (local only, gitignored) — the full internal build brief, if present.
