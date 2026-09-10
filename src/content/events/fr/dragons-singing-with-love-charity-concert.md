@@ -1,6 +1,12 @@
 ---
 title: "Concert-bénéfice Dragons Singing with Love"
 date: "2024"
+startDate: "2024"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "fr"
 summary: "Concert-bénéfice organisé avec des partenaires communautaires qui a recueilli 25 000 $ pour la banque alimentaire de Markham."
 gallery:

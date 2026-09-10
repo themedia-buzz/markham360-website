@@ -1,6 +1,15 @@
 ---
 title: "万锦招聘会"
 date: "April 19, 2026"
+startDate: "2026-04-19T14:00:00-04:00"
+endDate: "2026-04-19T17:00:00-04:00"
+location:
+  name: "Aaniin Community Centre"
+  streetAddress: "5665 14th Ave."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-CN"
 summary: "于 Aaniin Community Centre 举行的招聘会，连接居民与约克区、紧急服务及本地雇主。"
 gallery:

@@ -1,6 +1,15 @@
 ---
 title: "Community Picnic 2025"
 date: "July 19, 2025"
+startDate: "2025-07-19T16:00:00-04:00"
+endDate: "2025-07-19T20:00:00-04:00"
+location:
+  name: "Upper Cornell Park"
+  streetAddress: "128 Northvale Rd."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 summary: "Summer picnic at Upper Cornell Park with free food, shows, games, and a lucky draw for Markham residents."
 gallery:

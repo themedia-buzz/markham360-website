@@ -1,6 +1,12 @@
 ---
 title: "支援香港火災災民"
 date: "January 2026"
+startDate: "2026-01"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "zh-HK"
 summary: "擔任 Toronto Responds 慈善音樂會榮譽聯席主席，為香港大埔火災受影响家庭籌得 50,000 元。"
 gallery: []

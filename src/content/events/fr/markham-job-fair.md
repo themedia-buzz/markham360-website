@@ -1,6 +1,15 @@
 ---
 title: "Salon de l’emploi de Markham"
 date: "19 avril 2026"
+startDate: "2026-04-19T14:00:00-04:00"
+endDate: "2026-04-19T17:00:00-04:00"
+location:
+  name: "Aaniin Community Centre"
+  streetAddress: "5665 14th Ave."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "fr"
 summary: "Salon au Centre communautaire Aaniin reliant les résidents à la région de York, aux services d’urgence et aux employeurs locaux."
 gallery:

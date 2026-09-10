@@ -7,7 +7,8 @@ import Footer from '../components/Footer.astro';
 import Byline from '../components/Byline.astro';
 import { UI } from '../utils/constants';
 import { authorJsonLd, getAuthor } from '../utils/authors';
-import { contentSlug, href, LOCALE_LANG, type Locale } from '../utils/i18n';
+import { eventJsonLd } from '../utils/eventLd';
+import { contentSlug, href, localizePath, withBase, type Locale } from '../utils/i18n';
 
 interface Props {
   locale: Locale;
@@ -26,19 +27,17 @@ const base = import.meta.env.BASE_URL;
 const gallery = entry.data.gallery ?? [];
 const path = `/community/${contentSlug(entry.slug)}`;
 const author = await getAuthor(entry.data.author);
+const pageUrl = Astro.site
+  ? new URL(withBase(base, localizePath(path, locale)).replace(/^\//, ''), Astro.site).href
+  : href(base, locale, path);
 
-const eventLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Event',
-  name: entry.data.title,
-  description: entry.data.summary,
-  inLanguage: LOCALE_LANG[locale],
-  startDate: entry.data.date,
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  eventStatus: 'https://schema.org/EventScheduled',
+const eventLd = eventJsonLd({
+  entry,
+  locale,
+  pageUrl,
+  site: Astro.site,
   organizer: author ? authorJsonLd(author) : { '@type': 'Person', name: 'Alan Ho' },
-  image: gallery.map((g) => g.src),
-};
+});
 ---
 <BaseLayout
   title={`${entry.data.title} - ${t.community}`}

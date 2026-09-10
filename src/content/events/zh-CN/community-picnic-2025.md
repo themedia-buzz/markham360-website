@@ -1,6 +1,15 @@
 ---
 title: "社区野餐 2025"
 date: "July 19, 2025"
+startDate: "2025-07-19T16:00:00-04:00"
+endDate: "2025-07-19T20:00:00-04:00"
+location:
+  name: "Upper Cornell Park"
+  streetAddress: "128 Northvale Rd."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-CN"
 summary: "于 Upper Cornell Park 举行的夏季野餐，为万锦居民提供免费食物、表演、游戏与抽奖。"
 gallery:

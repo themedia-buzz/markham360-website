@@ -1,6 +1,14 @@
 ---
 title: "Tournée-bénéfice Alan Ho 2024"
 date: "28 avril 2024"
+startDate: "2024-04-28T14:00:00-04:00"
+endDate: "2024-04-28T17:00:00-04:00"
+location:
+  name: "King Square Shopping Centre"
+  streetAddress: "9390 Woodbine Ave."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "fr"
 summary: "Collecte de fonds au King Square Shopping Centre pour soutenir des organismes locaux au service des personnes ayant une déficience intellectuelle."
 gallery:

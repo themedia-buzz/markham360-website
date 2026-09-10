@@ -1,6 +1,12 @@
 ---
 title: "龙唱爱心慈善音乐会"
 date: "2024"
+startDate: "2024"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "zh-CN"
 summary: "与社区伙伴合办的慈善音乐会，为万锦食物银行筹得 25,000 元。"
 gallery:

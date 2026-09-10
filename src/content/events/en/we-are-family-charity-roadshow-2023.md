@@ -1,6 +1,12 @@
 ---
 title: "We Are Family Charity Roadshow 2023"
 date: "February 19, 2023"
+startDate: "2023-02-19"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "en"
 summary: "Charity roadshow supporting DD Community Connector and the Chinese Autism Awareness Centre, with sponsors, performers, and volunteers across Markham."
 gallery:

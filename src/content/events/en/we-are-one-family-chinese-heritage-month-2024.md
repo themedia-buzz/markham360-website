@@ -1,6 +1,15 @@
 ---
 title: "We Are One Family: Chinese Heritage Month 2024"
 date: "February 19, 2024"
+startDate: "2024-02-19T14:00:00-05:00"
+endDate: "2024-02-19T17:00:00-05:00"
+location:
+  name: "Markham Civic Centre"
+  streetAddress: "101 Town Centre Boulevard"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 summary: "Family Day Traditional Chinese Costume Heritage Show at Markham Civic Centre for Chinese Heritage Month."
 gallery:

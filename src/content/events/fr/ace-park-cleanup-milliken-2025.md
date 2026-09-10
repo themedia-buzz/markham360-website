@@ -1,6 +1,15 @@
 ---
 title: "Nettoyage de parc ACE au parc Milliken Mills"
 date: "24 août 2025"
+startDate: "2025-08-24T09:00:00-04:00"
+endDate: "2025-08-24T11:00:00-04:00"
+location:
+  name: "Milliken Mills Park"
+  streetAddress: "7600 Kennedy Road"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "fr"
 author: "ace-ontario"
 summary: "Les bénévoles d’ACE Ontario ont nettoyé le parc Milliken Mills à Markham, première étape d’une série de nettoyages de fin d’été."

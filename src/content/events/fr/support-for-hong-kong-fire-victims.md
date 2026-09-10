@@ -1,6 +1,12 @@
 ---
 title: "Soutien aux victimes de l’incendie à Hong Kong"
 date: "Janvier 2026"
+startDate: "2026-01"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "fr"
 summary: "Coprésident honoraire du concert Toronto Responds pour les familles touchées par l’incendie de Tai Po, qui a recueilli 50 000 $."
 gallery: []

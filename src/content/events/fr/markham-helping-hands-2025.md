@@ -1,6 +1,13 @@
 ---
 title: "Markham Helping Hands 2025"
 date: "Décembre 2025 à janvier 2026"
+startDate: "2025-12-01"
+endDate: "2026-01-31"
+location:
+  name: "Markham drop-off sites"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "fr"
 summary: "Collecte annuelle de denrées avec le Service d’incendie et d’urgence de Markham et des partenaires communautaires."
 gallery:

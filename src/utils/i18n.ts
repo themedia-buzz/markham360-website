@@ -30,11 +30,25 @@ export const LOCALE_HREFLANG: Record<Locale, string> = {
 /**
  * Prefix a path for a given locale. `en` lives at the root; the others are
  * prefixed (/zh-HK/, /zh-CN/). Does not include the site `base`.
+ * HTML page paths always end with a trailing slash to match GitHub Pages.
  */
 export function localizePath(path: string, locale: Locale): string {
   const clean = path.startsWith('/') ? path : `/${path}`;
-  if (locale === DEFAULT_LOCALE) return clean === '' ? '/' : clean;
-  return `/${locale}${clean === '/' ? '' : clean}`;
+  const prefixed =
+    locale === DEFAULT_LOCALE
+      ? clean === ''
+        ? '/'
+        : clean
+      : `/${locale}${clean === '/' ? '' : clean}`;
+  return withTrailingSlash(prefixed);
+}
+
+/** Ensure HTML page paths end with `/`. Leaves file assets (e.g. `.svg`) unchanged. */
+export function withTrailingSlash(path: string): string {
+  if (path === '/') return '/';
+  const bare = path.split(/[?#]/)[0] ?? path;
+  if (/\.[a-zA-Z0-9]+$/.test(bare)) return path;
+  return path.endsWith('/') ? path : `${path}/`;
 }
 
 /** Join Astro `BASE_URL` with a site path (handles trailing slashes). */

@@ -1,6 +1,12 @@
 ---
 title: "Tournée-bénéfice We Are Family 2023"
 date: "19 février 2023"
+startDate: "2023-02-19"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "fr"
 summary: "Tournée au profit de DD Community Connector et du Chinese Autism Awareness Centre avec des commanditaires, artistes et bénévoles."
 gallery:

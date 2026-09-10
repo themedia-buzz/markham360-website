@@ -1,6 +1,14 @@
 ---
 title: "Pique-nique communautaire 2024"
 date: "7 juillet 2024"
+startDate: "2024-07-07T16:00:00-04:00"
+endDate: "2024-07-07T20:00:00-04:00"
+location:
+  name: "Aaniin Park"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "fr"
 summary: "Pique-nique au parc Aaniin avec nourriture gratuite, spectacles, jeux et tirage."
 gallery:

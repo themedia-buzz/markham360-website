@@ -1,6 +1,13 @@
 ---
 title: "Markham Helping Hands 2025"
 date: "December 2025 to January 2026"
+startDate: "2025-12-01"
+endDate: "2026-01-31"
+location:
+  name: "Markham drop-off sites"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "en"
 summary: "Annual food bank drive with Markham Fire & Emergency Service and community partners, collecting non-perishable donations across Markham drop-off sites."
 gallery:

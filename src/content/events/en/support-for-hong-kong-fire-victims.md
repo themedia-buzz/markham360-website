@@ -1,6 +1,12 @@
 ---
 title: "Support for Hong Kong Fire Victims"
 date: "January 2026"
+startDate: "2026-01"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "en"
 summary: "Honorary co-chair of the Toronto Responds charity concert for Hong Kong Tai Po fire relief, raising $50,000 for affected families."
 gallery: []

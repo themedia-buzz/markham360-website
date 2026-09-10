@@ -1,6 +1,15 @@
 ---
 title: "ACE Park Cleanup at John Button Park"
 date: "September 21, 2025"
+startDate: "2025-09-21T09:00:00-04:00"
+endDate: "2025-09-21T11:00:00-04:00"
+location:
+  name: "John Button Park"
+  streetAddress: "125 John Button Boulevard"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 author: "ace-ontario"
 summary: "ACE Ontario invited Markham residents to a Sunday morning cleanup at John Button Park, continuing its late-summer park volunteer series."

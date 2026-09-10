@@ -1,6 +1,14 @@
 ---
 title: "社區野餐 2024"
 date: "July 7, 2024"
+startDate: "2024-07-07T16:00:00-04:00"
+endDate: "2024-07-07T20:00:00-04:00"
+location:
+  name: "Aaniin Park"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-HK"
 summary: "于 Aaniin Park 舉行的社區野餐，提供免費食物、表演、遊戲與抽獎。"
 gallery:

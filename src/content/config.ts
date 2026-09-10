@@ -84,12 +84,35 @@ const articles = defineCollection({
   }),
 });
 
+/** ISO 8601 date, year-month, year, or datetime with offset (Event JSON-LD). */
+const iso8601 = z
+  .string()
+  .regex(
+    /^\d{4}(-\d{2}(-\d{2}(T\d{2}:\d{2}(:\d{2})?([+-]\d{2}:\d{2}|Z)?)?)?)?$/,
+    'ISO 8601 date or datetime'
+  );
+
+const eventLocation = z.object({
+  name: z.string(),
+  streetAddress: z.string().optional(),
+  addressLocality: z.string().default('Markham'),
+  addressRegion: z.string().default('ON'),
+  postalCode: z.string().optional(),
+  addressCountry: z.string().default('CA'),
+});
+
 /** Community events (photo-led). */
 const events = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.string(), // free text OK (e.g. "Dec 2025 - Jan 2026")
+    date: z.string(), // display label; free text OK (e.g. "Dec 2025 - Jan 2026")
+    /** Machine start for Event JSON-LD. Never copy the display `date` string. */
+    startDate: iso8601,
+    endDate: iso8601.optional(),
+    location: eventLocation,
+    /** When true, emit a $0 CAD Offer. Omit when admission is unknown. */
+    free: z.boolean().optional(),
     locale,
     summary: z.string(),
     gallery: z

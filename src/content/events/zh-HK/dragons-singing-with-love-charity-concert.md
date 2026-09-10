@@ -1,6 +1,12 @@
 ---
 title: "龍唱愛心慈善音樂會"
 date: "2024"
+startDate: "2024"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "zh-HK"
 summary: "與社區伙伴合辦的慈善音樂會，為萬錦食物銀行籌得 25,000 元。"
 gallery:

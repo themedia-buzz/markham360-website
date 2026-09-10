@@ -1,6 +1,13 @@
 ---
 title: "萬錦伸出援手 2025"
 date: "December 2025 to January 2026"
+startDate: "2025-12-01"
+endDate: "2026-01-31"
+location:
+  name: "Markham drop-off sites"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "zh-HK"
 summary: "與萬錦消防及緊急服務和社區伙伴合辦的年度食物銀行募捐，于全市投放點收集不易腐坏的捐贈。"
 gallery:

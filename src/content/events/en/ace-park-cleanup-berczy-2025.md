@@ -1,6 +1,15 @@
 ---
 title: "ACE Park Cleanup at Berczy Park North"
 date: "September 7, 2025"
+startDate: "2025-09-07T09:00:00-04:00"
+endDate: "2025-09-07T11:00:00-04:00"
+location:
+  name: "Berczy Park North"
+  streetAddress: "447 The Bridle Walk"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 author: "ace-ontario"
 summary: "ACE Ontario continued its Markham park cleanup series at Berczy Park North, with volunteers gathering litter on a Sunday morning."

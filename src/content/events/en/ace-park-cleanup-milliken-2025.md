@@ -1,6 +1,15 @@
 ---
 title: "ACE Park Cleanup at Milliken Mills Park"
 date: "August 24, 2025"
+startDate: "2025-08-24T09:00:00-04:00"
+endDate: "2025-08-24T11:00:00-04:00"
+location:
+  name: "Milliken Mills Park"
+  streetAddress: "7600 Kennedy Road"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 author: "ace-ontario"
 summary: "Active Community Engagement (ACE) Ontario volunteers cleaned Milliken Mills Park in Markham, the first stop in a late-summer park cleanup series."

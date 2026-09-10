@@ -1,6 +1,15 @@
 ---
 title: "防罪論壇 2023"
 date: "December 20, 2023"
+startDate: "2023-12-20T19:00:00-05:00"
+endDate: "2023-12-20T21:00:00-05:00"
+location:
+  name: "Markham Civic Centre (Canada Room)"
+  streetAddress: "101 Town Centre Blvd."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-HK"
 summary: "與第二選區議員 Ritch Lau 及約克區警察合辦的論壇，涵盖防罪提示、舉報方式與攝像頭試點計劃。"
 gallery:

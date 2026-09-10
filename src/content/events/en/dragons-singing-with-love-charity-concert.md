@@ -1,6 +1,12 @@
 ---
 title: "Dragons Singing with Love Charity Concert"
 date: "2024"
+startDate: "2024"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "en"
 summary: "Charity concert co-hosted with community partners that raised $25,000 for the Markham Food Bank."
 gallery:

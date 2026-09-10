@@ -1,6 +1,15 @@
 ---
 title: "We Are One Family : Mois du patrimoine chinois 2024"
 date: "19 février 2024"
+startDate: "2024-02-19T14:00:00-05:00"
+endDate: "2024-02-19T17:00:00-05:00"
+location:
+  name: "Markham Civic Centre"
+  streetAddress: "101 Town Centre Boulevard"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "fr"
 summary: "Défilé de costumes chinois traditionnels au Centre civique de Markham pour la fête de la Famille et le Mois du patrimoine chinois."
 gallery:

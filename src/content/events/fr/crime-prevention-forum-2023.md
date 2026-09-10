@@ -1,6 +1,15 @@
 ---
 title: "Forum sur la prévention du crime 2023"
 date: "20 décembre 2023"
+startDate: "2023-12-20T19:00:00-05:00"
+endDate: "2023-12-20T21:00:00-05:00"
+location:
+  name: "Markham Civic Centre (Canada Room)"
+  streetAddress: "101 Town Centre Blvd."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "fr"
 summary: "Forum avec le conseiller du quartier 2 Ritch Lau et la Police régionale de York sur la prévention, le signalement et le projet pilote de caméras."
 gallery:

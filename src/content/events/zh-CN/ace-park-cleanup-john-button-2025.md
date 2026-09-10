@@ -1,6 +1,15 @@
 ---
 title: "政经民社 John Button 公园清洁"
 date: "2025年9月21日"
+startDate: "2025-09-21T09:00:00-04:00"
+endDate: "2025-09-21T11:00:00-04:00"
+location:
+  name: "John Button Park"
+  streetAddress: "125 John Button Boulevard"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-CN"
 author: "ace-ontario"
 summary: "政经民社邀请万锦居民于星期日早上到 John Button 公园清洁，延续夏末公园义工系列。"

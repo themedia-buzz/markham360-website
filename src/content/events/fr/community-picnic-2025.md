@@ -1,6 +1,15 @@
 ---
 title: "Pique-nique communautaire 2025"
 date: "19 juillet 2025"
+startDate: "2025-07-19T16:00:00-04:00"
+endDate: "2025-07-19T20:00:00-04:00"
+location:
+  name: "Upper Cornell Park"
+  streetAddress: "128 Northvale Rd."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "fr"
 summary: "Pique-nique estival au parc Upper Cornell avec nourriture gratuite, spectacles, jeux et tirage pour les résidents de Markham."
 gallery:

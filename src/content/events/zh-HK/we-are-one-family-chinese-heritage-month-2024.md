@@ -1,6 +1,15 @@
 ---
 title: "我們是一家人：華裔文化傳統月 2024"
 date: "February 19, 2024"
+startDate: "2024-02-19T14:00:00-05:00"
+endDate: "2024-02-19T17:00:00-05:00"
+location:
+  name: "Markham Civic Centre"
+  streetAddress: "101 Town Centre Boulevard"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-HK"
 summary: "于萬錦市政中心舉行的家庭日傳統中式服饰文化展，慶祝華裔文化傳統月。"
 gallery:

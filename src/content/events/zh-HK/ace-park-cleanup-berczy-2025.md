@@ -1,6 +1,15 @@
 ---
 title: "政經民社 Berczy Park North 公園清潔"
 date: "2025年9月7日"
+startDate: "2025-09-07T09:00:00-04:00"
+endDate: "2025-09-07T11:00:00-04:00"
+location:
+  name: "Berczy Park North"
+  streetAddress: "447 The Bridle Walk"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-HK"
 author: "ace-ontario"
 summary: "政經民社繼續於萬錦 Berczy Park North 舉行公園清潔，義工於星期日早上清理垃圾。"

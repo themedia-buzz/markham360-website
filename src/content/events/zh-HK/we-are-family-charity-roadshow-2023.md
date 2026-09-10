@@ -1,6 +1,12 @@
 ---
 title: "我們是一家人慈善巡演 2023"
 date: "February 19, 2023"
+startDate: "2023-02-19"
+location:
+  name: "Markham"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "zh-HK"
 summary: "支持 DD Community Connector 與華人自閉症關註中心的慈善巡演，汇集萬錦各地赞助商、表演者與義工。"
 gallery:

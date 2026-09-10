@@ -1,6 +1,15 @@
 ---
 title: "Markham Job Fair"
 date: "April 19, 2026"
+startDate: "2026-04-19T14:00:00-04:00"
+endDate: "2026-04-19T17:00:00-04:00"
+location:
+  name: "Aaniin Community Centre"
+  streetAddress: "5665 14th Ave."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 summary: "Job fair at Aaniin Community Centre connecting residents with York Region, emergency services, and local employers."
 gallery:

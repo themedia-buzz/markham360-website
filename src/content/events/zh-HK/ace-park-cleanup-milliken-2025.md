@@ -1,6 +1,15 @@
 ---
 title: "政經民社 Milliken Mills 公園清潔"
 date: "2025年8月24日"
+startDate: "2025-08-24T09:00:00-04:00"
+endDate: "2025-08-24T11:00:00-04:00"
+location:
+  name: "Milliken Mills Park"
+  streetAddress: "7600 Kennedy Road"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "zh-HK"
 author: "ace-ontario"
 summary: "政經民社（ACE Ontario）義工於萬錦 Milliken Mills 公園進行清潔，揭開夏末公園清潔系列的序幕。"

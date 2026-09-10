@@ -1,6 +1,14 @@
 ---
 title: "Community Picnic 2024"
 date: "July 7, 2024"
+startDate: "2024-07-07T16:00:00-04:00"
+endDate: "2024-07-07T20:00:00-04:00"
+location:
+  name: "Aaniin Park"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
+free: true
 locale: "en"
 summary: "Community picnic at Aaniin Park with free food, shows, games, and a lucky draw."
 gallery:

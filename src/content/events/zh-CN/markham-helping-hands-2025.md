@@ -1,6 +1,13 @@
 ---
 title: "万锦伸出援手 2025"
 date: "December 2025 to January 2026"
+startDate: "2025-12-01"
+endDate: "2026-01-31"
+location:
+  name: "Markham drop-off sites"
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "zh-CN"
 summary: "与万锦消防及紧急服务和社区伙伴合办的年度食物银行募捐，于全市投放点收集不易腐坏的捐赠。"
 gallery:

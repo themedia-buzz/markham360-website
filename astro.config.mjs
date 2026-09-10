@@ -9,6 +9,7 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://markham360.ca',
+  trailingSlash: 'always',
 
   i18n: {
     defaultLocale: 'en',

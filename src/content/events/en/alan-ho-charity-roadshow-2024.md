@@ -1,6 +1,14 @@
 ---
 title: "Alan Ho Charity Roadshow 2024"
 date: "April 28, 2024"
+startDate: "2024-04-28T14:00:00-04:00"
+endDate: "2024-04-28T17:00:00-04:00"
+location:
+  name: "King Square Shopping Centre"
+  streetAddress: "9390 Woodbine Ave."
+  addressLocality: "Markham"
+  addressRegion: "ON"
+  addressCountry: "CA"
 locale: "en"
 summary: "World Autism Awareness fundraiser at King Square Shopping Centre supporting local organisations that serve people with intellectual disabilities."
 gallery:
