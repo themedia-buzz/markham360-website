@@ -9,7 +9,6 @@ dist/
 # This is a PUBLIC repo (GitHub Pages). Keep all internal strategy,
 # handover notes, client context, and planning out of version control.
 docs/plans/
-docs/persona/
 
 # Environment / secrets
 .env
