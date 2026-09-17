@@ -113,6 +113,10 @@ const events = defineCollection({
     location: eventLocation,
     /** When true, emit a $0 CAD Offer. Omit when admission is unknown. */
     free: z.boolean().optional(),
+    /** RSVP / ticket page (Eventbrite, organiser listing, etc.). */
+    registrationUrl: z.string().url().optional(),
+    /** How people attend. Defaults to in-person. */
+    attendanceMode: z.enum(['offline', 'online', 'mixed']).default('offline'),
     locale,
     summary: z.string(),
     gallery: z

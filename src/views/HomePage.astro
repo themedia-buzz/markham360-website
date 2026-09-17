@@ -4,11 +4,13 @@ import CampaignBanner from '../components/CampaignBanner.astro';
 import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
 import StoryCard from '../components/StoryCard.astro';
+import UpcomingEventRow from '../components/UpcomingEventRow.astro';
 import PausedBanner from '../components/PausedBanner.astro';
 import Footer from '../components/Footer.astro';
 import { UI, PAGE_COPY } from '../utils/constants';
 import { buildFeed } from '../utils/feed';
-import { href, type Locale } from '../utils/i18n';
+import { formatEventDay, formatEventTime, getUpcomingEvents } from '../utils/events';
+import { contentSlug, href, type Locale } from '../utils/i18n';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -18,15 +20,19 @@ const base = import.meta.env.BASE_URL;
 
 const feed = await buildFeed(base, locale);
 const series = feed.filter((i) => i.kind === 'edition' || i.kind === 'video');
-const community = feed.filter((i) => i.kind === 'article' || i.kind === 'event');
+const communityNews = feed.filter((i) => i.kind === 'article');
 
-const lead = feed[0];
-const rail = feed
-  .filter((i) => i.id !== lead?.id)
-  .filter((i) => i.image || i.youtubeId || i.kind === 'edition')
-  .slice(0, 4);
+/** Lead must have a cover (photo or video thumb); never a bare folio placeholder. */
+const lead =
+  feed.find((i) => Boolean(i.image?.src) || Boolean(i.youtubeId)) ?? feed[0];
+const upcoming = await getUpcomingEvents(locale, 4);
 const moreSeries = series.slice(0, 6);
-const moreCommunity = community.slice(0, 6);
+const moreCommunity = communityNews.filter((i) => i.id !== lead?.id).slice(0, 6);
+
+function eventMeta(startDate: string, locationName: string): string {
+  const time = formatEventTime(startDate, locale);
+  return [time, locationName].filter(Boolean).join(' · ');
+}
 ---
 <BaseLayout
   title={copy.homeTitle}
@@ -65,22 +71,25 @@ const moreCommunity = community.slice(0, 6);
             />
           )}
         </div>
-        <aside class="lead-rail" aria-label={t.alsoFiling}>
-          <p class="label rail-head">{t.alsoFiling}</p>
-          {rail.map((item) => (
-            <StoryCard
-              size="rail"
-              kind={item.kind}
-              href={item.href}
-              label={item.label}
-              title={item.title}
-              dek={item.dek}
-              dateLabel={item.dateLabel}
-              image={item.image}
-              youtubeId={item.youtubeId}
-              folio={item.episode ? String(item.episode) : undefined}
+        <aside class="lead-rail" aria-label={t.upcomingEvents}>
+          <p class="label rail-head">{t.upcomingEvents}</p>
+          {upcoming.length === 0 && (
+            <p class="rail-empty">{t.noUpcomingEvents}</p>
+          )}
+          {upcoming.map((entry) => (
+            <UpcomingEventRow
+              compact
+              href={href(base, locale, `/community/${contentSlug(entry.slug)}`)}
+              title={entry.data.title}
+              dayLabel={formatEventDay(entry.data.startDate, locale)}
+              meta={eventMeta(entry.data.startDate, entry.data.location.name)}
+              free={entry.data.free}
+              freeLabel={t.eventFree}
+              registerHref={entry.data.registrationUrl}
+              registerLabel={t.register}
             />
           ))}
+          <a class="rail-link" href={href(base, locale, '/community')}>{t.allEvents} →</a>
         </aside>
       </div>
     </section>
@@ -171,6 +180,19 @@ const moreCommunity = community.slice(0, 6);
     }
   }
   .rail-head { margin: 0 0 var(--space-1); }
+  .rail-empty {
+    margin: var(--space-3) 0;
+    color: var(--colour-muted);
+    font-size: 0.9rem;
+  }
+  .rail-link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
 
   .band {
     padding-block: var(--section-gap);

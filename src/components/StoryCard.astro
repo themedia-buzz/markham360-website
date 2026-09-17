@@ -74,11 +74,12 @@ const fallback = defaults[kind] ?? defaults.edition;
     aspect-ratio: 3 / 2;
     text-decoration: none;
   }
-  .story.lead .media { aspect-ratio: 16 / 10; }
+  .story.lead .media { aspect-ratio: 16 / 9; }
   .media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   .media.folio {

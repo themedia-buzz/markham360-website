@@ -66,10 +66,10 @@ Self-host all fonts under `public/fonts/` (privacy + performance + discoverabili
 
 ## Layout Notes
 
-- **Home:** masthead-first, magazine-cover style; lead story is the newest item of any kind, plus filing rail, then Community (news + events), then Markham 360 series (editions + explainers).
+- **Home:** masthead-first, magazine-cover style; lead story is the newest item with a cover image (or video thumb), plus an upcoming-events rail, then Community (news), then Markham 360 series (editions + explainers).
 - **Series archive (`/markham-360`):** chronological mix of weekly editions and explainers as one continuous series; detail URLs remain `/markham-360/*` and `/video/*`.
 - **Article / edition detail:** serif headline, red EP stamp when applicable, hero image, sectioned digest, tight captions; byline when author is set.
-- **Community (`/community`):** mixed grid of community-news articles and events; detail URLs remain `/news/*` and `/community/*`.
+- **Community (`/community`):** upcoming events list (Eventbrite-style), community-news cards, and past events; detail URLs remain `/news/*` and `/community/*`.
 - **Authors:** profile pages for people and community organisations (bio, website, social links, their posts).
 - Alternate section surfaces (paper → white) with hairline rules.
 

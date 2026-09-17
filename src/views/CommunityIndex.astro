@@ -4,10 +4,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Masthead from '../components/Masthead.astro';
 import Nav from '../components/Nav.astro';
 import StoryCard from '../components/StoryCard.astro';
+import UpcomingEventRow from '../components/UpcomingEventRow.astro';
 import Footer from '../components/Footer.astro';
 import { UI, PAGE_COPY } from '../utils/constants';
 import { contentSlug, formatDate, href, includeDraftContent, type Locale } from '../utils/i18n';
-import { parseEventDate } from '../utils/feed';
+import {
+  formatEventDay,
+  formatEventTime,
+  getPastEvents,
+  getUpcomingEvents,
+} from '../utils/events';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -16,19 +22,13 @@ const copy = PAGE_COPY[locale];
 const base = import.meta.env.BASE_URL;
 const allowDraft = includeDraftContent(locale);
 
-const [articles, events] = await Promise.all([
-  getCollection(
-    'articles',
-    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
-  ),
-  getCollection(
-    'events',
-    (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
-  ),
-]);
+const articles = await getCollection(
+  'articles',
+  (e) => e.data.locale === locale && (allowDraft || !e.data.draft)
+);
 
-const community = [
-  ...articles.map((a) => ({
+const news = articles
+  .map((a) => ({
     kind: 'article' as const,
     id: a.id,
     href: href(base, locale, `/news/${contentSlug(a.slug)}`),
@@ -38,19 +38,16 @@ const community = [
     sort: a.data.pubDate.getTime(),
     image: a.data.heroImage,
     label: t.news,
-  })),
-  ...events.map((e) => ({
-    kind: 'event' as const,
-    id: e.id,
-    href: href(base, locale, `/community/${contentSlug(e.slug)}`),
-    title: e.data.title,
-    dek: e.data.summary,
-    dateLabel: e.data.date,
-    sort: parseEventDate(e.data.date)?.getTime() ?? 0,
-    image: e.data.gallery?.[0],
-    label: t.communityLabel,
-  })),
-].sort((a, b) => b.sort - a.sort);
+  }))
+  .sort((a, b) => b.sort - a.sort);
+
+const upcoming = await getUpcomingEvents(locale);
+const past = await getPastEvents(locale);
+
+function eventMeta(startDate: string, locationName: string): string {
+  const time = formatEventTime(startDate, locale);
+  return [time, locationName].filter(Boolean).join(' · ');
+}
 ---
 <BaseLayout title={copy.communityTitle} locale={locale} path="/community">
   <header class="container" style="padding-block: var(--space-6);"><Masthead locale={locale} /></header>
@@ -58,29 +55,82 @@ const community = [
   <main class="container" style="padding-block: var(--section-gap);">
     <h1>{t.community}</h1>
     <p class="measure lede">{copy.communityLede}</p>
-    <div class="grid">
-      {community.map((item) => (
-        <StoryCard
-          kind={item.kind}
-          href={item.href}
-          label={item.label}
-          title={item.title}
-          dek={item.dek}
-          dateLabel={item.dateLabel}
-          image={item.image}
-        />
-      ))}
-      {community.length === 0 && <p class="label">-</p>}
-    </div>
+
+    <section class="band" aria-labelledby="upcoming-heading">
+      <h2 id="upcoming-heading">{t.upcomingEvents}</h2>
+      {upcoming.length === 0 && <p class="empty">{t.noUpcomingEvents}</p>}
+      <div class="upcoming-list">
+        {upcoming.map((entry) => (
+          <UpcomingEventRow
+            href={href(base, locale, `/community/${contentSlug(entry.slug)}`)}
+            title={entry.data.title}
+            dayLabel={formatEventDay(entry.data.startDate, locale)}
+            meta={eventMeta(entry.data.startDate, entry.data.location.name)}
+            free={entry.data.free}
+            freeLabel={t.eventFree}
+            registerHref={entry.data.registrationUrl}
+            registerLabel={t.register}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="news-heading">
+      <h2 id="news-heading">{t.communityNews}</h2>
+      <div class="grid">
+        {news.map((item) => (
+          <StoryCard
+            kind={item.kind}
+            href={item.href}
+            label={item.label}
+            title={item.title}
+            dek={item.dek}
+            dateLabel={item.dateLabel}
+            image={item.image}
+          />
+        ))}
+        {news.length === 0 && <p class="label">-</p>}
+      </div>
+    </section>
+
+    {past.length > 0 && (
+      <section class="band" aria-labelledby="past-heading">
+        <h2 id="past-heading">{t.pastEvents}</h2>
+        <div class="grid">
+          {past.map((entry) => (
+            <StoryCard
+              kind="event"
+              href={href(base, locale, `/community/${contentSlug(entry.slug)}`)}
+              label={t.communityLabel}
+              title={entry.data.title}
+              dek={entry.data.summary}
+              dateLabel={entry.data.date}
+              image={entry.data.gallery?.[0]}
+            />
+          ))}
+        </div>
+      </section>
+    )}
   </main>
   <Footer locale={locale} />
 </BaseLayout>
 <style>
   .lede { margin-top: var(--space-3); color: var(--colour-muted); }
+  .band {
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--colour-rule);
+  }
+  .band h2 {
+    margin: 0 0 var(--space-4);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+  .empty { color: var(--colour-muted); }
+  .upcoming-list { margin-top: var(--space-2); }
   .grid {
     display: grid;
     gap: var(--space-6);
-    margin-top: var(--space-6);
+    margin-top: var(--space-2);
   }
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 960px) { .grid { grid-template-columns: repeat(3, 1fr); } }

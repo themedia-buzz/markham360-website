@@ -8,6 +8,7 @@ import Byline from '../components/Byline.astro';
 import { UI } from '../utils/constants';
 import { authorJsonLd, getAuthor } from '../utils/authors';
 import { eventJsonLd } from '../utils/eventLd';
+import { formatEventTime } from '../utils/events';
 import { contentSlug, href, localizePath, withBase, type Locale } from '../utils/i18n';
 
 interface Props {
@@ -38,6 +39,16 @@ const eventLd = eventJsonLd({
   site: Astro.site,
   organizer: author ? authorJsonLd(author) : { '@type': 'Person', name: 'Alan Ho' },
 });
+
+const timeLabel = formatEventTime(entry.data.startDate, locale);
+const endTime = entry.data.endDate ? formatEventTime(entry.data.endDate, locale) : '';
+const placeParts = [
+  entry.data.location.name,
+  entry.data.location.streetAddress,
+  [entry.data.location.addressLocality, entry.data.location.addressRegion]
+    .filter(Boolean)
+    .join(', '),
+].filter(Boolean);
 ---
 <BaseLayout
   title={`${entry.data.title} - ${t.community}`}
@@ -54,6 +65,31 @@ const eventLd = eventJsonLd({
       <h1>{entry.data.title}</h1>
       {author && <Byline locale={locale} author={author} />}
       <p class="summary measure">{entry.data.summary}</p>
+
+      <dl class="facts measure">
+        {timeLabel && (
+          <>
+            <dt>{t.eventTime}</dt>
+            <dd>{endTime ? `${timeLabel} - ${endTime}` : timeLabel}</dd>
+          </>
+        )}
+        <dt>{t.eventLocation}</dt>
+        <dd>{placeParts.join(' · ')}</dd>
+        {entry.data.free && (
+          <>
+            <dt>{t.eventPrice}</dt>
+            <dd>{t.eventFree}</dd>
+          </>
+        )}
+      </dl>
+
+      {entry.data.registrationUrl && (
+        <p class="register">
+          <a class="register-btn" href={entry.data.registrationUrl} rel="noopener noreferrer">
+            {t.register}
+          </a>
+        </p>
+      )}
 
       {gallery.length > 0 && (
         <figure class="hero">
@@ -84,9 +120,43 @@ const eventLd = eventJsonLd({
 <style>
   .event-detail h1 { margin: var(--space-2) 0 var(--space-3); }
   .summary {
-    margin: 0 0 var(--space-6);
+    margin: 0 0 var(--space-5);
     color: var(--colour-muted);
     font-size: 1.1rem;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-2) var(--space-4);
+    margin: 0 0 var(--space-5);
+    font-size: 0.95rem;
+  }
+  .facts dt {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--colour-muted);
+  }
+  .facts dd { margin: 0; }
+  .register { margin: 0 0 var(--space-6); }
+  .register-btn {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid var(--colour-ink);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--colour-ink);
+    text-decoration: none;
+  }
+  .register-btn:hover {
+    border-color: var(--colour-accent);
+    color: var(--colour-accent);
+    text-decoration: none;
   }
   .hero { margin: 0 0 var(--space-6); }
   .hero img { border-radius: var(--radius-sm); width: 100%; }

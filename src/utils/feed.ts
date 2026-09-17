@@ -7,6 +7,7 @@ import {
   type Locale,
 } from './i18n';
 import { UI } from './constants';
+import { parseEventStart } from './events';
 
 export type FeedKind = 'edition' | 'article' | 'event' | 'video';
 
@@ -104,7 +105,7 @@ export async function buildFeed(base: string, locale: Locale = 'en'): Promise<Fe
     kind: 'event',
     id: e.id,
     title: e.data.title,
-    date: parseEventDate(e.data.date) ?? new Date(0),
+    date: parseEventStart(e.data.startDate),
     dateLabel: e.data.date,
     dek: e.data.summary,
     href: href(base, locale, `/community/${contentSlug(e.slug)}`),
