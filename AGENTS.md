@@ -1,7 +1,9 @@
 # Markham 360 Website — Project Context (AGENTS.md)
 
 > Read this on every session to bootstrap context. Keep it concise and current.
-> **This is a PUBLIC repository** (served on GitHub Pages). Everything committed here is world-readable. Internal strategy, client context, and planning notes live in `docs/plans/` which is **gitignored** and never committed. Do not paste internal strategy into committed files.
+> **This is a PUBLIC repository** (served on GitHub Pages). Everything committed here is world-readable. Internal strategy, client context, and planning notes live outside committed public content. Do not paste internal strategy into committed files.
+>
+> This project is managed from the parent THE Media workspace at `../..`. Read `../../AGENTS.md` for agency and political-data boundaries, while preserving this repository's newspaper-specific rules.
 
 ## What This Project Is
 
