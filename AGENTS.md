@@ -52,11 +52,11 @@ Markham 360 is a multi-author newspaper. When asked to **ghostwrite an article b
 **Run the full workflow in `docs/persona/WORKFLOW.md`** (local; may be present on the contributor machine). Companions: `docs/persona/<slug>.md` (voice) and `docs/persona/WRITING-STYLE.md` (style + frontmatter contract). Summary:
 
 1. **Research the facts.** Prefer a primary source (City of Markham / York Region release, official page). Capture names, dates, figures, locations, and the source URL. Never fabricate.
-2. **Load the author's persona.** Read `docs/persona/<slug>.md` for voice, tone, register, vocabulary, sample lines, Chinese-rendering rules, and guardrails:
+2. **Load the author's persona.** Read the specified `docs/persona/<slug>.md` in full before drafting. Apply only that author's defined voice, register, vocabulary, Chinese rendering, and guardrails. Do not blend voices or infer biographical details, authority, or views that the persona and source do not establish:
    - Alan Ho (何胡景) — `docs/persona/alan-ho.md`
    - Scott Xie (谢绍国) — `docs/persona/scott-xie.md`
    - Mark Lin (林) — `docs/persona/mark-lin.md`
-3. **Write in that author's voice**, following newspaper rules in this file and `WRITING-STYLE.md` when present: Canadian English, no em-dashes, lead with the fact, scannable structure, no emoji/hashtags, no campaign solicitation.
+3. **Ghostwrite in that author's voice**, following newspaper rules in this file and `WRITING-STYLE.md` when present: Canadian English, no em-dashes, lead with the fact, scannable structure, no emoji/hashtags, no campaign solicitation. Keep first person to the author's verified participation, duty, thanks, or responsibility, and never represent an author as an official spokesperson without a source.
 4. **Produce four locales** (`en`, `fr`, `zh-HK`, `zh-CN`). EN/FR final; Chinese `draft: true` pending native Mandarin AND Cantonese review.
 5. **Generate or restyle images** into `public/images/posts/<YYYYMMDD>-<slug>/` using the **Markham 360 editorial art style** below. Reference them via `heroImage` and optional `gallery`. Descriptive `alt` on every image; optimise large files.
 6. **Place and verify.** Files go in `src/content/articles/<locale>/<slug>.md`; run `npm run build` (exit 0) and `npm run check`. The article then appears in the community section and homepage feed.

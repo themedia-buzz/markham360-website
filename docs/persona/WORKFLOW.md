@@ -33,8 +33,9 @@ Output of this step: a short, sourced fact list plus the source URL.
 Decide whose byline this runs under, then load that persona.
 
 - Read `docs/persona/<slug>.md` in full: who is speaking, tone, register, vocabulary (use / avoid), do / don't, sample lines, Chinese-rendering rules, guardrails.
-- The article must read as though that author wrote it. For **Alan Ho**, that means a steady, accountable councillor who reports rather than campaigns, leads with the fact rather than himself, uses first person for duty and thanks, and never solicits or campaigns on this domain.
-- Respect the persona's guardrails. For Alan Ho specifically: no campaign-platform branding (no S.M.A.R.T.), no "vote for me", no solicitation, no land/development/private-interest content.
+- The article must read as though that author wrote it. Apply the selected persona's tone, register, vocabulary, and guardrails. For **Alan Ho**, that means a steady, accountable councillor who reports rather than campaigns. For **Scott Xie**, it means a grounded, practical Ward 6 community voice. For **Mark Lin**, it means a concise, civic-minded Ward 2 community voice.
+- Do not blend personas or infer an author's biography, authority, views, or role beyond the persona and source. Reserve first person for verified participation, duty, thanks, or responsibility.
+- Respect every persona's guardrails: no campaign-platform branding (including S.M.A.R.T.), no "vote for me", no solicitation, no land/development/private-interest content, and no attacks on named individuals.
 
 ### 3. Write the report from that perspective
 
