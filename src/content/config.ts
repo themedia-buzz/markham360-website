@@ -63,6 +63,7 @@ const articles = defineCollection({
       .object({
         src: z.string(),
         alt: z.string(),
+        caption: z.string().optional(),
       })
       .optional(),
     /** Additional images shown in the article body after the hero. */

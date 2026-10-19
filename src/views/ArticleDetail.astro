@@ -62,6 +62,7 @@ const articleLd = {
           {images.map((img) => (
             <figure>
               <img src={img.src} alt={img.alt} loading={img === images[0] ? 'eager' : 'lazy'} />
+              {img === hero && hero?.caption && <figcaption>{hero.caption}</figcaption>}
             </figure>
           ))}
         </section>
@@ -102,6 +103,11 @@ const articleLd = {
   }
   .gallery figure { margin: 0; }
   .gallery img { border-radius: var(--radius-sm); width: 100%; }
+  .gallery figcaption {
+    margin-top: var(--space-2);
+    color: var(--colour-muted);
+    font-size: 0.9rem;
+  }
   .body { margin-bottom: var(--space-6); }
   .source { margin: 0 0 var(--space-6); font-size: 0.95rem; }
   .back { margin-top: var(--space-4); }

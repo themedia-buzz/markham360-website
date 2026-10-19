@@ -28,4 +28,11 @@ export default defineConfig({
   ],
 
   output: 'static',
+
+  vite: {
+    server: {
+      host: '0.0.0.0',
+      allowedHosts: ['.tail0f7891.ts.net'],
+    },
+  },
 });
